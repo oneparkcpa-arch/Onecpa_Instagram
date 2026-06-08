@@ -1,0 +1,1905 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>onecpa Instagram Bench — 2026-06-09</title>
+<style>
+* { box-sizing: border-box; }
+body { margin:0; background:#f6f7f9; font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif; color:#222; padding-bottom:80px; }
+.top { background:#222; color:#fff; padding:24px 32px; }
+.top h1 { margin:0 0 6px; font-size:22px; }
+.top .meta { font-size:13px; opacity:0.7; }
+.container { max-width:1400px; margin:0 auto; padding:24px; }
+.account { background:#fff; border-radius:12px; padding:24px; margin-bottom:32px; box-shadow:0 1px 3px rgba(0,0,0,0.05); }
+.profile { display:flex; align-items:center; gap:16px; padding-bottom:16px; border-bottom:1px solid #eee; margin-bottom:20px; }
+.profile img.avatar { width:80px; height:80px; border-radius:50%; object-fit:cover; }
+.profile .avatar-empty { background:#ddd; width:80px; height:80px; border-radius:50%; }
+.profile .name { font-weight:700; font-size:20px; }
+.profile .handle { color:#0095f6; text-decoration:none; font-size:15px; }
+.profile .stats { color:#555; font-size:13px; margin-top:4px; }
+.profile .bio { font-size:13px; color:#444; margin-top:6px; max-width:600px; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:14px; }
+.card { background:#fafafa; border:1px solid #ececec; border-radius:8px; overflow:hidden; display:flex; flex-direction:column; }
+.card.has-analysis { border-color:#0095f6; box-shadow:0 0 0 2px rgba(0,149,246,0.05); }
+.card .media { position:relative; background:#000; }
+.card .media img { width:100%; display:block; aspect-ratio:1/1; object-fit:cover; }
+.card .badge { position:absolute; top:8px; right:8px; background:rgba(0,0,0,0.6); color:#fff; font-size:11px; padding:3px 7px; border-radius:4px; }
+.card .video-badge { background:#e0245e; }
+.card .analysis-badge { position:absolute; top:8px; left:8px; background:#0095f6; color:#fff; font-size:11px; padding:3px 7px; border-radius:4px; }
+.card .meta { padding:10px 12px; font-size:13px; color:#555; display:flex; justify-content:space-between; }
+.card .caption { padding:0 12px 10px; font-size:12px; color:#333; line-height:1.45; max-height:80px; overflow:hidden; }
+.card .topic { display:inline-block; padding:2px 6px; background:#eef5ff; color:#0066cc; border-radius:3px; font-size:11px; font-weight:600; margin-right:4px; }
+.card a.open { display:block; padding:8px 12px; background:#0095f6; color:#fff; text-decoration:none; text-align:center; font-size:12px; font-weight:600; }
+.card a.open:hover { background:#0076c0; }
+.empty { color:#999; font-size:14px; padding:20px; text-align:center; }
+details.analysis { background:#fff; border-top:1px solid #ececec; padding:8px 12px; font-size:12px; }
+details.analysis summary { cursor:pointer; padding:6px 0; font-weight:600; color:#0066cc; user-select:none; }
+details.analysis summary:hover { color:#004080; }
+details.analysis[open] summary { padding-bottom:8px; border-bottom:1px solid #f0f0f0; }
+.field { padding:6px 0; border-bottom:1px solid #f5f5f5; display:flex; align-items:flex-start; gap:8px; }
+.field:last-child { border-bottom:none; }
+.field label.cb { display:flex; align-items:flex-start; gap:6px; cursor:pointer; flex:1; user-select:none; }
+.field input[type=checkbox] { margin-top:3px; cursor:pointer; }
+.field .k { font-weight:600; color:#555; min-width:90px; }
+.field .v { color:#222; flex:1; word-break:break-word; }
+.field .v code { background:#f0f0f0; padding:1px 4px; border-radius:3px; font-size:11px; }
+.swatch { display:inline-block; width:14px; height:14px; border-radius:3px; margin-right:4px; vertical-align:middle; border:1px solid #ddd; }
+.copyright-warn { color:#e0245e; font-weight:600; }
+.subbar { background:#fff; border-radius:8px; padding:12px 16px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 1px 3px rgba(0,0,0,0.05); }
+.subbar.warning { background:#fff8e1; border:1px solid #ffe082; color:#666; }
+.submitbar { position:fixed; bottom:0; left:0; right:0; background:#222; color:#fff; padding:14px 32px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 -2px 8px rgba(0,0,0,0.15); z-index:100; }
+.submitbar .count { font-size:14px; }
+.submitbar .count .n { font-size:18px; font-weight:700; color:#0095f6; }
+.submitbar button { background:#0095f6; color:#fff; border:none; padding:10px 24px; border-radius:6px; font-size:14px; font-weight:600; cursor:pointer; }
+.submitbar button:hover { background:#0076c0; }
+.submitbar button:disabled { background:#555; cursor:not-allowed; }
+</style>
+</head>
+<body data-date="2026-06-09">
+<header class="top">
+  <h1>🔎 onecpa Instagram Bench — 2026-06-09</h1>
+  <div class="meta">생성: 2026-06-09T06:47:50.702225+09:00 · 계정 5 · 게시물 48 · 🔍 분석 15건 (sonnet)</div>
+</header>
+<main class="container">
+  <div class="subbar">📌 각 카드의 "🔍 분석 보기" 패널에서 onecpa 마스터 템플릿에 반영할 항목을 체크 → 하단 Submit picks → BSD/CCD로 전송</div>
+  
+    <section class="account">
+      <header class="profile">
+        <div class="avatar-empty"></div>
+        <div>
+          <div class="name">아이디어보부상</div>
+          <a class="handle" href="https://www.instagram.com/idea82people/" target="_blank">@idea82people</a>
+          <div class="stats">팔로워 — · top 10 viral posts (engagement 정렬)</div>
+          <div class="bio"></div>
+        </div>
+      </header>
+      <div class="grid">
+        
+    <div class="card has-analysis">
+      <div class="media"><img src="assets/856646e4f6f84446.jpg" alt=""><span class="analysis-badge">🔍 분석됨</span><span class="badge">📑 3장</span></div>
+      <div class="meta"><span><span class="topic">기타</span>♥ 24,231</span><span>💬 985</span></div>
+      <div class="caption">저는 귀빠지고 지금껏 콩국수를 먹어본 적이 없습니다
+하지만 커피는 거의 달고 사는데요
+커피콩도 콩이잖슴 근데?
+아이스 아메리카노에 소면 넣으면 그게 콩국수 아닐까요?
+ㅋㅋ미친 천재; 곧 외계인이 납치할 듯
+제가 만들 여력까진 없어서 
+메가커피가 만들어 줬으면 하는 마음으로 만들었습니다 굿</div>
+      <a class="open" href="https://www.instagram.com/p/DYRMNU_EQ73/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYRMNU_EQ73" data-account="idea82people" data-field="hook" data-value="contrarian | 커피콩도 콩이잖슴 — 아이스 아메리카노에 소면 넣으면 그게 콩국수 아닐까요?">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>contrarian</code> · 강도 9/5<br><i>"커피콩도 콩이잖슴 — 아이스 아메리카노에 소면 넣으면 그게 콩국수 아닐까요?"</i><br><small>누구나 알지만 연결하지 않았던 두 개념(커피콩=콩, 콩국수)을 기상천외하게 이어붙여 &#x27;어이없는 논리적 정합성&#x27;으로 즉각 웃음+공유욕 발동</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYRMNU_EQ73" data-account="idea82people" data-field="message_arc" data-value="myth_bust | 1 후킹 — &#x27;커피콩도 콩&#x27; 명제 제시 + 비주얼 임팩트 → 2 논리 전개 — 아이스 아메리카노+소면=콩국수 공식 시각화 → 3 제안·마무리 — &#x27;메가커피가 만들어줬으면&#x27; 위시리스트 CTA">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>myth_bust</code> · low density<br><small>roles: 1 후킹 — &#x27;커피콩도 콩&#x27; 명제 제시 + 비주얼 임팩트, 2 논리 전개 — 아이스 아메리카노+소면=콩국수 공식 시각화, 3 제안·마무리 — &#x27;메가커피가 만들어줬으면&#x27; 위시리스트 CTA</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYRMNU_EQ73" data-account="idea82people" data-field="cta" data-value="comment_keyword | (암묵적) &#x27;메가커피 제발 만들어줘 / 나도 먹고 싶다&#x27; 댓글 유도 — 명시적 CTA 문구 없이 위시 공감으로 댓글 폭발 유도">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>comment_keyword</code> · last · 강도 8/5<br><i>"(암묵적) &#x27;메가커피 제발 만들어줘 / 나도 먹고 싶다&#x27; 댓글 유도 — 명시적 CTA 문구 없이 위시 공감으로 댓글 폭발 유도"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYRMNU_EQ73" data-account="idea82people" data-field="visual_palette" data-value="#1A1A1A, #F5F0E8, #A0522D, #FFFFFF">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#1A1A1A"></span><code>#1A1A1A</code><span class="swatch" style="background:#F5F0E8"></span><code>#F5F0E8</code><span class="swatch" style="background:#A0522D"></span><code>#A0522D</code><span class="swatch" style="background:#FFFFFF"></span><code>#FFFFFF</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYRMNU_EQ73" data-account="idea82people" data-field="visual_typography" data-value="굵은 고딕 계열 대형 텍스트 + 손글씨 강조 포인트, 군더더기 없는 단문 | 중앙 집중형 1-컬럼, 오브젝트 컷아웃 + 타이포 오버레이">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>굵은 고딕 계열 대형 텍스트 + 손글씨 강조 포인트, 군더더기 없는 단문</code> · 중앙 집중형 1-컬럼, 오브젝트 컷아웃 + 타이포 오버레이<br><small>균형</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYRMNU_EQ73" data-account="idea82people" data-field="viral_factors" data-value="absurdist_logic_humor — 반박 불가한 황당 삼단논법 · brand_tagging_wish — 실존 브랜드(메가커피) 언급으로 팬덤·브랜드 계정 반응 유도 · low_stakes_shareability — 음식·일상 유머는 DM 공유 마찰 제로 · identity_signal — &#x27;나 이런 거 발견하는 사람&#x27;이라는 자아 표현 욕구">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>absurdist_logic_humor — 반박 불가한 황당 삼단논법</code> conf=0.95 → comments<br><small>틀리지 않은 논리인데 결론이 웃기므로 &#x27;나도 이 논리 공유하고 싶다&#x27; 댓글·공유 폭발</small></li><li><code>brand_tagging_wish — 실존 브랜드(메가커피) 언급으로 팬덤·브랜드 계정 반응 유도</code> conf=0.82 → comments<br><small>메가커피 팔로워 유입 + &#x27;진짜 출시되면?&#x27; 기대감 댓글 체인 생성</small></li><li><code>low_stakes_shareability — 음식·일상 유머는 DM 공유 마찰 제로</code> conf=0.88 → saves<br><small>지인에게 &#x27;이거 봐&#x27; 보내기 딱 좋은 무해한 유머, 저장 후 나중에 써먹기 용이</small></li><li><code>identity_signal — &#x27;나 이런 거 발견하는 사람&#x27;이라는 자아 표현 욕구</code> conf=0.75 → likes<br><small>공유하면 자신이 센스 있어 보이는 콘텐츠 → 좋아요·공유 허들 낮음</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYRMNU_EQ73" data-account="idea82people" data-field="transferable_pattern" data-value="일상 개념 2개를 &#x27;틀리지 않은 삼단논법&#x27;으로 연결해 &#x27;어이없는 정합성&#x27; 후킹 → 짧은 슬라이드로 논리 시각화 → 실존 대상(기업·제도)에 위시 제안으로 마무리하는 구조. onecpa 버전: &#x27;근로소득도 사업소득도 종합과세 대상이잖슴 — 그럼 직장인도 절세 플래닝 해야 하는 거 아닌가요?&#x27; 식의 &#x27;당연한 논리인데 아무도 안 챙기는 맹점&#x27; 후킹 + 3장 체크리스트 + 저장CTA. 유머 대신 human-trust 톤으로 치환하면 신뢰도와 저장율을 동시에 높이는 절세·지원금 카드뉴스에 유효.">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"일상 개념 2개를 &#x27;틀리지 않은 삼단논법&#x27;으로 연결해 &#x27;어이없는 정합성&#x27; 후킹 → 짧은 슬라이드로 논리 시각화 → 실존 대상(기업·제도)에 위시 제안으로 마무리하는 구조. onecpa 버전: &#x27;근로소득도 사업소득도 종합과세 대상이잖슴 — 그럼 직장인도 절세 플래닝 해야 하는 거 아닌가요?&#x27; 식의 &#x27;당연한 논리인데 아무도 안 챙기는 맹점&#x27; 후킹 + 3장 체크리스트 + 저장CTA. 유머 대신 human-trust 톤으로 치환하면 신뢰도와 저장율을 동시에 높이는 절세"</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card has-analysis">
+      <div class="media"><img src="assets/1821030c4ee4176a.jpg" alt=""><span class="analysis-badge">🔍 분석됨</span><span class="badge">📑 6장</span></div>
+      <div class="meta"><span><span class="topic">기타</span>♥ 22,763</span><span>💬 84</span></div>
+      <div class="caption">저도 코르티스처럼 새깅해서 멋쟁이 소리 듣고 싶은데
+하지만 멋쟁이 팬티가 없다는 점이 정말 곤란한 요즘입니다
+그렇다고 팬티에 큰 지출을 하고 싶진 않아요
+티셔츠면 모를까
+
+그래서 티셔츠 밑단을 멋쟁이 팬티처럼 제작하면 어떨까 싶었습니다
+이거면 티셔츠와 멋쟁이 빤스 심지어 멋까지 동시에 챙길 수 있겠죠?</div>
+      <a class="open" href="https://www.instagram.com/p/DYMXsIXkZGB/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYMXsIXkZGB" data-account="idea82people" data-field="hook" data-value="story | 저도 코르티스처럼 새깅해서 멋쟁이 소리 듣고 싶은데 / 하지만 멋쟁이 팬티가 없다는 점이 정말 곤란한 요즘입니다">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>story</code> · 강도 8/5<br><i>"저도 코르티스처럼 새깅해서 멋쟁이 소리 듣고 싶은데 / 하지만 멋쟁이 팬티가 없다는 점이 정말 곤란한 요즘입니다"</i><br><small>공감 가능한 자조적 고민 서술로 즉각적 몰입을 유도하며, 유머 코드가 스크롤을 멈추는 강한 구심점 역할</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYMXsIXkZGB" data-account="idea82people" data-field="message_arc" data-value="problem_solution | 1 후킹 — 멋쟁이 팬티 없는 고민 공감 유도 → 2 문제 심화 — 팬티 지출 거부 선언으로 공감 극대화 → 3 아이디어 제시 — 티셔츠 밑단으로 팬티 대체 아이디어 공개 → 4 시각적 시연 — 실제 제작/연출 장면 → 5 결과 비교 — 멋쟁이 효과 확인 → 6 마무리/CTA — 반응 유도 또는 여운">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>problem_solution</code> · low density<br><small>roles: 1 후킹 — 멋쟁이 팬티 없는 고민 공감 유도, 2 문제 심화 — 팬티 지출 거부 선언으로 공감 극대화, 3 아이디어 제시 — 티셔츠 밑단으로 팬티 대체 아이디어 공개, 4 시각적 시연 — 실제 제작/연출 장면, 5 결과 비교 — 멋쟁이 효과 확인, 6 마무리/CTA — 반응 유도 또는 여운</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYMXsIXkZGB" data-account="idea82people" data-field="cta" data-value="share | 명시적 CTA 없음 — 유머 공유 충동 자체가 암묵적 바이럴 CTA로 작동">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>share</code> · last · 강도 7/5<br><i>"명시적 CTA 없음 — 유머 공유 충동 자체가 암묵적 바이럴 CTA로 작동"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYMXsIXkZGB" data-account="idea82people" data-field="visual_palette" data-value="#FFFFFF, #000000, #F5F0E8">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#FFFFFF"></span><code>#FFFFFF</code><span class="swatch" style="background:#000000"></span><code>#000000</code><span class="swatch" style="background:#F5F0E8"></span><code>#F5F0E8</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYMXsIXkZGB" data-account="idea82people" data-field="visual_typography" data-value="굵은 산세리프 한글, 대형 포인트 텍스트, 여백 넉넉 | 중앙 정렬 단일 컬럼, 텍스트+오브젝트 조합">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>굵은 산세리프 한글, 대형 포인트 텍스트, 여백 넉넉</code> · 중앙 정렬 단일 컬럼, 텍스트+오브젝트 조합<br><small>균형</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYMXsIXkZGB" data-account="idea82people" data-field="viral_factors" data-value="공감형 자조 유머 · 기발한 창의 아이디어 공개 · 낮은 정보 밀도 + 빠른 소비 · 문화 레퍼런스 활용(새깅·코르티스)">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>공감형 자조 유머</code> conf=0.95 → likes<br><small>누구나 겪는 &#x27;가성비 vs 멋&#x27; 딜레마를 웃음으로 승화해 즉각적 좋아요 유발</small></li><li><code>기발한 창의 아이디어 공개</code> conf=0.88 → saves<br><small>실용성과 유머를 겸비한 DIY 발상은 저장 후 공유 동기 강함</small></li><li><code>낮은 정보 밀도 + 빠른 소비</code> conf=0.82 → likes<br><small>슬라이드당 카피 최소화로 완독률 높아 좋아요 전환율 상승</small></li><li><code>문화 레퍼런스 활용(새깅·코르티스)</code> conf=0.75 → comments<br><small>패션 트렌드 언급이 공감 댓글 및 지인 태그를 유도</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYMXsIXkZGB" data-account="idea82people" data-field="transferable_pattern" data-value="자조적 1인칭 고민 서술로 공감을 선점한 뒤, 예상 밖의 창의적 해결책을 6장 구조(고민→거부→아이디어→시연→결과→여운)로 전개하는 &#x27;문제공감+발상전환&#x27; 포맷. onecpa에 적용 시: &#x27;세금 낼 돈 없다는 분들이 모르는 것&#x27;처럼 독자의 절세 고민을 자조적으로 포착한 뒤, 의외의 절세 루트를 시각적으로 한 장씩 펼치는 구조로 변환 가능. 핵심은 설명 전에 공감 먼저, 텍스트 최소화, 마지막 슬라이드는 정보 아닌 여운 또는 저장 유도.">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"자조적 1인칭 고민 서술로 공감을 선점한 뒤, 예상 밖의 창의적 해결책을 6장 구조(고민→거부→아이디어→시연→결과→여운)로 전개하는 &#x27;문제공감+발상전환&#x27; 포맷. onecpa에 적용 시: &#x27;세금 낼 돈 없다는 분들이 모르는 것&#x27;처럼 독자의 절세 고민을 자조적으로 포착한 뒤, 의외의 절세 루트를 시각적으로 한 장씩 펼치는 구조로 변환 가능. 핵심은 설명 전에 공감 먼저, 텍스트 최소화, 마지막 슬라이드는 정보 아닌 여운 또는 저장 유도."</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card has-analysis">
+      <div class="media"><img src="assets/2f90265be11809bf.jpg" alt=""><span class="analysis-badge">🔍 분석됨</span><span class="badge">📑 5장</span></div>
+      <div class="meta"><span><span class="topic">기타</span>♥ 20,256</span><span>💬 100</span></div>
+      <div class="caption">고깃집에 가면 항상 저를 거슬리게 만드는 새끼가 하나 있습니다.
+바로 연기를 빨아 들이는 후드인데요.
+
+후드 이 새끼 때매 대각선에 있는 사람 얼굴은 가려서 하나도 안 보임;;
+
+만약 최근 젠슨 황의 삼쏘 회동 같은 일이 또 벌어질 경우??
+이것은 비즈니스적으로 큰 손실이 아닐 수가 없는데요
+
+그래서 이런 경우를 방지해서
+고깃집마다 투명 후드를 비치해야 한다는 것이 저의 결론입니다
+
+후드에 연기 올라가면 어차피 안 보인다구요?</div>
+      <a class="open" href="https://www.instagram.com/p/DZPSBlykV7w/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZPSBlykV7w" data-account="idea82people" data-field="hook" data-value="story | 고깃집에 가면 항상 저를 거슬리게 만드는 새끼가 하나 있습니다.">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>story</code> · 강도 9/5<br><i>"고깃집에 가면 항상 저를 거슬리게 만드는 새끼가 하나 있습니다."</i><br><small>일상 공감 소재 + 구어체 과격 어조로 스크롤 즉각 정지 유발, &#x27;새끼가 뭔지&#x27; 알고 싶은 호기심 갭 강하게 형성</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZPSBlykV7w" data-account="idea82people" data-field="message_arc" data-value="problem_solution | 1 후킹 — 거슬리는 존재 예고 → 2 문제 시각화 — 환기 후드가 시야 차단 → 3 비즈니스 손실 프레임 확대 (젠슨 황·삼성 회동 밈 연계) → 4 해결책 제안 — 투명 후드 비치 주장 → 5 반전 마무리 — &#x27;어차피 안 보인다&#x27; 셀프디스 CTA">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>problem_solution</code> · low density<br><small>roles: 1 후킹 — 거슬리는 존재 예고, 2 문제 시각화 — 환기 후드가 시야 차단, 3 비즈니스 손실 프레임 확대 (젠슨 황·삼성 회동 밈 연계), 4 해결책 제안 — 투명 후드 비치 주장, 5 반전 마무리 — &#x27;어차피 안 보인다&#x27; 셀프디스 CTA</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZPSBlykV7w" data-account="idea82people" data-field="cta" data-value="share | 어쩌라고요 (명시적 CTA 없음; 반전 셀프디스가 지인 태그·공유 욕구를 묵시적으로 유도)">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>share</code> · last · 강도 5/5<br><i>"어쩌라고요 (명시적 CTA 없음; 반전 셀프디스가 지인 태그·공유 욕구를 묵시적으로 유도)"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZPSBlykV7w" data-account="idea82people" data-field="visual_palette" data-value="#FFFFFF, #1A1A1A, #FF4500">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#FFFFFF"></span><code>#FFFFFF</code><span class="swatch" style="background:#1A1A1A"></span><code>#1A1A1A</code><span class="swatch" style="background:#FF4500"></span><code>#FF4500</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZPSBlykV7w" data-account="idea82people" data-field="visual_typography" data-value="대형 굵은 고딕, 구어체 강조 키워드 포인트 처리, 감탄·줄임 표현 그대로 사용 | 중앙 정렬 단일 칼럼, 텍스트 + 일러스트·밈 이미지 교차 배치">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>대형 굵은 고딕, 구어체 강조 키워드 포인트 처리, 감탄·줄임 표현 그대로 사용</code> · 중앙 정렬 단일 칼럼, 텍스트 + 일러스트·밈 이미지 교차 배치<br><small>균형</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZPSBlykV7w" data-account="idea82people" data-field="viral_factors" data-value="한국인 보편 공감 경험 (고깃집 후드 시야 차단) · 시사 밈 삽입 (젠슨 황·삼성 회동 연계) · 반전·셀프디스 구조 (진지한 비즈니스 프레임 → 허무 결말) · 구어체 과격 카피 어그로">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>한국인 보편 공감 경험 (고깃집 후드 시야 차단)</code> conf=0.92 → likes<br><small>거의 모든 한국 성인이 겪은 불편을 정확히 포착해 즉각 공감→좋아요 전환율 극대화</small></li><li><code>시사 밈 삽입 (젠슨 황·삼성 회동 연계)</code> conf=0.8 → comments<br><small>최신 뉴스 화제를 엉뚱한 맥락에 갖다 붙여 댓글 참여·공유 욕구 자극</small></li><li><code>반전·셀프디스 구조 (진지한 비즈니스 프레임 → 허무 결말)</code> conf=0.88 → saves<br><small>예상 밖 전개가 웃음을 터뜨리게 해 &#x27;이거 친구한테 보내야 해&#x27; 반응 유도</small></li><li><code>구어체 과격 카피 어그로</code> conf=0.85 → likes<br><small>첫 줄 훅 카피가 정제된 브랜드 계정과 차별화돼 피드에서 스크롤 스톱률 상승</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZPSBlykV7w" data-account="idea82people" data-field="transferable_pattern" data-value="일상 속 보편 불편(고깃집 후드 → 세금 고지서·세무조사 통보·지원금 누락 등)을 포착해 &#x27;비즈니스·재무 손실 프레임&#x27;으로 살짝 과장 확대한 뒤, 실용적 해결책(절세 팁·지원금 신청법)을 제시하는 공감형 5장 구조. onecpa 버전: 구어체 강도는 human-trust 톤으로 조정하되 &#x27;모르면 손해&#x27; 손실회피 후킹(1장) → 문제 시각화(2장) → 핵심 체크리스트·팁(2장) → 저장 유도 CTA(1장)로 번역 가능. 핵심은 전문가 권위보다 &#x27;나도 당황했다&#x27;식 공감 진입점으로 신뢰를 먼저 쌓고 정보를 전달하는 순서를 지키는 것.">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"일상 속 보편 불편(고깃집 후드 → 세금 고지서·세무조사 통보·지원금 누락 등)을 포착해 &#x27;비즈니스·재무 손실 프레임&#x27;으로 살짝 과장 확대한 뒤, 실용적 해결책(절세 팁·지원금 신청법)을 제시하는 공감형 5장 구조. onecpa 버전: 구어체 강도는 human-trust 톤으로 조정하되 &#x27;모르면 손해&#x27; 손실회피 후킹(1장) → 문제 시각화(2장) → 핵심 체크리스트·팁(2장) → 저장 유도 CTA(1장)로 번역 가능. 핵심은 전문가 권위보다 &#x27;나도 당황했다&#x27;식 공감 진입점으로 신"</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/68caa86bc04ab48c.jpg" alt=""><span class="badge">📑 4장</span></div>
+      <div class="meta"><span>♥ 17,834</span><span>💬 193</span></div>
+      <div class="caption">젠틀몬스터가 새로운 ‘모노’ 라인 다래끼용 선글라스를 출시하지 않았습니다.🕶️ 한쪽 렌즈를 비워낸 비대칭 실루엣과 미니멀한 디테일이 돋보이는 이번 아이템은, 다래끼 같은 일시적인 눈 트러블 상황에서도 멋스러움을 잃지 않도록 고안됐는데요.👁️ 실용성과 디자인 감도를 동시에 끌어올린 젠틀몬스터식 해석인 인상적이죠. 해당 컬렉션은 오는 5월 12일 부터 아이디어보부상 (@idea82people) 계정에서만 만나볼 수 있습니다. 📝보</div>
+      <a class="open" href="https://www.instagram.com/p/DYO-_O2kRQn/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/dd9cf556191dbda0.jpg" alt=""></div>
+      <div class="meta"><span>♥ 6,291</span><span>💬 35</span></div>
+      <div class="caption">18일 서울 중구 하나은행 딜링룸 현황판 앞에서 하나은행 직원들이 정리해고 1순위를 가위바위보로 정하고 있다. 이날 코스피는 지수가 3% 가까이 급락하면서 코스피 시장에 매도 사이드카가 발동됐다. 전 거래일 대비 49.89포인트(0.67%) 내린 7,443.29에, 코스닥지수는 7.25포인트(0.64%) 내린 1,122.57에 개장했다. 2026.5.18 연함뉴스 @idea82people</div>
+      <a class="open" href="https://www.instagram.com/p/DYd-wDYTbJ_/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/3a98ad2d5bad1117.jpg" alt=""><span class="badge">📑 7장</span></div>
+      <div class="meta"><span>♥ 3,604</span><span>💬 26</span></div>
+      <div class="caption">깍두기 국물 넣고 싶은데 주변 눈치 때문에 못 넣은 적 많으시죠?
+뭔가 다같이 먹는 깍두기 그릇에 손대기가 조금 그렇기도 하고잉~
+그래서 제가 깍두기 국물팩을 준비했습니다
+핫소스처럼 딱 뜯어서 국밥에 딱! 미쳤다ㅋㅋ 새끼 영리해</div>
+      <a class="open" href="https://www.instagram.com/p/DY6kznkkZFe/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/b922e0076a8001a8.jpg" alt=""></div>
+      <div class="meta"><span>♥ 2,559</span><span>💬 16</span></div>
+      <div class="caption">코스피가 장중 사상 처음으로 8900선을 돌파한 뒤 극심한 변동성을 보였지만 결국 8800선 위에서 마감하며 종가 기준 최고 기록을 다시 썼다.
+
+이날 지수는 전장 대비 94.81포인트(1.08%) 상승한 8883.19로 출발해 전날 세운 장중 최고치(8874.16)를 넘어섰다. 이후 상승 폭을 확대하며 8933.62까지 치솟아 사상 처음으로 8900선을 돌파했다. 하지만 차익 실현 매물이 대거 출회되면서 장중 한때 8500선</div>
+      <a class="open" href="https://www.instagram.com/p/DZFC_0FTUSe/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/d685d80cb7a92e83.jpg" alt=""><span class="badge">📑 16장</span></div>
+      <div class="meta"><span>♥ 2,348</span><span>💬 45</span></div>
+      <div class="caption">#광고 저는 레전드 인프피라 쇼핑할때 곤란한 적이 한두번이 아닌데요
+
+어느 정도냐면 환불하러 갔는데 말을 못 꺼내서 옷 하나 더 사고 나옴ㅋㅋ
+
+저와 같은 어려움을 겪고 있을 인프피 친구덜이 많죠?
+
+그래서 제가 옷가게에서 하기 어려운 말 탑텐(내 기준임 반박 ㄴ.)이 적힌 티셔츠를 준비했습니다
+
+입이 안 떨어질 때 손가락으로 티셔츠를 가리키기만 하면 되는거죠 캬
+
+이 티셔츠만 있다면? 탑텐 초대형 세일 텐텐데이를 1010배 </div>
+      <a class="open" href="https://www.instagram.com/p/DYl9zCxEfhL/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/fc4bc27910cc876f.jpg" alt=""><span class="badge">📑 7장</span></div>
+      <div class="meta"><span>♥ 1,946</span><span>💬 48</span></div>
+      <div class="caption">멀티탭 선이 짧아서 개쳐빡친 경험 다들 있으시죠?
+
+그래서 제가 또 짱구를 굴려봤는데요
+바로 블루투스 멀티탭임 ㄷㄷ
+
+페어링으로 전력을 공급 받아서 선의 제약 없이 사용 가능한 미친ㄷㄷ
+
+어떻게 그게 되냐구요?
+저는 문과라 여기부턴 이과가 해결해야지ㅋㅋ</div>
+      <a class="open" href="https://www.instagram.com/p/DYUACVckeQY/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/2ca1344b17387502.jpg" alt=""><span class="badge">📑 3장</span></div>
+      <div class="meta"><span>♥ 1,772</span><span>💬 45</span></div>
+      <div class="caption">밤티같은 감도를 가진 사람들 모두 주목! 👀 감도 높은 사람들을 보면 뭔가 다르죠. ✨사실 이건 타고 나는게 아니라 매일의 작은 습관에서 만들어지는 거에요. 🧘‍♀️어떤 챔을 고를 지, 화물은 언제 밀 것인지, 궁을 언제 쓸 것인지 먼저 판단할 줄 알아야 하죠. 결국 감도는 안목보다 속도에요. 💡오늘부터 바로 적용할 수 있는 감도 높이는 방법을 소개합니다.</div>
+      <a class="open" href="https://www.instagram.com/p/DYq5V1okdgE/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+      </div>
+    </section>
+    
+
+    <section class="account">
+      <header class="profile">
+        <div class="avatar-empty"></div>
+        <div>
+          <div class="name">법무법인고운 변호사의 로펌스토리</div>
+          <a class="handle" href="https://www.instagram.com/gounlaw/" target="_blank">@gounlaw</a>
+          <div class="stats">팔로워 — · top 8 viral posts (engagement 정렬)</div>
+          <div class="bio"></div>
+        </div>
+      </header>
+      <div class="grid">
+        
+    <div class="card has-analysis">
+      <div class="media"><img src="assets/98c756b0a4fb53cf.jpg" alt=""><span class="analysis-badge">🔍 분석됨</span><span class="badge">📑 11장</span></div>
+      <div class="meta"><span><span class="topic">기타</span>♥ 4,650</span><span>💬 473</span></div>
+      <div class="caption">650화 : 어쩌란 말인가 (2)
+수원 법무법인 고운이
+@tedbark 작가님과 함께 연재중입니다
+
+남편의 기분을 풀어주려고 노력을 하는데...
+
+#고운웹툰 #고운변호사 #변호사웹툰 #수원변호사 #수원법무법인</div>
+      <a class="open" href="https://www.instagram.com/p/DZExBBeCbAu/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      <div class="field"><span class="copyright-warn">⚠ distinctive_design_avoid_close_emulation</span> — 직접 복제 회피, *추상 패턴*만 차용</div>
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZExBBeCbAu" data-account="gounlaw" data-field="hook" data-value="story | 650화 : 어쩌란 말인가 (2) — 남편의 기분을 풀어주려고 노력을 하는데...">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>story</code> · 강도 7/5<br><i>"650화 : 어쩌란 말인가 (2) — 남편의 기분을 풀어주려고 노력을 하는데..."</i><br><small>시리즈 650화라는 숫자 자체가 팬덤 신뢰도를 증명하고, &#x27;(2)&#x27;와 말줄임표로 전편 독자의 즉시 클릭을 유도하는 연속 긴장감이 강함</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZExBBeCbAu" data-account="gounlaw" data-field="message_arc" data-value="case_study | 1 에피소드 타이틀·후킹 장면 → 2 상황 도입 (남편 기분 나쁜 배경) → 3 주인공의 첫 반응·대사 → 4 갈등 심화 컷 → 5 반전 또는 시도 장면 → 6 코믹 리액션 → 7 서브 캐릭터 등장 또는 조언 → 8 감정 클라이막스">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>case_study</code> · low density<br><small>roles: 1 에피소드 타이틀·후킹 장면, 2 상황 도입 (남편 기분 나쁜 배경), 3 주인공의 첫 반응·대사, 4 갈등 심화 컷, 5 반전 또는 시도 장면, 6 코믹 리액션</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZExBBeCbAu" data-account="gounlaw" data-field="cta" data-value="follow | 다음 화가 궁금하다면 팔로우 / 공감되면 댓글로 반응 남기기">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>follow</code> · last · 강도 8/5<br><i>"다음 화가 궁금하다면 팔로우 / 공감되면 댓글로 반응 남기기"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZExBBeCbAu" data-account="gounlaw" data-field="visual_palette" data-value="#FFFDF5, #2C2C2C, #E8A87C, #6B9AC4, #F4E4C1">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#FFFDF5"></span><code>#FFFDF5</code><span class="swatch" style="background:#2C2C2C"></span><code>#2C2C2C</code><span class="swatch" style="background:#E8A87C"></span><code>#E8A87C</code><span class="swatch" style="background:#6B9AC4"></span><code>#6B9AC4</code><span class="swatch" style="background:#F4E4C1"></span><code>#F4E4C1</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZExBBeCbAu" data-account="gounlaw" data-field="visual_typography" data-value="웹툰 손글씨체 + 말풍선 폰트 혼용, 감정 강조 시 볼드 강조체 | 단일 웹툰 컷 레이아웃 — 세로형 스크롤 최적화, 컷당 1-3개 패널 구성">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>웹툰 손글씨체 + 말풍선 폰트 혼용, 감정 강조 시 볼드 강조체</code> · 단일 웹툰 컷 레이아웃 — 세로형 스크롤 최적화, 컷당 1-3개 패널 구성<br><small>균형</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZExBBeCbAu" data-account="gounlaw" data-field="viral_factors" data-value="장기 시리즈 충성도 (650화) · 감정 이입형 생활 서사 · 연속 클리프행어 구조 (&#x27;(2)&#x27;편) · 전문직 계정의 탈전문 콘텐츠 반전">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>장기 시리즈 충성도 (650화)</code> conf=0.95 → comments<br><small>수백 화를 이어온 팬덤이 매화 댓글 참여를 의무감처럼 수행 — 알고리즘 부스트 반복 발생</small></li><li><code>감정 이입형 생활 서사</code> conf=0.88 → likes<br><small>부부 갈등·직장 스트레스 등 보편 감정을 변호사 시각으로 풀어 비법조인도 공감 즉시 좋아요</small></li><li><code>연속 클리프행어 구조 (&#x27;(2)&#x27;편)</code> conf=0.82 → saves<br><small>전편 미저장 독자가 뒤늦게 저장하거나 공유해 소환하는 패턴 발생</small></li><li><code>전문직 계정의 탈전문 콘텐츠 반전</code> conf=0.78 → comments<br><small>변호사 = 딱딱한 정보 기대치를 웹툰으로 배반 → &#x27;신기하다&#x27; 반응 댓글 폭증</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZExBBeCbAu" data-account="gounlaw" data-field="transferable_pattern" data-value="전문직 신뢰를 &#x27;정보 카드뉴스&#x27; 아닌 &#x27;반복 시리즈 서사&#x27;로 구축하는 구조가 핵심 패턴. onecpa에 적용 시: 익명 의뢰인 시나리오를 화수(話數) 형식으로 연재 — 예: &#x27;CPA일기 N화: 세무조사 전날 밤&#x27; — 매 편 감정·갈등 후킹 → 핵심 절세/지원금 인사이트 1개 삽입 → 다음화 예고 CTA. 정보 밀도는 낮게 유지하되 구독 지속성을 높이는 충성도 루프를 먼저 형성하고, 인사이트는 시리즈 후반부에 자연스럽게 심는 human-trust editorial 방식으로 운용">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"전문직 신뢰를 &#x27;정보 카드뉴스&#x27; 아닌 &#x27;반복 시리즈 서사&#x27;로 구축하는 구조가 핵심 패턴. onecpa에 적용 시: 익명 의뢰인 시나리오를 화수(話數) 형식으로 연재 — 예: &#x27;CPA일기 N화: 세무조사 전날 밤&#x27; — 매 편 감정·갈등 후킹 → 핵심 절세/지원금 인사이트 1개 삽입 → 다음화 예고 CTA. 정보 밀도는 낮게 유지하되 구독 지속성을 높이는 충성도 루프를 먼저 형성하고, 인사이트는 시리즈 후반부에 자연스럽게 심는 human-trust editorial 방식으로 운용"</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card has-analysis">
+      <div class="media"><img src="assets/326ed66507098fb9.jpg" alt=""><span class="analysis-badge">🔍 분석됨</span><span class="badge">📑 11장</span></div>
+      <div class="meta"><span><span class="topic">기타</span>♥ 4,121</span><span>💬 320</span></div>
+      <div class="caption">651화 : 어쩌란 말인가 (3)
+수원 법무법인 고운이
+@tedbark 작가님과 함께 연재중입니다
+
+아이들과 자신을 위해서 다시 직장을 다니기 시작하는데..
+
+#고운웹툰 #고운변호사 #변호사웹툰 #수원변호사 #수원법무법인</div>
+      <a class="open" href="https://www.instagram.com/p/DZMfL5fCQ2f/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZMfL5fCQ2f" data-account="gounlaw" data-field="hook" data-value="curiosity_gap | 651화 : 어쩌란 말인가 (3)">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>curiosity_gap</code> · 강도 4/5<br><i>"651화 : 어쩌란 말인가 (3)"</i><br><small>시리즈 3부 연속 구조가 &#x27;아직 안 끝났다&#x27;는 잔여 긴장감을 유발, 댓글 320개로 감정 투자가 높은 팬층이 형성된 증거</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZMfL5fCQ2f" data-account="gounlaw" data-field="message_arc" data-value="case_study | 1 에피소드 타이틀·상황 도입 → 2 주인공 감정 갈등 제시 → 3 사건 전개 (직장 복귀 결심) → 4 주변 반응·복선 → 5 감정 클라이맥스 → 6 전환점 장면 → 7 부연 에피소드 → 8 독자 공감 포인트 삽입">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>case_study</code> · low density<br><small>roles: 1 에피소드 타이틀·상황 도입, 2 주인공 감정 갈등 제시, 3 사건 전개 (직장 복귀 결심), 4 주변 반응·복선, 5 감정 클라이맥스, 6 전환점 장면</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZMfL5fCQ2f" data-account="gounlaw" data-field="cta" data-value="comment_keyword | (추정) 다음화가 궁금하다면 댓글로 반응 남겨주세요 / 팔로우하면 다음화 알림">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>comment_keyword</code> · last · 강도 3/5<br><i>"(추정) 다음화가 궁금하다면 댓글로 반응 남겨주세요 / 팔로우하면 다음화 알림"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZMfL5fCQ2f" data-account="gounlaw" data-field="visual_palette" data-value="#FFF8F0, #3D2B1F, #E8A87C, #6B4C3B, #F2D4B6">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#FFF8F0"></span><code>#FFF8F0</code><span class="swatch" style="background:#3D2B1F"></span><code>#3D2B1F</code><span class="swatch" style="background:#E8A87C"></span><code>#E8A87C</code><span class="swatch" style="background:#6B4C3B"></span><code>#6B4C3B</code><span class="swatch" style="background:#F2D4B6"></span><code>#F2D4B6</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZMfL5fCQ2f" data-account="gounlaw" data-field="visual_typography" data-value="웹툰 손글씨·만화체 말풍선, 제목은 두껍고 큰 고딕계열, 본문은 중간 굵기 명조 혼용 | 전면 일러스트 + 하단 또는 오버레이 말풍선, 여백 최소화 풀블리드 칸 구성">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>웹툰 손글씨·만화체 말풍선, 제목은 두껍고 큰 고딕계열, 본문은 중간 굵기 명조 혼용</code> · 전면 일러스트 + 하단 또는 오버레이 말풍선, 여백 최소화 풀블리드 칸 구성<br><small>이미지 우세</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZMfL5fCQ2f" data-account="gounlaw" data-field="viral_factors" data-value="장기 연재 시리즈 팬덤 락인 · 감정 이입형 주인공 서사 (직장 복귀 현실) · 법률 전문 계정의 비전문 콘텐츠 반전 · 3부작 연속 구조의 미완결 긴장감">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>장기 연재 시리즈 팬덤 락인</code> conf=0.92 → comments<br><small>651화라는 누적 화수가 충성 팬층을 형성, 회차 공개마다 댓글 집중 유발</small></li><li><code>감정 이입형 주인공 서사 (직장 복귀 현실)</code> conf=0.85 → likes<br><small>육아·재취업 경험 보유 30-40대 공감대와 직접 매칭, 좋아요 반사적 발생</small></li><li><code>법률 전문 계정의 비전문 콘텐츠 반전</code> conf=0.78 → saves<br><small>법무법인이 웹툰을 운영한다는 희소성이 공유·저장 동기 강화</small></li><li><code>3부작 연속 구조의 미완결 긴장감</code> conf=0.8 → comments<br><small>&#x27;(3)&#x27;표시가 전편 미열람자의 탐색과 기존 팬의 완결 촉구 댓글을 동시에 유발</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZMfL5fCQ2f" data-account="gounlaw" data-field="transferable_pattern" data-value="연재형 미니 케이스 스토리 구조: 실제 의뢰인 유사 상황을 익명 캐릭터화 → 감정 갈등 중심 서사 → 마지막 1-2장에서 세금·회계 쟁점 한 문장으로 연결. &#x27;이 상황에서 절세 포인트는?&#x27;식 브리지로 엔터테인먼트→정보 전환. onecpa 톤에 맞게 캐릭터는 1인 CPA 시점으로 설정, 매회 동일 포맷(N화) 유지해 구독 습관 형성. 저장CTA는 &#x27;이 패턴 기억해두세요&#x27;가 아닌 &#x27;다음화 놓치지 마세요&#x27;로 연속성 소구.">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"연재형 미니 케이스 스토리 구조: 실제 의뢰인 유사 상황을 익명 캐릭터화 → 감정 갈등 중심 서사 → 마지막 1-2장에서 세금·회계 쟁점 한 문장으로 연결. &#x27;이 상황에서 절세 포인트는?&#x27;식 브리지로 엔터테인먼트→정보 전환. onecpa 톤에 맞게 캐릭터는 1인 CPA 시점으로 설정, 매회 동일 포맷(N화) 유지해 구독 습관 형성. 저장CTA는 &#x27;이 패턴 기억해두세요&#x27;가 아닌 &#x27;다음화 놓치지 마세요&#x27;로 연속성 소구."</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card has-analysis">
+      <div class="media"><img src="assets/dbc5fdaddcb233cf.jpg" alt=""><span class="analysis-badge">🔍 분석됨</span><span class="badge">📑 13장</span></div>
+      <div class="meta"><span><span class="topic">기타</span>♥ 3,542</span><span>💬 364</span></div>
+      <div class="caption">649화 : 어쩌란 말인가 (1)
+수원 법무법인 고운이
+@tedbark 작가님과 함께 연재중입니다
+
+사내커플 그리고 결혼 그리고 출산 
+그리고 달라진 남편의 태도..
+
+#고운웹툰 #고운변호사 #변호사웹툰 #수원변호사 #수원법무법인</div>
+      <a class="open" href="https://www.instagram.com/p/DY6b6G4CeKI/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      <div class="field"><span class="copyright-warn">⚠ distinctive_design_avoid_close_emulation</span> — 직접 복제 회피, *추상 패턴*만 차용</div>
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY6b6G4CeKI" data-account="gounlaw" data-field="hook" data-value="curiosity_gap | 649화 : 어쩌란 말인가 (1) — 사내커플 그리고 결혼 그리고 출산, 그리고 달라진 남편의 태도..">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>curiosity_gap</code> · 강도 8/5<br><i>"649화 : 어쩌란 말인가 (1) — 사내커플 그리고 결혼 그리고 출산, 그리고 달라진 남편의 태도.."</i><br><small>시리즈 회차(649화)로 기존 팬 즉시 클릭 유도, &#x27;달라진 태도&#x27;라는 미완결 감정 상황이 신규 독자에게도 강한 궁금증 유발</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY6b6G4CeKI" data-account="gounlaw" data-field="message_arc" data-value="case_study | 1 타이틀 후킹 (화수·에피소드 제목) → 2 상황 설정 (사내커플 배경) → 3 사건 전개 1 (결혼·임신 시점) → 4 사건 전개 2 (출산 후 변화 조짐) → 5 감정 고조 1 → 6 감정 고조 2 → 7 갈등 정점 1 → 8 갈등 정점 2">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>case_study</code> · low density<br><small>roles: 1 타이틀 후킹 (화수·에피소드 제목), 2 상황 설정 (사내커플 배경), 3 사건 전개 1 (결혼·임신 시점), 4 사건 전개 2 (출산 후 변화 조짐), 5 감정 고조 1, 6 감정 고조 2</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY6b6G4CeKI" data-account="gounlaw" data-field="cta" data-value="comment_keyword | 다음화 기대되면 댓글로 반응 남기기 / 팔로우하면 매주 업데이트 알림 (캡션 내 시리즈 구독 유도)">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>comment_keyword</code> · last · 강도 7/5<br><i>"다음화 기대되면 댓글로 반응 남기기 / 팔로우하면 매주 업데이트 알림 (캡션 내 시리즈 구독 유도)"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY6b6G4CeKI" data-account="gounlaw" data-field="visual_palette" data-value="#FFFBF0, #F4A261, #264653, #E76F51, #A8DADC">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#FFFBF0"></span><code>#FFFBF0</code><span class="swatch" style="background:#F4A261"></span><code>#F4A261</code><span class="swatch" style="background:#264653"></span><code>#264653</code><span class="swatch" style="background:#E76F51"></span><code>#E76F51</code><span class="swatch" style="background:#A8DADC"></span><code>#A8DADC</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY6b6G4CeKI" data-account="gounlaw" data-field="visual_typography" data-value="웹툰 손글씨풍 말풍선 + 고딕 제목 혼용 — 디지털 카툰 표준 레이아웃 | 단일 패널 또는 2-분할 패널 / 말풍선 오버레이, 풀블리드 일러스트 배경">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>웹툰 손글씨풍 말풍선 + 고딕 제목 혼용 — 디지털 카툰 표준 레이아웃</code> · 단일 패널 또는 2-분할 패널 / 말풍선 오버레이, 풀블리드 일러스트 배경<br><small>이미지 우세</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY6b6G4CeKI" data-account="gounlaw" data-field="viral_factors" data-value="시리즈 연재 충성도(649화 누적) · 직장인 공감 감정 서사 (사내커플·육아 후 태도 변화) · 법률 전문성의 엔터테인먼트 래핑 · 클리프행어 구조 (1부 완결 미달 제목) · 외부 작가(@tedbark) 콜라보 태그">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>시리즈 연재 충성도(649화 누적)</code> conf=0.92 → saves<br><small>회차가 쌓일수록 기존 팔로워의 정기 저장·공유 루틴이 고정되어 알고리즘 도달 안정성 확보</small></li><li><code>직장인 공감 감정 서사 (사내커플·육아 후 태도 변화)</code> conf=0.88 → comments<br><small>결혼·출산 후 관계 변화는 보편적 공감 소재 — &#x27;나도 그랬어&#x27; 댓글 유발력 매우 높음</small></li><li><code>법률 전문성의 엔터테인먼트 래핑</code> conf=0.82 → likes<br><small>딱딱한 법률 정보를 스토리로 소비하게 해 진입 장벽을 낮추고 좋아요 감성 반응 유도</small></li><li><code>클리프행어 구조 (1부 완결 미달 제목)</code> conf=0.78 → saves<br><small>&#x27;(1)&#x27;이 붙은 분할 구성은 다음화 저장 동기를 직접 생성</small></li><li><code>외부 작가(@tedbark) 콜라보 태그</code> conf=0.65 → likes<br><small>작가 팬덤 크로스 유입 가능 — 웹툰 팬층과 법률 관심층 동시 도달</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY6b6G4CeKI" data-account="gounlaw" data-field="transferable_pattern" data-value="법률 서비스가 &#x27;649화 연재 웹툰&#x27;으로 팔로워 충성도를 구축한 핵심 구조 → onecpa 적용 추상 패턴: ① 직장인·사업자의 보편 감정 상황(세금 고지서 충격, 세무조사 통보, 폐업 결정)을 1화 후킹 제목으로 설정 ② 전문 해설 없이 감정 흐름(당혹→탐색→해결)으로 6-8장 서사 전개 ③ 마지막 슬라이드에서 &#x27;다음 편&#x27;예고 + 저장 CTA로 시리즈 구독 루틴 형성 ④ human-trust editorial 톤 유지를 위해 캐릭터(의뢰인 페르소나)를 고정하되 직접 복제 아닌 텍스트 카드뉴스 포맷으로 재해석 — 핵심은 &#x27;전문성 직접 노출&#x27;이 아닌 &#x27;감정 공감 서사 → 전문가 신뢰 귀결&#x27; 구조">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"법률 서비스가 &#x27;649화 연재 웹툰&#x27;으로 팔로워 충성도를 구축한 핵심 구조 → onecpa 적용 추상 패턴: ① 직장인·사업자의 보편 감정 상황(세금 고지서 충격, 세무조사 통보, 폐업 결정)을 1화 후킹 제목으로 설정 ② 전문 해설 없이 감정 흐름(당혹→탐색→해결)으로 6-8장 서사 전개 ③ 마지막 슬라이드에서 &#x27;다음 편&#x27;예고 + 저장 CTA로 시리즈 구독 루틴 형성 ④ human-trust editorial 톤 유지를 위해 캐릭터(의뢰인 페르소나)를 고정하되 직접 복제 아닌 텍스트 카드뉴스 포"</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/e4b61f54111a6b7e.jpg" alt=""><span class="badge">📑 14장</span></div>
+      <div class="meta"><span>♥ 2,708</span><span>💬 33</span></div>
+      <div class="caption">648화 : 거지 같은 인생 (4)
+수원 법무법인 고운이
+@tedbark 작가님과 함께 연재중입니다
+
+청소년 사이버 도박! 게임이 아닌 범죄 입니다!
+
+#고운웹툰 #고운변호사 #변호사웹툰 #수원변호사 #수원법무법인</div>
+      <a class="open" href="https://www.instagram.com/p/DYyvaB4iQjt/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/f00508a61db6da2f.jpg" alt=""><span class="badge">📑 14장</span></div>
+      <div class="meta"><span>♥ 2,360</span><span>💬 35</span></div>
+      <div class="caption">647화 : 거지 같은 인생 (3)
+수원 법무법인 고운이
+@tedbark 작가님과 함께 연재중입니다
+
+결국 할머니계서 고운을 찾아오시게 되는데..
+
+#고운웹툰 #고운변호사 #변호사웹툰 #수원변호사 #수원법무법인</div>
+      <a class="open" href="https://www.instagram.com/p/DYoZx9zCc20/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/4e446393763c8bf0.jpg" alt=""><span class="badge">📑 13장</span></div>
+      <div class="meta"><span>♥ 2,388</span><span>💬 22</span></div>
+      <div class="caption">644화 : 내 남자가 사라졌다 (4)
+수원 법무법인 고운이
+@tedbark 작가님과 함께 연재중입니다
+
+계속해서 나타나는 제3의 피해자, 고운과 소송을 진행합니다 
+
+#고운웹툰 #고운변호사 #변호사웹툰 #수원변호사 #수원법무법인</div>
+      <a class="open" href="https://www.instagram.com/p/DYOs6iHid5M/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/313cd7aa5a92b3b9.jpg" alt=""><span class="badge">📑 12장</span></div>
+      <div class="meta"><span>♥ 1,910</span><span>💬 44</span></div>
+      <div class="caption">646화 : 거지 같은 인생 (2)
+수원 법무법인 고운이
+@tedbark 작가님과 함께 연재중입니다
+
+#고운웹툰 #고운변호사 #변호사웹툰 #수원변호사 #수원법무법인</div>
+      <a class="open" href="https://www.instagram.com/p/DYgs9-aCVWU/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/7da992ff188140a5.jpg" alt=""><span class="badge">📑 13장</span></div>
+      <div class="meta"><span>♥ 1,820</span><span>💬 42</span></div>
+      <div class="caption">645화 : 거지 같은 인생 (1)
+수원 법무법인 고운이
+@tedbark 작가님과 함께 연재중입니다
+
+#고운웹툰 #고운변호사 #변호사웹툰 #수원변호사 #수원법무법인</div>
+      <a class="open" href="https://www.instagram.com/p/DYWaY8kid4Z/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+      </div>
+    </section>
+    
+
+    <section class="account">
+      <header class="profile">
+        <div class="avatar-empty"></div>
+        <div>
+          <div class="name">NH농협은행</div>
+          <a class="handle" href="https://www.instagram.com/nh.nonghyupbank.official/" target="_blank">@nh.nonghyupbank.official</a>
+          <div class="stats">팔로워 — · top 10 viral posts (engagement 정렬)</div>
+          <div class="bio"></div>
+        </div>
+      </header>
+      <div class="grid">
+        
+    <div class="card has-analysis">
+      <div class="media"><img src="assets/853c151506cdbe03.jpg" alt=""><span class="analysis-badge">🔍 분석됨</span><span class="badge">📑 2장</span></div>
+      <div class="meta"><span><span class="topic">기타</span>♥ 5,237</span><span>💬 1,246</span></div>
+      <div class="caption">[NH Original] 다른 그림 찾기 #12 👀
+
+솔직히 말해봐요
+먼저 본 거… 얼굴이죠?👀
+
+다른 그림 찾기인데
+자꾸 얼굴만 보이는 건
+저만 그런 거 아니죠…?🫣
+
+다그찾 집중 실패한 사람
+댓글로 손 들어주세요🙋‍♀️🙋‍♂️
+
+눈치 챘다면 정답도 슬쩍 남기기💛
+
+🎯 &lt;다른 그림 찾기 EVENT&gt;
+📅 이벤트 기간: 2026. 5. 12.(화) ~ 2026. 5. 17.(일)
+
+✅ 참여 방법
+➀ NH농협은행 SNS 팔로우
+➁</div>
+      <a class="open" href="https://www.instagram.com/p/DYOCl0DAYGy/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      <div class="field"><span class="copyright-warn">⚠ distinctive_design_avoid_close_emulation</span> — 직접 복제 회피, *추상 패턴*만 차용</div>
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYOCl0DAYGy" data-account="nh.nonghyupbank.official" data-field="hook" data-value="curiosity_gap | 솔직히 말해봐요 / 먼저 본 거… 얼굴이죠?👀">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>curiosity_gap</code> · 강도 9/5<br><i>"솔직히 말해봐요 / 먼저 본 거… 얼굴이죠?👀"</i><br><small>셀럽(변우석) 얼굴이미지 + &#x27;나만 그런가?&#x27; 공감 자기고백이 즉각적 thumb-stop을 만들고 댓글 참여 욕구를 동시에 점화</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYOCl0DAYGy" data-account="nh.nonghyupbank.official" data-field="message_arc" data-value="problem_solution | 1 셀럽 틀린그림찾기 게임 이미지 (후킹 + 참여유도) → 2 이벤트 유의사항 및 안내 텍스트">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>problem_solution</code> · low density<br><small>roles: 1 셀럽 틀린그림찾기 게임 이미지 (후킹 + 참여유도), 2 이벤트 유의사항 및 안내 텍스트</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYOCl0DAYGy" data-account="nh.nonghyupbank.official" data-field="cta" data-value="comment_keyword | 두 그림 비교 후, 다른 부분을 댓글로 남기면 참여 완료💌 / 다그찾 집중 실패한 사람 댓글로 손 들어주세요🙋">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>comment_keyword</code> · last · 강도 9/5<br><i>"두 그림 비교 후, 다른 부분을 댓글로 남기면 참여 완료💌 / 다그찾 집중 실패한 사람 댓글로 손 들어주세요🙋"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYOCl0DAYGy" data-account="nh.nonghyupbank.official" data-field="visual_palette" data-value="#005BAC, #FFFFFF, #FFD700">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#005BAC"></span><code>#005BAC</code><span class="swatch" style="background:#FFFFFF"></span><code>#FFFFFF</code><span class="swatch" style="background:#FFD700"></span><code>#FFD700</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYOCl0DAYGy" data-account="nh.nonghyupbank.official" data-field="visual_typography" data-value="NH 브랜드 고딕 계열, 이벤트 안내 텍스트는 소형·정렬형, 이모지 포인트 활용 | 풀블리드 이미지 2분할(틀린그림 비교) 1장 + 유의사항 텍스트 전용 1장">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>NH 브랜드 고딕 계열, 이벤트 안내 텍스트는 소형·정렬형, 이모지 포인트 활용</code> · 풀블리드 이미지 2분할(틀린그림 비교) 1장 + 유의사항 텍스트 전용 1장<br><small>이미지 우세</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYOCl0DAYGy" data-account="nh.nonghyupbank.official" data-field="viral_factors" data-value="셀럽(변우석) 활용 · 인터랙티브 게임 포맷(틀린그림찾기) · 공감형 자기고백 후킹(&#x27;얼굴만 보임&#x27;) · 소액 실물 경품 인센티브(배스킨라빈스) · #다그찾 커뮤니티 해시태그">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>셀럽(변우석) 활용</code> conf=0.95 → likes<br><small>팬덤 유입 + 팔로워 외 계정 알고리즘 노출 극대화</small></li><li><code>인터랙티브 게임 포맷(틀린그림찾기)</code> conf=0.93 → comments<br><small>정답 댓글이라는 낮은 참여 장벽이 댓글 1246건 직접 견인</small></li><li><code>공감형 자기고백 후킹(&#x27;얼굴만 보임&#x27;)</code> conf=0.87 → comments<br><small>&#x27;나도 그래!&#x27; 공감 댓글을 자연스럽게 유발하는 사회적 증거 메커니즘</small></li><li><code>소액 실물 경품 인센티브(배스킨라빈스)</code> conf=0.8 → comments<br><small>팔로우+댓글이라는 이중 전환의 마찰을 경품이 제거</small></li><li><code>#다그찾 커뮤니티 해시태그</code> conf=0.68 → likes<br><small>기존 틀린그림찾기 콘텐츠 팬층을 브랜드 계정으로 유입시키는 발견 채널</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYOCl0DAYGy" data-account="nh.nonghyupbank.official" data-field="transferable_pattern" data-value="공감자기고백 후킹 + 게임형 참여유도 슬라이드 + 댓글CTA 구조: onecpa 맥락에서는 &#x27;이 세금 실수 본인도 했죠?&#x27; 류 공감질문 후킹 + 간단 OX퀴즈·절세 체크리스트 슬라이드 + &#x27;맞힌 분 댓글로 손!&#x27; CTA로 전환 가능. 셀럽 대신 충격적 절세 숫자나 흔한 실수 사례가 thumb-stop 역할 대체. 핵심 공식: 낮은 참여 장벽(정답이 있는 질문) + 공감 유발 자기고백 어조 + 단일 댓글 행동 CTA = 코멘트 폭발. human-trust editorial 톤으로는 &#x27;사례→독자 공감 질문→전문가 확인&#x27; 3단 흐름이 적합">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"공감자기고백 후킹 + 게임형 참여유도 슬라이드 + 댓글CTA 구조: onecpa 맥락에서는 &#x27;이 세금 실수 본인도 했죠?&#x27; 류 공감질문 후킹 + 간단 OX퀴즈·절세 체크리스트 슬라이드 + &#x27;맞힌 분 댓글로 손!&#x27; CTA로 전환 가능. 셀럽 대신 충격적 절세 숫자나 흔한 실수 사례가 thumb-stop 역할 대체. 핵심 공식: 낮은 참여 장벽(정답이 있는 질문) + 공감 유발 자기고백 어조 + 단일 댓글 행동 CTA = 코멘트 폭발. human-trust editorial 톤으로는 &#x27;사례→"</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card has-analysis">
+      <div class="media"><img src="assets/3b7dcda1553543e5.jpg" alt=""><span class="analysis-badge">🔍 분석됨</span><span class="badge">📑 4장</span></div>
+      <div class="meta"><span><span class="topic">기타</span>♥ 4,134</span><span>💬 1,233</span></div>
+      <div class="caption">NH Original] 올랭배뿌 &gt;.&lt;
+
+본격 여름이 시작된 것 같은 요즘…☀️
+저 올리는 더울 때마다 자연스럽게 폰을 확인하게 된답니다.
+
+왜냐구요? 👀
+우석님이 바로 저만의 에어컨이기 때문이에요! ❄️🤍
+(우석이가 있는 곳엔 공기가 2도 정도 차다면서요? 🌬️)
+
+그래서 여러분을 위해 야심차게 준비했습니다!
+초여름 무더위 싹- 날려줄 변우석 6월 한정판 배경화면 나눔! 💚
+(이번 컨셉 진짜 역대급 청량함 그 자체라 소장 가</div>
+      <a class="open" href="https://www.instagram.com/p/DY0qhhZAYdZ/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      <div class="field"><span class="copyright-warn">⚠ distinctive_design_avoid_close_emulation</span> — 직접 복제 회피, *추상 패턴*만 차용</div>
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY0qhhZAYdZ" data-account="nh.nonghyupbank.official" data-field="hook" data-value="curiosity_gap | 올랭배뿌 &gt;.&lt;">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>curiosity_gap</code> · 강도 8/5<br><i>"올랭배뿌 &gt;.&lt;"</i><br><small>&#x27;올랭배뿌&#x27;라는 팬덤 조어가 즉각적 궁금증을 유발하고, 변우석 얼굴 이미지가 스크롤 정지 효과를 극대화해 팬·비팬 모두 클릭하게 만든다</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY0qhhZAYdZ" data-account="nh.nonghyupbank.official" data-field="message_arc" data-value="problem_solution | 1 후킹 — &#x27;올랭배뿌&#x27; 조어+변우석 대형 비주얼로 스크롤 정지 → 2 콘셉트 소개 — &#x27;인간 에어컨&#x27; 스토리텔링+한정판 배경화면 예고 → 3 참여방법 — 팔로우+댓글 키워드 2단계 CTA 명시 → 4 CTA — 이벤트 기간·수령 방법 재확인 및 기대감 마무리">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>problem_solution</code> · low density<br><small>roles: 1 후킹 — &#x27;올랭배뿌&#x27; 조어+변우석 대형 비주얼로 스크롤 정지, 2 콘셉트 소개 — &#x27;인간 에어컨&#x27; 스토리텔링+한정판 배경화면 예고, 3 참여방법 — 팔로우+댓글 키워드 2단계 CTA 명시, 4 CTA — 이벤트 기간·수령 방법 재확인 및 기대감 마무리</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY0qhhZAYdZ" data-account="nh.nonghyupbank.official" data-field="cta" data-value="comment_keyword | 댓글에 &#x27;변우석&#x27; 키워드를 포함해 댓글 남기기">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>comment_keyword</code> · last · 강도 9/5<br><i>"댓글에 &#x27;변우석&#x27; 키워드를 포함해 댓글 남기기"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY0qhhZAYdZ" data-account="nh.nonghyupbank.official" data-field="visual_palette" data-value="#00A650, #FFFFFF, #C8EFD4, #1A1A1A">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#00A650"></span><code>#00A650</code><span class="swatch" style="background:#FFFFFF"></span><code>#FFFFFF</code><span class="swatch" style="background:#C8EFD4"></span><code>#C8EFD4</code><span class="swatch" style="background:#1A1A1A"></span><code>#1A1A1A</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY0qhhZAYdZ" data-account="nh.nonghyupbank.official" data-field="visual_typography" data-value="산세리프 대형 포인트 텍스트, 손글씨풍 서브 카피 혼용, NH 브랜드 그린 강조색 적용 | 전면 인물 사진 배경 + 중앙·하단 오버레이 텍스트 블록, 하단 이벤트 정보 띠 고정">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>산세리프 대형 포인트 텍스트, 손글씨풍 서브 카피 혼용, NH 브랜드 그린 강조색 적용</code> · 전면 인물 사진 배경 + 중앙·하단 오버레이 텍스트 블록, 하단 이벤트 정보 띠 고정<br><small>이미지 우세</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY0qhhZAYdZ" data-account="nh.nonghyupbank.official" data-field="viral_factors" data-value="유명 셀럽(변우석) 앰배서더 활용 · 댓글 키워드 이벤트 구조 · 한정판 희소성 프레이밍 · 초여름 시즌 타이밍 + &#x27;인간 에어컨&#x27; 밈 조어 · 팬 은어 &#x27;올랭배뿌&#x27; 사용으로 인사이더 공동체감 형성">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>유명 셀럽(변우석) 앰배서더 활용</code> conf=0.95 → likes<br><small>팬덤 기반 자발적 유입으로 팔로우 여부 무관하게 좋아요+댓글 폭발 유도</small></li><li><code>댓글 키워드 이벤트 구조</code> conf=0.92 → comments<br><small>참여 장벽 낮음(댓글 한 줄)과 명확한 보상(한정 배경화면) 조합으로 댓글 1233개 견인</small></li><li><code>한정판 희소성 프레이밍</code> conf=0.8 → saves<br><small>&#x27;한정판·소장가치 1031%&#x27; 표현이 FOMO를 자극해 저장 및 재방문 동기 강화</small></li><li><code>초여름 시즌 타이밍 + &#x27;인간 에어컨&#x27; 밈 조어</code> conf=0.75 → likes<br><small>공감각적 시즌 키워드가 공유·태그 욕구를 자극하고 알고리즘 발견 가능성 상승</small></li><li><code>팬 은어 &#x27;올랭배뿌&#x27; 사용으로 인사이더 공동체감 형성</code> conf=0.7 → comments<br><small>팬클럽 고유 언어가 댓글 참여 심리적 허들을 낮추고 귀속감 기반 자발적 참여 유도</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY0qhhZAYdZ" data-account="nh.nonghyupbank.official" data-field="transferable_pattern" data-value="저진입 댓글 키워드 이벤트 구조(팔로우+키워드 댓글 2단계)는 onecpa 절세·지원금 해설 포스트에 응용 가능 — 예: &#x27;이 공제 항목 알고 계셨나요? 댓글에 항목명 남기시면 무료 세무 체크리스트 DM 드립니다&#x27; 형태. 셀럽 이미지 대신 신뢰 기반 에디토리얼 디자인(굵은 숫자+질문형 카피)을 후킹으로 쓰고, 희소성은 &#x27;선착순 무료 템플릿·체크리스트 한정 배포&#x27; 프레이밍으로 대체. 핵심 추상 패턴: 실용 콘텐츠 예고(저장 가치) + 댓글 한 줄 참여 CTA = 댓글·저장 동반 상승 구조. onecpa human-trust editorial 톤에서는 &#x27;전문가가 직접 DM 드립니다&#x27; 신뢰 레이어를 추가해 차별화 가능.">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"저진입 댓글 키워드 이벤트 구조(팔로우+키워드 댓글 2단계)는 onecpa 절세·지원금 해설 포스트에 응용 가능 — 예: &#x27;이 공제 항목 알고 계셨나요? 댓글에 항목명 남기시면 무료 세무 체크리스트 DM 드립니다&#x27; 형태. 셀럽 이미지 대신 신뢰 기반 에디토리얼 디자인(굵은 숫자+질문형 카피)을 후킹으로 쓰고, 희소성은 &#x27;선착순 무료 템플릿·체크리스트 한정 배포&#x27; 프레이밍으로 대체. 핵심 추상 패턴: 실용 콘텐츠 예고(저장 가치) + 댓글 한 줄 참여 CTA = 댓글·저장 동반 상승 구조. onec"</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card has-analysis">
+      <div class="media"><img src="assets/a8e63bdcc4bf3540.jpg" alt=""><span class="analysis-badge">🔍 분석됨</span><span class="badge">📑 2장</span></div>
+      <div class="meta"><span><span class="topic">기타</span>♥ 3,320</span><span>💬 905</span></div>
+      <div class="caption">[NH Original] 다른 그림 찾기 #13 👀
+6월의 시작을 환하게 밝히는 우석 등장! ✨
+나 이렇게 또 변우석한테 한 번 더 반하네..🤍
+흰 니트 우석도, 그레이 니트 우석도 완벽해서
+정답 찾기가 하늘의 별 따기만큼 어렵지만!
+눈치 빠른 분들이 얼른 정답 슬쩍 남겨주기 💛
+
+🎯 &lt;다른 그림 찾기 EVENT&gt;
+📅 이벤트 기간: 2026. 6. 8.(월) ~ 2026. 6. 14.(일)
+
+✅ 참여 방법
+➀ NH농협은행 SN</div>
+      <a class="open" href="https://www.instagram.com/p/DZTkIqkgTAB/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      <div class="field"><span class="copyright-warn">⚠ distinctive_design_avoid_close_emulation</span> — 직접 복제 회피, *추상 패턴*만 차용</div>
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZTkIqkgTAB" data-account="nh.nonghyupbank.official" data-field="hook" data-value="curiosity_gap | 다른 그림 찾기 #13 👀  6월의 시작을 환하게 밝히는 우석 등장!">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>curiosity_gap</code> · 강도 9/5<br><i>"다른 그림 찾기 #13 👀  6월의 시작을 환하게 밝히는 우석 등장!"</i><br><small>셀럽(변우석) 얼굴 클로즈업 + &#x27;다른 부분 찾기&#x27;라는 인지적 도전이 결합되어 즉각적 시선 고정 및 슬라이드 스와이프 욕구를 동시에 자극</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZTkIqkgTAB" data-account="nh.nonghyupbank.official" data-field="message_arc" data-value="how_to | 1 후킹 — 셀럽 등장 + 챌린지 선언 → 2 정답 확인 + 이벤트 안내 + CTA">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>how_to</code> · low density<br><small>roles: 1 후킹 — 셀럽 등장 + 챌린지 선언, 2 정답 확인 + 이벤트 안내 + CTA</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZTkIqkgTAB" data-account="nh.nonghyupbank.official" data-field="cta" data-value="comment_keyword | 두 그림 비교 후, 다른 부분을 댓글로 남기면 참여 완료💌  눈치 빠른 분들이 얼른 정답 슬쩍 남겨주기 💛">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>comment_keyword</code> · last · 강도 9/5<br><i>"두 그림 비교 후, 다른 부분을 댓글로 남기면 참여 완료💌  눈치 빠른 분들이 얼른 정답 슬쩍 남겨주기 💛"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZTkIqkgTAB" data-account="nh.nonghyupbank.official" data-field="visual_palette" data-value="#FFFFFF, #F5E642, #2E6B3E, #D9D9D9">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#FFFFFF"></span><code>#FFFFFF</code><span class="swatch" style="background:#F5E642"></span><code>#F5E642</code><span class="swatch" style="background:#2E6B3E"></span><code>#2E6B3E</code><span class="swatch" style="background:#D9D9D9"></span><code>#D9D9D9</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZTkIqkgTAB" data-account="nh.nonghyupbank.official" data-field="visual_typography" data-value="산세리프 계열 브랜드 서체, 캐주얼 이모지 혼용, 포인트 컬러 강조 타이틀 | 좌우 2분할 비교 레이아웃 (틀린 그림 찾기 포맷) — 셀럽 인물 사진 풀블리드">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>산세리프 계열 브랜드 서체, 캐주얼 이모지 혼용, 포인트 컬러 강조 타이틀</code> · 좌우 2분할 비교 레이아웃 (틀린 그림 찾기 포맷) — 셀럽 인물 사진 풀블리드<br><small>이미지 우세</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZTkIqkgTAB" data-account="nh.nonghyupbank.official" data-field="viral_factors" data-value="셀럽 앰배서더(변우석) 팬덤 동원 · 게임화(Gamification) — 틀린 그림 찾기 · 경품 인센티브(투썸플레이스 쿠폰) · 시리즈 넘버링(#13) — 콘텐츠 연속성 · 팬심 유발 캡션 카피(&#x27;변우석한테 한 번 더 반하네&#x27;)">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>셀럽 앰배서더(변우석) 팬덤 동원</code> conf=0.95 → likes<br><small>변우석 팬 계층이 브랜드 팔로워와 무관하게 유입되어 좋아요·공유 증폭</small></li><li><code>게임화(Gamification) — 틀린 그림 찾기</code> conf=0.92 → comments<br><small>정답을 댓글로 남겨야 이벤트 참여가 완료되므로 댓글 수 직접 견인</small></li><li><code>경품 인센티브(투썸플레이스 쿠폰)</code> conf=0.85 → comments<br><small>실물 보상이 참여 장벽을 낮추고 이벤트 확산 동기 부여</small></li><li><code>시리즈 넘버링(#13) — 콘텐츠 연속성</code> conf=0.72 → saves<br><small>시리즈물 인식 시 팔로우·저장으로 다음 회차 대기 행동 유도</small></li><li><code>팬심 유발 캡션 카피(&#x27;변우석한테 한 번 더 반하네&#x27;)</code> conf=0.8 → comments<br><small>공감형 감성 어투가 팬 댓글 공명을 유발해 자발적 반응 증폭</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZTkIqkgTAB" data-account="nh.nonghyupbank.official" data-field="transferable_pattern" data-value="게임화 호기심 후킹 + 댓글 참여 CTA 구조: &#x27;두 개를 비교해 차이를 찾아라&#x27;는 포맷을 onecpa 절세·지원금 콘텐츠에 적용 가능. 예시 — &#x27;이 두 사업자 중 세금을 덜 낸 쪽은? 댓글로 맞혀보세요&#x27; 형식으로 1슬라이드에 시각 비교(대화형 수치 또는 케이스), 2슬라이드에 해설+저장 CTA를 배치. 핵심 추상: 독자가 정답을 추론하게 만들어 댓글·저장을 자연 유발하는 &#x27;퀴즈형 curiosity_gap + 해설 보상 구조&#x27;는 신뢰 기반 에디토리얼 톤과도 충돌하지 않으며, 절세 체크리스트·지원금 자격 진단 등 판단 개입이 필요한 주제에 특히 강함">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"게임화 호기심 후킹 + 댓글 참여 CTA 구조: &#x27;두 개를 비교해 차이를 찾아라&#x27;는 포맷을 onecpa 절세·지원금 콘텐츠에 적용 가능. 예시 — &#x27;이 두 사업자 중 세금을 덜 낸 쪽은? 댓글로 맞혀보세요&#x27; 형식으로 1슬라이드에 시각 비교(대화형 수치 또는 케이스), 2슬라이드에 해설+저장 CTA를 배치. 핵심 추상: 독자가 정답을 추론하게 만들어 댓글·저장을 자연 유발하는 &#x27;퀴즈형 curiosity_gap + 해설 보상 구조&#x27;는 신뢰 기반 에디토리얼 톤과도 충돌하지 않으며, 절"</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/5a76f7c4e7c28621.jpg" alt=""><span class="badge">📑 3장</span></div>
+      <div class="meta"><span>♥ 494</span><span>💬 425</span></div>
+      <div class="caption">[NH Original] 米라클 🌾
+
+내힘들다를 거꾸로 하면...? 
+
+✨ [ 다 들 힘 내 ] ✨
+
+오늘도 이 바닥을 뜨지 않고 (ㅠㅠ)
+당당히 눈을 뜬 여러분! 
+
+쌀을 사랑하는 마음을 가득 담아
+댓글로 응원 한 마디를 남겨주세요!
+
+추첨을 통해 아침 입맛을 돋우게 할
+[농협 군옥수수 쌀수프] 를 드릴게요 🌽💛
+
+&lt;米라클 EVENT!&gt;
+
+■ 이벤트 기간 : 2026. 5. 22.(금) ~ 5. 27.(수)
+■ 이벤트 당첨자</div>
+      <a class="open" href="https://www.instagram.com/p/DYnyi-MjM53/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/a7901e3854073951.jpg" alt=""><span class="badge">📑 7장</span></div>
+      <div class="meta"><span>♥ 177</span><span>💬 1</span></div>
+      <div class="caption">[NH Benefit] 엄빠를 위한 보이스피싱 보상보험, 무료로 챙기세요! 
+📱날로 교묘해지는 보이스피싱, 
+우리 부모님은 괜찮으실까 걱정되셨다면? 🧐
+
+NH농협은행이
+보이스피싱 보상보험 무료 가입 지원으로
+든든하게 대비해드려요! 🙌 
+
+보이스피싱, 메신저피싱으로 인한 실제 금전 손해를
+최대 1천만 원까지 보장해 드립니다!
+
+📌 상품명
+단체상해보험
+
+📌 보장내용 
+전기통신금융사기로 인한 송금 피해 발생 시, 
+실제 금전손해액의</div>
+      <a class="open" href="https://www.instagram.com/p/DYgELwDjIt0/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/ab488a5bcc3e7981.jpg" alt=""><span class="badge">📑 4장</span></div>
+      <div class="meta"><span>♥ 117</span><span>💬 8</span></div>
+      <div class="caption">[NH Benefit] 거침없이 가자! 위풍당당 승부 예측 ⚾🟢
+
+이번 경기, 결과를 예측해보세요!
+NH올원뱅크에서 승부를 예측하고,
+커피 쿠폰부터 우대금리 혜택까지 챙겨가세요 💚
+
+🎁 EVENT 1. 승리 팀 예측하고 투썸플레이스 아이스 아메리카노 받자!
+
+■ 참여 방법
+NH올원뱅크에서 승리 팀 예측하기
+
+🏆 경품
+- 투썸플레이스 아이스 아메리카노(R) 1잔 (100명)
+
+🎁 EVENT 2. 위풍당당 적금 가입 고객 혜택
+
+</div>
+      <a class="open" href="https://www.instagram.com/p/DYgooYtl-Ii/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/52831ceb7a12db81.jpg" alt=""><span class="badge">📑 4장</span></div>
+      <div class="meta"><span>♥ 135</span><span>💬 1</span></div>
+      <div class="caption">[NH Benefit] NH농협은행 X 기안84가 뭉쳤다!
+
+모이면 모일수록 혜택이 터지는
+&#x27;모+모익선 이벤트&#x27;가 시작되었습니다! 🎉
+
+NH올원모임통장 만들고
+성수동 핫플 팝업스토어 카페 이용권부터
+푸짐한 경품, 모임지원금까지 모두 챙겨가세요!
+(기존 가입자도 신규모임 개설 후 참여 가능🤫)
+
+🎁 BENEFIT 1. 올원뱅크 팝업스토어 카페 이용권 100% 증정!
+🎁 BENEFIT 2. 모일수록 커지는 추첨 경품 (7월 중 발</div>
+      <a class="open" href="https://www.instagram.com/p/DY50KZxAaPf/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/1d3325240cc5cd4b.jpg" alt=""><span class="badge">📑 5장</span></div>
+      <div class="meta"><span>♥ 106</span><span>💬 1</span></div>
+      <div class="caption">[NH Original] 올리큐레이터
+
+성장의 숫자 뒤에 가려진 진짜 소득의 비밀,
+지표와 내 체감이 따로 노는 결정적 원인을
+올리가 정리해 봤어요 👀
+
+어렵지만 꼭 알아야 할 경제 흐름!
+올리와 함께 확인하고,
+소중한 내 자산을 든든하게 지킬 전략도 세워보아요!💎🔒
+
+editor. 올리
+
+#NH올리큐레이터 #경제흐름 #GDP #GDI #경제지표 #자산관리 #한국경제 #경제상식 #금융상식 #NH농협은행 #농협은행</div>
+      <a class="open" href="https://www.instagram.com/p/DYipEthge2n/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/26e8e4c1791c7c93.jpg" alt=""><span class="badge">📑 5장</span></div>
+      <div class="meta"><span>♥ 108</span><span>💬 0</span></div>
+      <div class="caption">[NH Original] 올리큐레이터
+
+문화재에서 &#x27;국가유산&#x27;이 된 이유부터
+&#x27;입장료 0원&#x27; 혜택을 누리는 똑똑한 소비법까지 
+올리가 핵심만 정리했어요 👀✨
+
+이번 주말에는 올리의 꿀팁과 함께
+우리 국가유산으로 가벼운 나들이를 떠나보아요 🥰
+
+editor. 올리
+
+#NH올리큐레이터 #국가유산 #국가유산청 #입장료 #무료혜택 #문화가있는날 #경제상식 #금융상식 #NH농협은행 #농협은행</div>
+      <a class="open" href="https://www.instagram.com/p/DZJQ6ZEDVtl/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/0ca88c332f3eae45.jpg" alt=""></div>
+      <div class="meta"><span>♥ 92</span><span>💬 2</span></div>
+      <div class="caption">[NH Original] 제철한끼 요리편 이달의 농산물 Answer.
+
+✅ 봄 끝자락 입맛 두 배 상승 시키는 이 식재료는?
+정답은 바로 ‘두릅’이었습니다! 🌿✨
+
+향은 산에서 온 느낌, 쌉싸름한데 자꾸 손이 가는
+두릅의 매력을 듬뿍 담아
+두릅력 MAX 찍어줄 두릅냉파스타 만들어볼까요?
+
+💚두릅냉파스타💚
+① 두릅은 밑동을 다듬고 끓는 소금물에 살짝 데친 후 찬물에 헹궈 물기를 빼고 먹기 좋은 크기로 썬다
+② 파스타면을 소금물에</div>
+      <a class="open" href="https://www.instagram.com/p/DYdfbZDAVCp/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+      </div>
+    </section>
+    
+
+    <section class="account">
+      <header class="profile">
+        <div class="avatar-empty"></div>
+        <div>
+          <div class="name">UPPITY 어피티</div>
+          <a class="handle" href="https://www.instagram.com/uppity.official/" target="_blank">@uppity.official</a>
+          <div class="stats">팔로워 — · top 10 viral posts (engagement 정렬)</div>
+          <div class="bio"></div>
+        </div>
+      </header>
+      <div class="grid">
+        
+    <div class="card">
+      <div class="media"><img src="assets/e236298335afb50b.jpg" alt=""><span class="badge video-badge">▶ 7,884회</span></div>
+      <div class="meta"><span>♥ 195</span><span>💬 683</span></div>
+      <div class="caption">댓글에 ‘반도체’라고 적어주시면
+AI 반도체 투자 꿀정보 보내드릴게요 💌
+
+요즘 AI 반도체 주식, 진짜 난리죠.
+삼성전자, SK하이닉스, 마이크론, 엔비디아, TSMC까지
+이름은 많이 들어봤는데…
+사실 반도체 회사라고 다 같은 회사가 아니에요.
+
+✔️ HBM 1등은? SK하이닉스
+✔️ GPU 1등은? 엔비디아
+✔️ 파운드리 1등은? TSMC
+
+AI 반도체가 왜 뜨는지,
+각 기업은 어떤 역할을 하는지,
+대표 ETF와 투자 방법</div>
+      <a class="open" href="https://www.instagram.com/p/DZFCOdWz7Ts/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card has-analysis">
+      <div class="media"><img src="assets/ddbba53fb5a25ea5.jpg" alt=""><span class="analysis-badge">🔍 분석됨</span><span class="badge video-badge">▶ 13,610회</span></div>
+      <div class="meta"><span><span class="topic">기타</span>♥ 500</span><span>💬 12</span></div>
+      <div class="caption">지난 19일, 기획예산처에서 주관한 
+‘다음 세대와 함께 대한민국을 그리다’ 청년 라이브톡에 다녀왔습니다.
+이 자리에서 청년들의 경제 생활에 필요한 여러 이야기를 나누고, 
+현장에서 느낀 고민과 의견을 전하고 왔어요.
+
+청년들이 더 안정적으로 일하고, 벌고, 모으고, 살아가기 위해 
+어떤 정책과 지원이 필요할까요?
+
+여러분의 생각도 댓글로 남겨주세요.</div>
+      <a class="open" href="https://www.instagram.com/p/DY1f9w4z2Sn/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY1f9w4z2Sn" data-account="uppity.official" data-field="hook" data-value="question | 청년들이 더 안정적으로 일하고, 벌고, 모으고, 살아가기 위해 어떤 정책과 지원이 필요할까요?">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>question</code> · 강도 3/5<br><i>"청년들이 더 안정적으로 일하고, 벌고, 모으고, 살아가기 위해 어떤 정책과 지원이 필요할까요?"</i><br><small>열린 정책 질문이 20-30대 공감을 자극하나 구체적 손실·숫자 없이 추상 이슈로 남아 훅 긴장감이 중간 수준에 머묾</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY1f9w4z2Sn" data-account="uppity.official" data-field="message_arc" data-value="story | 1 현장 참여 인증 + 열린 질문형 CTA">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>story</code> · low density<br><small>roles: 1 현장 참여 인증 + 열린 질문형 CTA</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY1f9w4z2Sn" data-account="uppity.official" data-field="cta" data-value="comment_keyword | 여러분의 생각도 댓글로 남겨주세요.">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>comment_keyword</code> · last · 강도 3/5<br><i>"여러분의 생각도 댓글로 남겨주세요."</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY1f9w4z2Sn" data-account="uppity.official" data-field="visual_palette" data-value="#FFFFFF, #F5EFE6, #1A1A1A">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#FFFFFF"></span><code>#FFFFFF</code><span class="swatch" style="background:#F5EFE6"></span><code>#F5EFE6</code><span class="swatch" style="background:#1A1A1A"></span><code>#1A1A1A</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY1f9w4z2Sn" data-account="uppity.official" data-field="visual_typography" data-value="Pretendard 계열 세미볼드, 미니멀 베이지 톤 브랜드 일관성 추정 | 풀블리드 현장 사진 단일 컷 또는 텍스트 오버레이 최소 레이아웃">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>Pretendard 계열 세미볼드, 미니멀 베이지 톤 브랜드 일관성 추정</code> · 풀블리드 현장 사진 단일 컷 또는 텍스트 오버레이 최소 레이아웃<br><small>이미지 우세</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY1f9w4z2Sn" data-account="uppity.official" data-field="viral_factors" data-value="오피니언 유도형 댓글 CTA · 정부 공식 행사 참여 권위 시그널 · 청년 경제 불안 공감 키워드 밀집">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>오피니언 유도형 댓글 CTA</code> conf=0.72 → comments<br><small>청년 정책 이슈는 의견 다양성이 높아 논쟁적 댓글 참여 동기 자연 발생</small></li><li><code>정부 공식 행사 참여 권위 시그널</code> conf=0.6 → saves<br><small>기획예산처 주관 행사 언급이 콘텐츠 신뢰도를 높여 저장·공유 의향 소폭 상승</small></li><li><code>청년 경제 불안 공감 키워드 밀집</code> conf=0.65 → likes<br><small>&#x27;일하고·벌고·모으고·살아가기&#x27; 4동사 나열이 20-30대 재무 불안 정서를 압축 자극</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY1f9w4z2Sn" data-account="uppity.official" data-field="transferable_pattern" data-value="현장 권위 + 열린 질문 단일 컷 구조: 전문가·미디어가 정책·이슈 현장을 직접 경험한 뒤 &#x27;여러분은 어떻게 생각하나요?&#x27;로 독자 참여를 여는 1-컷 스토리 포맷. onecpa에서는 절세·정부지원금 설명회·세미나 참석 후 &#x27;CPA가 현장에서 들은 핵심 한 마디 + 이 제도 해당되시나요?&#x27;처럼 전문가 현장 권위(신뢰)와 독자 자가진단 질문(참여)을 결합한 단일 카드로 응용 가능; 정보 밀도는 낮게 유지하고 댓글 CTA로 알고리즘 도달 확장">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"현장 권위 + 열린 질문 단일 컷 구조: 전문가·미디어가 정책·이슈 현장을 직접 경험한 뒤 &#x27;여러분은 어떻게 생각하나요?&#x27;로 독자 참여를 여는 1-컷 스토리 포맷. onecpa에서는 절세·정부지원금 설명회·세미나 참석 후 &#x27;CPA가 현장에서 들은 핵심 한 마디 + 이 제도 해당되시나요?&#x27;처럼 전문가 현장 권위(신뢰)와 독자 자가진단 질문(참여)을 결합한 단일 카드로 응용 가능; 정보 밀도는 낮게 유지하고 댓글 CTA로 알고리즘 도달 확장"</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card has-analysis">
+      <div class="media"><img src="assets/fdea637806989093.jpg" alt=""><span class="analysis-badge">🔍 분석됨</span><span class="badge video-badge">▶ 34,837회</span></div>
+      <div class="meta"><span><span class="topic">자본시장</span>♥ 331</span><span>💬 6</span></div>
+      <div class="caption">요새 삼전 하닉만 잘 나간다고?
+현대차 주가도 장난 아니래요.
+자율주행과 로봇에 진심인 현대차 그룹에 투자하는 뜨끈뜨끈한 신상 ETF가 나왔습니다.
+바로 RISE 현대차고정피지컬AI ETF!
+
+핵심은 ‘피지컬 AI’.
+ 즉, 실제로 움직이는 AI 산업에 투자하는 건데요.
+ 자율주행차, 로봇, 스마트팩토리 같은 미래 산업을 한 번에 담았어요.
+
+구성도 꽤 직관적입니다.
+ 현대차를 25% 고정 편입해서 중심을 잡고,
+ 현대오토에버</div>
+      <a class="open" href="https://www.instagram.com/p/DYyvdpTzx8y/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYyvdpTzx8y" data-account="uppity.official" data-field="hook" data-value="contrarian | 요새 삼전 하닉만 잘 나간다고?">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>contrarian</code> · 강도 7/5<br><i>"요새 삼전 하닉만 잘 나간다고?"</i><br><small>삼전·하닉 집중이라는 투자자 통념을 구어체 의문문으로 정면 도전해 방어적 주의를 즉시 끌어냄</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYyvdpTzx8y" data-account="uppity.official" data-field="message_arc" data-value="problem_solution | 1 후킹: &#x27;삼전·하닉만?&#x27; 반전 질문 → 2 신상 소개: RISE 현대차고정피지컬AI ETF 발표 → 3 핵심 개념: 피지컬AI 정의 (자율주행·로봇·스마트팩토리) → 4 구성 비중: 현대차 25% 고정 + 핵심 편입 종목 → 5 차별화: 기존 자동차ETF vs 피지컬AI ETF 비교 → 6 CTA: 체크리스트 요약 + 다음 ETF 댓글 요청">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>problem_solution</code> · medium density<br><small>roles: 1 후킹: &#x27;삼전·하닉만?&#x27; 반전 질문, 2 신상 소개: RISE 현대차고정피지컬AI ETF 발표, 3 핵심 개념: 피지컬AI 정의 (자율주행·로봇·스마트팩토리), 4 구성 비중: 현대차 25% 고정 + 핵심 편입 종목, 5 차별화: 기존 자동차ETF vs 피지컬AI ETF 비교, 6 CTA: 체크리스트 요약 + 다음 ETF 댓글 요청</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYyvdpTzx8y" data-account="uppity.official" data-field="cta" data-value="comment_keyword | 다음은 또 어떤 ETF를 다뤄볼까요?">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>comment_keyword</code> · last · 강도 5/5<br><i>"다음은 또 어떤 ETF를 다뤄볼까요?"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYyvdpTzx8y" data-account="uppity.official" data-field="visual_palette" data-value="#FF6B35, #FFFFFF, #1A1A2E, #F7F7F7">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#FF6B35"></span><code>#FF6B35</code><span class="swatch" style="background:#FFFFFF"></span><code>#FFFFFF</code><span class="swatch" style="background:#1A1A2E"></span><code>#1A1A2E</code><span class="swatch" style="background:#F7F7F7"></span><code>#F7F7F7</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYyvdpTzx8y" data-account="uppity.official" data-field="visual_typography" data-value="산세리프 ExtraBold 헤드라인 + Regular 본문, 핵심 수치 컬러 강조 | 전면 타이포 중심 단일컬럼, 하단 체크리스트 블록 분리">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>산세리프 ExtraBold 헤드라인 + Regular 본문, 핵심 수치 컬러 강조</code> · 전면 타이포 중심 단일컬럼, 하단 체크리스트 블록 분리<br><small>텍스트 우세</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYyvdpTzx8y" data-account="uppity.official" data-field="viral_factors" data-value="신규 금융상품 출시 정보 희소성 · 삼전·하닉 편향 반전 후킹 · 피지컬AI 테마 키워드 시의성 · 열린 질문형 댓글 CTA">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>신규 금융상품 출시 정보 희소성</code> conf=0.85 → saves<br><small>뜨끈뜨끈한 신상 ETF 정보는 &#x27;나중에 다시 보기&#x27; 저장 동기가 강함</small></li><li><code>삼전·하닉 편향 반전 후킹</code> conf=0.78 → likes<br><small>투자자 통념을 자극해 공감 또는 반박 욕구를 유발, 초기 좋아요 유입 견인</small></li><li><code>피지컬AI 테마 키워드 시의성</code> conf=0.72 → saves<br><small>생소하지만 핫한 개념어 → 개념 학습 목적의 저장 패턴 유발</small></li><li><code>열린 질문형 댓글 CTA</code> conf=0.55 → comments<br><small>다음 주제 추천 요청은 허들 낮은 의견 개진으로 댓글 참여 유도</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYyvdpTzx8y" data-account="uppity.official" data-field="transferable_pattern" data-value="시장 통념 반전 질문 후킹(&#x27;○○만 된다고?&#x27;) + 신규 제도·상품 소개 → 핵심 개념 즉시 풀이 → ✔️ 체크리스트형 요약 → 댓글 참여 유도 CTA의 6슬라이드 구조는 onecpa의 절세·지원금 신규 안내에 전용 가능: &#x27;법인세 절세는 대기업만 된다고?&#x27; 형태 반전 후킹으로 시작해 중소기업 신규 세제 혜택을 3-4포인트 체크리스트로 정리하고 &#x27;다음에 다룰 세금 고민 댓글로 알려주세요&#x27; CTA로 마감하면 human-trust editorial 톤을 유지하면서 저장·댓글 동시 유도 구조가 됨">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"시장 통념 반전 질문 후킹(&#x27;○○만 된다고?&#x27;) + 신규 제도·상품 소개 → 핵심 개념 즉시 풀이 → ✔️ 체크리스트형 요약 → 댓글 참여 유도 CTA의 6슬라이드 구조는 onecpa의 절세·지원금 신규 안내에 전용 가능: &#x27;법인세 절세는 대기업만 된다고?&#x27; 형태 반전 후킹으로 시작해 중소기업 신규 세제 혜택을 3-4포인트 체크리스트로 정리하고 &#x27;다음에 다룰 세금 고민 댓글로 알려주세요&#x27; CTA로 마감하면 human-trust editorial 톤을 유지하면서 저장·댓글 동시 유"</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card has-analysis">
+      <div class="media"><img src="assets/56e652df2c1218de.jpg" alt=""><span class="analysis-badge">🔍 분석됨</span><span class="badge video-badge">▶ 12,724회</span></div>
+      <div class="meta"><span><span class="topic">자본시장</span>♥ 207</span><span>💬 4</span></div>
+      <div class="caption">💨 오늘의 증시(6/5), 젠슨 황 기대감은 방구 ’뿡?!‘
+
+엔비디아 젠슨 황 CEO에 대한 기대감으로 잔뜩 부풀었던 증시가 오늘 ’뿡-‘ 하고 빠져버렸습니다.
+
+미국 증시 기술주들이 일제히 숨 고르기에 들어가면서 국내 증시도 직격탄을 맞았는데요.
+
+그동안 무섭게 오르던 삼성전자와 SK하이닉스 역시 외국인들의 차익 실현 매물이 쏟아지며 하락세를 면치 못했습니다.
+
+역시 영원한 상승은 없고, 가스가 차면 빠지는 게 자연의 섭리</div>
+      <a class="open" href="https://www.instagram.com/p/DZKTjzHzgdA/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZKTjzHzgdA" data-account="uppity.official" data-field="hook" data-value="curiosity_gap | 💨 오늘의 증시(6/5), 젠슨 황 기대감은 방구 &#x27;뿡?!&#x27;">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>curiosity_gap</code> · 강도 7/5<br><i>"💨 오늘의 증시(6/5), 젠슨 황 기대감은 방구 &#x27;뿡?!&#x27;"</i><br><small>금융 정보에 저속 의성어(뿡)를 결합한 이질적 불협화음이 피드 스크롤을 물리적으로 멈추게 하며 클릭 충동을 유발</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZKTjzHzgdA" data-account="uppity.official" data-field="message_arc" data-value="problem_solution | 1 후킹 + 일일 증시 요약 썸네일 (영상 단일 프레임)">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>problem_solution</code> · medium density<br><small>roles: 1 후킹 + 일일 증시 요약 썸네일 (영상 단일 프레임)</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZKTjzHzgdA" data-account="uppity.official" data-field="cta" data-value="link_in_bio | 더 자세한 &#x27;증시와 방구의 상관관계&#x27;가 궁금하다면? 지금 바로 영상에서 확인해 보세요! 👇">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>link_in_bio</code> · last · 강도 6/5<br><i>"더 자세한 &#x27;증시와 방구의 상관관계&#x27;가 궁금하다면? 지금 바로 영상에서 확인해 보세요! 👇"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZKTjzHzgdA" data-account="uppity.official" data-field="visual_palette" data-value="#FF5C35, #FFED4A, #1A1A2E, #FFFFFF">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#FF5C35"></span><code>#FF5C35</code><span class="swatch" style="background:#FFED4A"></span><code>#FFED4A</code><span class="swatch" style="background:#1A1A2E"></span><code>#1A1A2E</code><span class="swatch" style="background:#FFFFFF"></span><code>#FFFFFF</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZKTjzHzgdA" data-account="uppity.official" data-field="visual_typography" data-value="Bold 라운드 산세리프; 핵심 키워드 초대형, 부제 중형, 명도 대비 강조 | 중앙 집중형 단일 프레임; 캐릭터 일러스트 + 텍스트 오버레이 레이어드">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>Bold 라운드 산세리프; 핵심 키워드 초대형, 부제 중형, 명도 대비 강조</code> · 중앙 집중형 단일 프레임; 캐릭터 일러스트 + 텍스트 오버레이 레이어드<br><small>균형</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZKTjzHzgdA" data-account="uppity.official" data-field="viral_factors" data-value="저속 유머 × 금융 정보 이질 결합 · 일일 증시 요약 정기 포맷 · 열린 이분법 질문 (조정 vs 하락장?)">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>저속 유머 × 금융 정보 이질 결합</code> conf=0.83 → likes<br><small>&#x27;방구&#x27; 메타포는 지인 태그·공유 욕구를 자극하는 &#x27;웃겨서 퍼뜨리기&#x27; 반응 유도</small></li><li><code>일일 증시 요약 정기 포맷</code> conf=0.76 → saves<br><small>매일 발행되는 시황 시리즈는 팔로우·저장 습관 형성에 유리하며 알고리즘 반복 노출 강화</small></li><li><code>열린 이분법 질문 (조정 vs 하락장?)</code> conf=0.55 → comments<br><small>의견 양분 질문이 댓글 참여를 의도했으나 실제 댓글 4개로 전환 효율은 낮음—영상 소비로 관심이 분산된 것으로 추정</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZKTjzHzgdA" data-account="uppity.official" data-field="transferable_pattern" data-value="딱딱한 전문 개념을 일상 의성어·신체 메타포로 압축하는 &#x27;이질 대비 후킹&#x27; 구조 — onecpa는 절세·세법 이슈에서 &#x27;세금도 빠져나갈 구멍이 있다&#x27;, &#x27;종합소득세 뿡! 환급 받는 법&#x27; 같은 친근 메타포로 1번 슬라이드를 후킹한 뒤 6~8장 문제→체크리스트→저장CTA 카드 구조로 전환하면 human-trust editorial 톤을 지키면서 피드 정지력을 확보할 수 있음">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"딱딱한 전문 개념을 일상 의성어·신체 메타포로 압축하는 &#x27;이질 대비 후킹&#x27; 구조 — onecpa는 절세·세법 이슈에서 &#x27;세금도 빠져나갈 구멍이 있다&#x27;, &#x27;종합소득세 뿡! 환급 받는 법&#x27; 같은 친근 메타포로 1번 슬라이드를 후킹한 뒤 6~8장 문제→체크리스트→저장CTA 카드 구조로 전환하면 human-trust editorial 톤을 지키면서 피드 정지력을 확보할 수 있음"</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/9b974df694eb86ba.jpg" alt=""><span class="badge video-badge">▶ 7,881회</span></div>
+      <div class="meta"><span>♥ 201</span><span>💬 2</span></div>
+      <div class="caption">미국 반도체 ETF, 뭘 살지 고민되시죠? 
+가장 유명한 3가지 딱 비교해 드릴게요.
+
+먼저 SMH예요. 반도체 ETF의 대명사죠. 
+엔비디아나 TSMC 같은 1등 대형주에 집중적으로 투자해요. 
+AI 랠리 때 가장 시원하게 오르지만, 그 특정 종목이 잘 안 나가면 주가가 쭉 빠져요.
+
+다음은 SOXX, 쏙스예요. 20년 넘은 전통 강자죠. 
+미국에 상장된 30개의 반도체 기업을 담고, 
+특정 종목 비중이 너무 커지지 않게 상</div>
+      <a class="open" href="https://www.instagram.com/p/DYOeGAgSzX9/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/c3653fffaa14f94f.jpg" alt=""><span class="badge video-badge">▶ 7,721회</span></div>
+      <div class="meta"><span>♥ 167</span><span>💬 5</span></div>
+      <div class="caption">”코스피 불장이라는데, 나만 벼락거지 되는 거 아니야? 🥶“
+
+밥도 안 먹히고 손발이 덜덜 떨린다면, 
+그거 지금 시장에서 가장 핫한 질병(?) ’포모(FOMO)‘ 증상이에요.
+(Fear Of Missing Out: 나만 소외될까 봐 두려운 마음 ⚠️)
+
+남들 벌 때 나만 뒤처지는 것 같아 잠 못 드는 분들을 위해, 
+이 불안감 싹 다스리는 현실적인 치유법 3가지 정리해 드려요! 👇
+
+🧠 FOMO 완치해 줄 3가지 멘탈 치트키</div>
+      <a class="open" href="https://www.instagram.com/p/DYgnHfNziBN/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/9e35b86a3050ffa4.jpg" alt=""><span class="badge video-badge">▶ 4,931회</span></div>
+      <div class="meta"><span>♥ 121</span><span>💬 14</span></div>
+      <div class="caption">띠로리..
+여러분들의 계좌는 안녕하신가요..?</div>
+      <a class="open" href="https://www.instagram.com/p/DZUbpPlTvu7/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/ef70b7c2859b93a2.jpg" alt=""><span class="badge video-badge">▶ 10,249회</span></div>
+      <div class="meta"><span>♥ 177</span><span>💬 2</span></div>
+      <div class="caption">주식 주문을 넣었는데, 왜 내 주문만 체결이 안 되는 걸까요?
+
+주식은 단순히 “먼저 주문하면 끝”이 아니라, 
+정해진 원칙에 따라 체결돼요.
+
+✅ 가격 우선의 원칙
+✅ 시간 우선의 원칙
+✅ 수량 우선의 원칙
+
+그래서 같은 가격에 주문했어도, 
+내 앞에 대기 중인 주문이 많으면 체결이 늦어질 수 있어요.
+
+초보자를 위한 주식 용어와 투자 방법이 더 궁금하다면?
+ 어피티 유튜브에서 쉽게 확인해보세요!</div>
+      <a class="open" href="https://www.instagram.com/p/DY37UjGTw6K/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/a4978e820bba9596.jpg" alt=""><span class="badge video-badge">▶ 8,110회</span></div>
+      <div class="meta"><span>♥ 166</span><span>💬 1</span></div>
+      <div class="caption">코스피 올해 들어 80% 오른 거 아세요?
+전 세계 상승률 1등! 2등인 터키보다 무려 4배나 더 올랐어요.
+나만 못 탄 거 같고, 지금이라도 확 들어가야 하나 싶죠?
+
+NO!!! 이럴 때 뛰어들면 크게 물리기 딱 좋거든요.
+이럴 땐 뭐다? 바로 적립식 매수!
+한 번에 다 사는 게 아니라 원금을 나눠서 매일 조금씩 사는 거예요.
+아니면 원하는 가격에 예약을 걸어두고 그때마다 자동으로 사지게 만드는 거죠.
+
+이렇게 하면 코스트 </div>
+      <a class="open" href="https://www.instagram.com/p/DYlpSEuy_nj/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/53528dae4ad61162.jpg" alt=""><span class="badge video-badge">▶ 13,532회</span></div>
+      <div class="meta"><span>♥ 143</span><span>💬 2</span></div>
+      <div class="caption">삼성전자 VS 하이닉스
+
+초보자를 위한 주식 용어와 투자 방법이 더 궁금하자면?
+어피티 유튜브에서 쉽게 확인해 보세요!</div>
+      <a class="open" href="https://www.instagram.com/p/DY4T-tnypDO/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+      </div>
+    </section>
+    
+
+    <section class="account">
+      <header class="profile">
+        <div class="avatar-empty"></div>
+        <div>
+          <div class="name">Diego Perez</div>
+          <a class="handle" href="https://www.instagram.com/sahilbloom/" target="_blank">@sahilbloom</a>
+          <div class="stats">팔로워 — · top 10 viral posts (engagement 정렬)</div>
+          <div class="bio"></div>
+        </div>
+      </header>
+      <div class="grid">
+        
+    <div class="card has-analysis">
+      <div class="media"><img src="assets/6f323af97fbd63e5.jpg" alt=""><span class="analysis-badge">🔍 분석됨</span><span class="badge">📑 10장</span></div>
+      <div class="meta"><span><span class="topic">기타</span>♥ 69,496</span><span>💬 576</span></div>
+      <div class="caption">Leave a 💙 if this collab with @case.kenny and @sahilbloom resonates. Comment “ready” and I’ll send you a link to my new app Ready Together that helps couples thrive. Try it for free.
+
+It is a fun and useful way to check in, build emotional </div>
+      <a class="open" href="https://www.instagram.com/p/DYuqYhWlnd1/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYuqYhWlnd1" data-account="sahilbloom" data-field="hook" data-value="curiosity_gap | 대부분의 커플이 절대 하지 않는 것 — 하지만 오래 함께하는 커플은 매주 한다">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>curiosity_gap</code> · 강도 8/5<br><i>"대부분의 커플이 절대 하지 않는 것 — 하지만 오래 함께하는 커플은 매주 한다"</i><br><small>관계라는 보편적 감정 주제에 대비 구조(하지 않는 vs 하는)로 클릭 충동을 자극하며, 자기 해당 여부 확인 욕구를 유발함</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYuqYhWlnd1" data-account="sahilbloom" data-field="message_arc" data-value="listicle | 1 후킹 — 커플 공통 페인포인트 제시 → 2 문제정의 — 대화가 반복·피상적으로 굳어지는 현상 → 3 팁 #1 → 4 팁 #2 → 5 팁 #3 → 6 팁 #4 → 7 팁 #5 → 8 감성 마무리 — 연결의 가치 리마인드">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>listicle</code> · medium density<br><small>roles: 1 후킹 — 커플 공통 페인포인트 제시, 2 문제정의 — 대화가 반복·피상적으로 굳어지는 현상, 3 팁 #1, 4 팁 #2, 5 팁 #3, 6 팁 #4</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYuqYhWlnd1" data-account="sahilbloom" data-field="cta" data-value="comment_keyword | 댓글에 &#x27;ready&#x27; 라고 쓰면 앱 링크를 보내드려요">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>comment_keyword</code> · last · 강도 9/5<br><i>"댓글에 &#x27;ready&#x27; 라고 쓰면 앱 링크를 보내드려요"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYuqYhWlnd1" data-account="sahilbloom" data-field="visual_palette" data-value="#F5F0E8, #1A1A1A, #4A90D9, #E8DDD0">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#F5F0E8"></span><code>#F5F0E8</code><span class="swatch" style="background:#1A1A1A"></span><code>#1A1A1A</code><span class="swatch" style="background:#4A90D9"></span><code>#4A90D9</code><span class="swatch" style="background:#E8DDD0"></span><code>#E8DDD0</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYuqYhWlnd1" data-account="sahilbloom" data-field="visual_typography" data-value="클린 산세리프 헤드라인(굵기 강조) + 가독성 우선 본문, 에디토리얼 미니멀 | 단일 중앙 컬럼, 상단 키워드 대형 + 하단 보조 텍스트 2단 분리">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>클린 산세리프 헤드라인(굵기 강조) + 가독성 우선 본문, 에디토리얼 미니멀</code> · 단일 중앙 컬럼, 상단 키워드 대형 + 하단 보조 텍스트 2단 분리<br><small>텍스트 우세</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYuqYhWlnd1" data-account="sahilbloom" data-field="viral_factors" data-value="크리에이터 콜라보 (@case.kenny × @sahilbloom) 교차 팬덤 노출 · comment_keyword CTA (&#x27;ready&#x27;) — ManyChat 류 자동화로 댓글 수 폭증 · 관계·감정 주제의 높은 보편성 및 저장 동기 · 무료 앱 체험 제안으로 전환 동기 내재">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>크리에이터 콜라보 (@case.kenny × @sahilbloom) 교차 팬덤 노출</code> conf=0.92 → likes<br><small>두 대형 계정 팬층이 동시에 피드에 노출되어 초기 좋아요 속도가 알고리즘 부스트 임계치를 빠르게 넘음</small></li><li><code>comment_keyword CTA (&#x27;ready&#x27;) — ManyChat 류 자동화로 댓글 수 폭증</code> conf=0.95 → comments<br><small>댓글 달기 행동 장벽이 낮고 앱 링크 수령 인센티브가 명확해 참여율 대비 댓글 비중이 비정상적으로 높음</small></li><li><code>관계·감정 주제의 높은 보편성 및 저장 동기</code> conf=0.85 → saves<br><small>커플 관계 팁은 &#x27;나중에 파트너에게 보여주고 싶다&#x27;는 저장 트리거가 강하게 작동함</small></li><li><code>무료 앱 체험 제안으로 전환 동기 내재</code> conf=0.78 → comments<br><small>유료 장벽 없이 가치를 먼저 주는 구조가 댓글 참여를 정당화하고 앱 바이럴 루프를 형성</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYuqYhWlnd1" data-account="sahilbloom" data-field="transferable_pattern" data-value="콜라보 권위 앵커 + 감성 보편 주제 + comment-keyword 자동화 CTA의 3단 구조가 핵심. onecpa 적용 시: 세무사·노무사 등 인접 전문가와 공동 카드뉴스를 발행하고(권위 앵커), &#x27;절세&#x27; 또는 &#x27;지원금&#x27; 같은 손실회피 감정을 첫 슬라이드에서 촉발한 뒤, 마지막 슬라이드에서 &#x27;체크&#x27; 또는 &#x27;해당&#x27; 댓글 유도로 DM 자동화 연결. 10장 구성에서 슬라이드 7-8을 감성 리마인드로 배치해 저장 욕구를 자극하는 리듬도 재사용 가능.">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"콜라보 권위 앵커 + 감성 보편 주제 + comment-keyword 자동화 CTA의 3단 구조가 핵심. onecpa 적용 시: 세무사·노무사 등 인접 전문가와 공동 카드뉴스를 발행하고(권위 앵커), &#x27;절세&#x27; 또는 &#x27;지원금&#x27; 같은 손실회피 감정을 첫 슬라이드에서 촉발한 뒤, 마지막 슬라이드에서 &#x27;체크&#x27; 또는 &#x27;해당&#x27; 댓글 유도로 DM 자동화 연결. 10장 구성에서 슬라이드 7-8을 감성 리마인드로 배치해 저장 욕구를 자극하는 리듬도 재사용 가능."</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card has-analysis">
+      <div class="media"><img src="assets/d557ceafb052332f.jpg" alt=""><span class="analysis-badge">🔍 분석됨</span></div>
+      <div class="meta"><span><span class="topic">기타</span>♥ 31,128</span><span>💬 179</span></div>
+      <div class="caption">What investments are you making in yourself this month?
+
+#growth #mindset #discipline</div>
+      <a class="open" href="https://www.instagram.com/p/DYm3JWMuBNx/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYm3JWMuBNx" data-account="sahilbloom" data-field="hook" data-value="question | 이번 달 당신은 자신에게 어떤 투자를 하고 있나요?">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>question</code> · 강도 7/5<br><i>"이번 달 당신은 자신에게 어떤 투자를 하고 있나요?"</i><br><small>자기성찰 질문은 즉각적 자아 관여를 유발하나, 단일 슬라이드 한계로 깊이 확장이 제한됨</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYm3JWMuBNx" data-account="sahilbloom" data-field="message_arc" data-value="myth_bust | 1 질문형 후킹 + 핵심 메시지 전달 + 암묵적 CTA 통합">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>myth_bust</code> · low density<br><small>roles: 1 질문형 후킹 + 핵심 메시지 전달 + 암묵적 CTA 통합</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYm3JWMuBNx" data-account="sahilbloom" data-field="cta" data-value="comment_keyword | What investments are you making in yourself this month? (댓글 참여 유도형 질문)">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>comment_keyword</code> · last · 강도 7/5<br><i>"What investments are you making in yourself this month? (댓글 참여 유도형 질문)"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYm3JWMuBNx" data-account="sahilbloom" data-field="visual_palette" data-value="#FFFFFF, #1A1A1A, #F5F0E8">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#FFFFFF"></span><code>#FFFFFF</code><span class="swatch" style="background:#1A1A1A"></span><code>#1A1A1A</code><span class="swatch" style="background:#F5F0E8"></span><code>#F5F0E8</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYm3JWMuBNx" data-account="sahilbloom" data-field="visual_typography" data-value="Bold sans-serif 대형 타이포, 고대비 흑백 기반, 최소 장식 | 중앙 정렬 단일 텍스트 블록, 여백 극대화 미니멀 카드">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>Bold sans-serif 대형 타이포, 고대비 흑백 기반, 최소 장식</code> · 중앙 정렬 단일 텍스트 블록, 여백 극대화 미니멀 카드<br><small>텍스트 우세</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYm3JWMuBNx" data-account="sahilbloom" data-field="viral_factors" data-value="자기투영형 열린 질문 · 브랜드 인지도 누적 효과 · 저장 가치 있는 성찰 프롬프트 · 최소 텍스트 피로도">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>자기투영형 열린 질문</code> conf=0.88 → comments<br><small>팔로워가 자신의 답을 공유하고 싶게 만들어 댓글 폭발을 유도</small></li><li><code>브랜드 인지도 누적 효과</code> conf=0.82 → likes<br><small>900K+ 기존 팬덤이 친숙한 포맷에 조건반사적 좋아요 반응</small></li><li><code>저장 가치 있는 성찰 프롬프트</code> conf=0.75 → saves<br><small>월간 루틴 점검용으로 저장해 두고 싶은 자기계발 질문 속성</small></li><li><code>최소 텍스트 피로도</code> conf=0.7 → likes<br><small>단 한 문장으로 완결되어 스크롤 중 즉각 소비·반응 가능</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYm3JWMuBNx" data-account="sahilbloom" data-field="transferable_pattern" data-value="자기성찰 개방형 질문을 1장 전면에 배치하고 댓글 참여를 CTA로 유도하는 &#x27;질문형 단일 카드&#x27; 구조. onecpa 적용 예: &#x27;이번 연말정산, 당신은 얼마를 돌려받을 자격이 있습니까?&#x27; 형태로 절세 맥락에서 독자 자가진단을 촉발하고 DM 또는 댓글로 구체 상황 공유를 유도. 핵심 추상 원리: 정보 전달 전에 독자 당사자성을 먼저 활성화하면 저장·댓글·도달 모두 상승.">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"자기성찰 개방형 질문을 1장 전면에 배치하고 댓글 참여를 CTA로 유도하는 &#x27;질문형 단일 카드&#x27; 구조. onecpa 적용 예: &#x27;이번 연말정산, 당신은 얼마를 돌려받을 자격이 있습니까?&#x27; 형태로 절세 맥락에서 독자 자가진단을 촉발하고 DM 또는 댓글로 구체 상황 공유를 유도. 핵심 추상 원리: 정보 전달 전에 독자 당사자성을 먼저 활성화하면 저장·댓글·도달 모두 상승."</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card has-analysis">
+      <div class="media"><img src="assets/93cd6b55c5f8a8e3.jpg" alt=""><span class="analysis-badge">🔍 분석됨</span><span class="badge">📑 13장</span></div>
+      <div class="meta"><span><span class="topic">기타</span>♥ 25,377</span><span>💬 146</span></div>
+      <div class="caption">Who are your High Shoulders People?
+
+#growth #relationships #love #mindset</div>
+      <a class="open" href="https://www.instagram.com/p/DZPqF8mDnha/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZPqF8mDnha" data-account="sahilbloom" data-field="hook" data-value="curiosity_gap | 당신의 &#x27;High Shoulders People&#x27;은 누구인가요?">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>curiosity_gap</code> · 강도 8/5<br><i>"당신의 &#x27;High Shoulders People&#x27;은 누구인가요?"</i><br><small>&#x27;High Shoulders People&#x27;이라는 낯선 조어가 즉각 의미 탐색 욕구를 자극—정의를 알기 위해 슬라이드를 넘기게 만드는 전형적 호기심 격차 장치</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZPqF8mDnha" data-account="sahilbloom" data-field="message_arc" data-value="listicle | 1 후킹 — &#x27;Who are your High Shoulders People?&#x27; 질문 제시 → 2 개념 정의 — High Shoulders People이란 무엇인가 → 3 특징 1 — 당신이 낮아질 때 높여주는 사람 → 4 특징 2 — 진실을 말해주는 사람 → 5 특징 3 — 성장을 같이 기뻐하는 사람 → 6 특징 4 — 아무것도 아닐 때도 믿어준 사람 → 7 특징 5 — 조용히 곁에 있는 사람 → 8 특징 6 — 경쟁이 아닌 협력을 선택하는 사람">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>listicle</code> · low density<br><small>roles: 1 후킹 — &#x27;Who are your High Shoulders People?&#x27; 질문 제시, 2 개념 정의 — High Shoulders People이란 무엇인가, 3 특징 1 — 당신이 낮아질 때 높여주는 사람, 4 특징 2 — 진실을 말해주는 사람, 5 특징 3 — 성장을 같이 기뻐하는 사람, 6 특징 4 — 아무것도 아닐 때도 믿어준 사람</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZPqF8mDnha" data-account="sahilbloom" data-field="cta" data-value="comment_keyword | 당신의 High Shoulders People을 댓글에 태그하거나 이 게시물을 저장해두세요">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>comment_keyword</code> · last · 강도 8/5<br><i>"당신의 High Shoulders People을 댓글에 태그하거나 이 게시물을 저장해두세요"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZPqF8mDnha" data-account="sahilbloom" data-field="visual_palette" data-value="#FFFFFF, #1A1A1A, #F5F0E8, #C8A96E">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#FFFFFF"></span><code>#FFFFFF</code><span class="swatch" style="background:#1A1A1A"></span><code>#1A1A1A</code><span class="swatch" style="background:#F5F0E8"></span><code>#F5F0E8</code><span class="swatch" style="background:#C8A96E"></span><code>#C8A96E</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZPqF8mDnha" data-account="sahilbloom" data-field="visual_typography" data-value="대형 세리프 또는 굵은 산세리프 혼용, 키워드 강조 대비 뚜렷, 줄간격 넉넉 | 중앙 정렬 단일 컬럼, 상하 대칭 여백, 텍스트 블록 단독 배치">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>대형 세리프 또는 굵은 산세리프 혼용, 키워드 강조 대비 뚜렷, 줄간격 넉넉</code> · 중앙 정렬 단일 컬럼, 상하 대칭 여백, 텍스트 블록 단독 배치<br><small>텍스트 우세</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZPqF8mDnha" data-account="sahilbloom" data-field="viral_factors" data-value="감성적 자기반성 유도 질문 · 타인 태그 유도 구조 · 보편 감정 코드(소속·감사·관계) · 짧은 캡션 + 강력한 후킹 카피">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>감성적 자기반성 유도 질문</code> conf=0.92 → saves<br><small>&#x27;나의 High Shoulders People은 누구인가&#x27;라는 질문이 즉각 특정인을 떠올리게 해 저장 후 공유 욕구 자극</small></li><li><code>타인 태그 유도 구조</code> conf=0.87 → comments<br><small>댓글에 특정인을 태그하도록 설계된 CTA가 146개 댓글 대부분을 태그형 댓글로 전환—알고리즘 노출 증폭</small></li><li><code>보편 감정 코드(소속·감사·관계)</code> conf=0.89 → likes<br><small>성장·관계·사랑 해시태그 조합이 넓은 연령대의 공감 포인트를 동시 포착, 좋아요 대량 발생</small></li><li><code>짧은 캡션 + 강력한 후킹 카피</code> conf=0.8 → saves<br><small>캡션이 4단어+해시태그만으로 구성돼 슬라이드 본문에 집중하게 유도, 콘텐츠 완독률·저장률 제고</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZPqF8mDnha" data-account="sahilbloom" data-field="transferable_pattern" data-value="감성 질문형 후킹(&#x27;당신의 X는 누구/무엇인가?&#x27;) + 개념정의→특징 나열(6~8장) 리스티클 + 자기반성 반전 슬라이드 + 태그 CTA 구조. onecpa 적용 예: &#x27;당신의 세금을 진짜 아끼는 사람은 누구인가요?&#x27;로 후킹 후 절세 포인트 6~8개 나열→&#x27;나는 당신의 High Shoulders CPA가 되고 싶습니다&#x27; 클로징—human-trust editorial 톤 유지하면서 저장·태그 유도 가능">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"감성 질문형 후킹(&#x27;당신의 X는 누구/무엇인가?&#x27;) + 개념정의→특징 나열(6~8장) 리스티클 + 자기반성 반전 슬라이드 + 태그 CTA 구조. onecpa 적용 예: &#x27;당신의 세금을 진짜 아끼는 사람은 누구인가요?&#x27;로 후킹 후 절세 포인트 6~8개 나열→&#x27;나는 당신의 High Shoulders CPA가 되고 싶습니다&#x27; 클로징—human-trust editorial 톤 유지하면서 저장·태그 유도 가능"</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/b6eef8951ecb6131.jpg" alt=""></div>
+      <div class="meta"><span>♥ 25,212</span><span>💬 88</span></div>
+      <div class="caption">Leave a ❤️ if you agree!
+
+Words from a mentor I’ll never forget.
+
+#growth #mindset #energy</div>
+      <a class="open" href="https://www.instagram.com/p/DZAivpxulrb/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/b93588edbfe4ee23.jpg" alt=""></div>
+      <div class="meta"><span>♥ 17,509</span><span>💬 123</span></div>
+      <div class="caption">Take back that power.
+
+#growth #energy #mindset</div>
+      <a class="open" href="https://www.instagram.com/p/DYPjw1_OFyz/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/e73d4780fb479781.jpg" alt=""></div>
+      <div class="meta"><span>♥ 13,577</span><span>💬 78</span></div>
+      <div class="caption">The answers you seek are found in the actions you avoid.
+
+#growth #mindset #energy #relationships</div>
+      <a class="open" href="https://www.instagram.com/p/DZD0tTGOhVR/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/b4e11d8134439090.jpg" alt=""></div>
+      <div class="meta"><span>♥ 12,614</span><span>💬 76</span></div>
+      <div class="caption">Leave a ❤️ if you agree!
+
+#growth #mindset #energy</div>
+      <a class="open" href="https://www.instagram.com/p/DYxQxdVOgib/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/74e87fd12c42d0ae.jpg" alt=""><span class="badge">📑 9장</span></div>
+      <div class="meta"><span>♥ 9,279</span><span>💬 63</span></div>
+      <div class="caption">Send this to someone you love today!
+
+This story stopped me in my tracks…
+
+It was written by a woman named Pam Kearney in a local newspaper a few years ago:
+
+I visited Matthew, the owner of Lucy’s Flour Shop a little while back. As I nibble</div>
+      <a class="open" href="https://www.instagram.com/p/DYXDiXKDm4x/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/3d7f585808400598.jpg" alt=""></div>
+      <div class="meta"><span>♥ 9,052</span><span>💬 64</span></div>
+      <div class="caption">Do you agree?
+
+#growth #mindset #confidence</div>
+      <a class="open" href="https://www.instagram.com/p/DZKjmIkOU68/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img src="assets/17e324c0acd148ba.jpg" alt=""></div>
+      <div class="meta"><span>♥ 8,344</span><span>💬 123</span></div>
+      <div class="caption">Do you agree?
+
+#growth #mindset #rest #recovery</div>
+      <a class="open" href="https://www.instagram.com/p/DY4laPTuRTd/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+      </div>
+    </section>
+    
+</main>
+<footer style="text-align:center;padding:32px;color:#999;font-size:12px;">
+  Brand System Designer 작업용 viral 레퍼런스. Reference & Trend Analyst 자동 산출 (Apify + Anthropic).
+</footer>
+<div class="submitbar" id="submitbar"><div class="count">선택 <span class="n" id="pick-count">0</span>건</div><button id="submit-btn" disabled>Submit picks → BSD/CCD</button></div>
+<script>
+(function() {
+  const date = document.body.dataset.date;
+  const bar = document.getElementById('submitbar');
+  const countEl = document.getElementById('pick-count');
+  const btn = document.getElementById('submit-btn');
+  if (!bar) return;
+
+  function gather() {
+    const picks = {};
+    document.querySelectorAll('input.pick[type=checkbox]:checked').forEach(cb => {
+      const postId = cb.dataset.postId;
+      const field = cb.dataset.field;
+      const value = cb.dataset.value;
+      picks[postId] = picks[postId] || { post_id: postId, account: cb.dataset.account, picked: {} };
+      picks[postId].picked[field] = value;
+    });
+    return Object.values(picks);
+  }
+
+  function update() {
+    const n = document.querySelectorAll('input.pick[type=checkbox]:checked').length;
+    countEl.textContent = n;
+    btn.disabled = n === 0;
+  }
+
+  document.addEventListener('change', e => {
+    if (e.target.matches('input.pick[type=checkbox]')) update();
+  });
+
+  btn.addEventListener('click', () => {
+    const picks = gather();
+    if (!picks.length) return;
+    const payload = {
+      date: date,
+      submitted_at: new Date().toISOString(),
+      picks_count: picks.length,
+      picks: picks,
+    };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], {type: 'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `picks-${date}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    btn.disabled = true;
+    btn.textContent = '✓ 다운로드됨 — sync_picks.py로 vault 동기';
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.textContent = 'Submit picks → BSD/CCD';
+      update();
+    }, 5000);
+  });
+
+  update();
+})();
+</script>
+</body>
+</html>
