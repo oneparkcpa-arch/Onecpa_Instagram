@@ -1,0 +1,1706 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>onecpa Instagram Bench — 2026-06-10</title>
+<style>
+* { box-sizing: border-box; }
+body { margin:0; background:#f6f7f9; font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif; color:#222; padding-bottom:80px; }
+.top { background:#222; color:#fff; padding:24px 32px; }
+.top h1 { margin:0 0 6px; font-size:22px; }
+.top .meta { font-size:13px; opacity:0.7; }
+.container { max-width:1400px; margin:0 auto; padding:24px; }
+.account { background:#fff; border-radius:12px; padding:24px; margin-bottom:32px; box-shadow:0 1px 3px rgba(0,0,0,0.05); }
+.profile { display:flex; align-items:center; gap:16px; padding-bottom:16px; border-bottom:1px solid #eee; margin-bottom:20px; }
+.profile img.avatar { width:80px; height:80px; border-radius:50%; object-fit:cover; }
+.profile .avatar-empty { background:#ddd; width:80px; height:80px; border-radius:50%; }
+.profile .name { font-weight:700; font-size:20px; }
+.profile .handle { color:#0095f6; text-decoration:none; font-size:15px; }
+.profile .stats { color:#555; font-size:13px; margin-top:4px; }
+.profile .bio { font-size:13px; color:#444; margin-top:6px; max-width:600px; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:14px; }
+.card { background:#fafafa; border:1px solid #ececec; border-radius:8px; overflow:hidden; display:flex; flex-direction:column; }
+.card.has-analysis { border-color:#0095f6; box-shadow:0 0 0 2px rgba(0,149,246,0.05); }
+.card .media { position:relative; background:#000; }
+.card .media-track { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:thin; scroll-behavior:smooth; }
+.card .media-track::-webkit-scrollbar { height:6px; }
+.card .media-track::-webkit-scrollbar-track { background:#000; }
+.card .media-track::-webkit-scrollbar-thumb { background:#555; border-radius:3px; }
+.card .media-track .slide { flex:0 0 100%; scroll-snap-align:start; position:relative; }
+.card .media-track .slide img { width:100%; display:block; aspect-ratio:1/1; object-fit:cover; }
+.card .media-track .slide .idx { position:absolute; top:8px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.7); color:#fff; font-size:11px; padding:2px 8px; border-radius:10px; pointer-events:none; }
+.card .media img.single { width:100%; display:block; aspect-ratio:1/1; object-fit:cover; }
+.card .badge { position:absolute; top:8px; right:8px; background:rgba(0,0,0,0.6); color:#fff; font-size:11px; padding:3px 7px; border-radius:4px; z-index:2; }
+.card .video-badge { background:#e0245e; }
+.card .analysis-badge { position:absolute; top:8px; left:8px; background:#0095f6; color:#fff; font-size:11px; padding:3px 7px; border-radius:4px; }
+.card .meta { padding:10px 12px; font-size:13px; color:#555; display:flex; justify-content:space-between; }
+.card .caption { padding:0 12px 10px; font-size:12px; color:#333; line-height:1.45; max-height:80px; overflow:hidden; }
+.card .topic { display:inline-block; padding:2px 6px; background:#eef5ff; color:#0066cc; border-radius:3px; font-size:11px; font-weight:600; margin-right:4px; }
+.card a.open { display:block; padding:8px 12px; background:#0095f6; color:#fff; text-decoration:none; text-align:center; font-size:12px; font-weight:600; }
+.card a.open:hover { background:#0076c0; }
+.empty { color:#999; font-size:14px; padding:20px; text-align:center; }
+details.analysis { background:#fff; border-top:1px solid #ececec; padding:8px 12px; font-size:12px; }
+details.analysis summary { cursor:pointer; padding:6px 0; font-weight:600; color:#0066cc; user-select:none; }
+details.analysis summary:hover { color:#004080; }
+details.analysis[open] summary { padding-bottom:8px; border-bottom:1px solid #f0f0f0; }
+.field { padding:6px 0; border-bottom:1px solid #f5f5f5; display:flex; align-items:flex-start; gap:8px; }
+.field:last-child { border-bottom:none; }
+.field label.cb { display:flex; align-items:flex-start; gap:6px; cursor:pointer; flex:1; user-select:none; }
+.field input[type=checkbox] { margin-top:3px; cursor:pointer; }
+.field .k { font-weight:600; color:#555; min-width:90px; }
+.field .v { color:#222; flex:1; word-break:break-word; }
+.field .v code { background:#f0f0f0; padding:1px 4px; border-radius:3px; font-size:11px; }
+.swatch { display:inline-block; width:14px; height:14px; border-radius:3px; margin-right:4px; vertical-align:middle; border:1px solid #ddd; }
+.copyright-warn { color:#e0245e; font-weight:600; }
+.subbar { background:#fff; border-radius:8px; padding:12px 16px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 1px 3px rgba(0,0,0,0.05); }
+.subbar.warning { background:#fff8e1; border:1px solid #ffe082; color:#666; }
+.submitbar { position:fixed; bottom:0; left:0; right:0; background:#222; color:#fff; padding:14px 32px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 -2px 8px rgba(0,0,0,0.15); z-index:100; }
+.submitbar .count { font-size:14px; }
+.submitbar .count .n { font-size:18px; font-weight:700; color:#0095f6; }
+.submitbar button { background:#0095f6; color:#fff; border:none; padding:10px 24px; border-radius:6px; font-size:14px; font-weight:600; cursor:pointer; }
+.submitbar button:hover { background:#0076c0; }
+.submitbar button:disabled { background:#555; cursor:not-allowed; }
+#toast { position:fixed; right:24px; bottom:80px; max-width:440px; padding:14px 18px; border-radius:8px; font-size:13px; line-height:1.5; box-shadow:0 4px 16px rgba(0,0,0,0.18); z-index:200; opacity:0; transform:translateY(8px); transition:opacity 0.2s, transform 0.2s; pointer-events:none; }
+#toast.show { opacity:1; transform:translateY(0); pointer-events:auto; }
+#toast.ok { background:#e8f5e9; color:#1b5e20; border:1px solid #a5d6a7; }
+#toast.warn { background:#fff8e1; color:#7c5300; border:1px solid #ffe082; }
+#toast.err { background:#ffebee; color:#b71c1c; border:1px solid #ef9a9a; }
+#toast code { background:rgba(0,0,0,0.08); padding:1px 5px; border-radius:3px; font-size:12px; }
+</style>
+</head>
+<body data-date="2026-06-10" data-bridge-url="http://localhost:8765/submit-picks" data-bridge-token="IWwvMC-3X0KHGkc9Z6lIG6oCk_c38JkwGvVFly5B5So">
+<header class="top">
+  <h1>🔎 onecpa Instagram Bench — 2026-06-10</h1>
+  <div class="meta">생성: 2026-06-09T23:06:31.829184+09:00 · 계정 5 · 게시물 46 · 🔍 분석 14건 (sonnet)</div>
+</header>
+<main class="container">
+  <div class="subbar">📌 각 카드의 "🔍 분석 보기" 패널에서 onecpa 마스터 템플릿에 반영할 항목을 체크 → 하단 Submit picks → BSD/CCD로 전송</div>
+  
+    <section class="account">
+      <header class="profile">
+        <div class="avatar-empty"></div>
+        <div>
+          <div class="name">머니그라피</div>
+          <a class="handle" href="https://www.instagram.com/moneygraphyworld/" target="_blank">@moneygraphyworld</a>
+          <div class="stats">팔로워 — · top 10 viral posts (engagement 정렬)</div>
+          <div class="bio"></div>
+        </div>
+      </header>
+      <div class="grid">
+        
+    <div class="card has-analysis">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/72611561e0efaba5.jpg" alt="" loading="lazy"><span class="idx">1/7</span></div><div class="slide"><img src="assets/f7d28bcd3b99708b.jpg" alt="" loading="lazy"><span class="idx">2/7</span></div><div class="slide"><img src="assets/6779e8e4f7871d3e.jpg" alt="" loading="lazy"><span class="idx">3/7</span></div><div class="slide"><img src="assets/8695142335cfee3a.jpg" alt="" loading="lazy"><span class="idx">4/7</span></div><div class="slide"><img src="assets/5d2d886b76239f6c.jpg" alt="" loading="lazy"><span class="idx">5/7</span></div><div class="slide"><img src="assets/057b9b925ade9717.jpg" alt="" loading="lazy"><span class="idx">6/7</span></div><div class="slide"><img src="assets/72832066c8cec2fb.jpg" alt="" loading="lazy"><span class="idx">7/7</span></div></div><span class="analysis-badge">🔍 분석됨</span><span class="badge">📑 7장</span></div>
+      <div class="meta"><span><span class="topic">기타</span>♥ 3,787</span><span>💬 39</span></div>
+      <div class="caption">B주류초대석 비밀파티도 끝난지 벌써 2주...
+시민분들이 남겨주신 방명록과 함께 그날의 추억을 함께 떠올려보아요 👭
+
+#B주류초대석비밀파티 #머니그라피 #토스</div>
+      <a class="open" href="https://www.instagram.com/p/DYqbt5Wkgv8/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      <div class="field"><span class="copyright-warn">⚠ distinctive_design_avoid_close_emulation</span> — 직접 복제 회피, *추상 패턴*만 차용</div>
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYqbt5Wkgv8" data-account="moneygraphyworld" data-field="hook" data-value="story | B주류초대석 비밀파티도 끝난지 벌써 2주… 그날의 추억을 방명록과 함께 떠올려봐요">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>story</code> · 강도 6/5<br><i>"B주류초대석 비밀파티도 끝난지 벌써 2주… 그날의 추억을 방명록과 함께 떠올려봐요"</i><br><small>이벤트 종료 후 회고 프레임 + &#x27;비밀파티&#x27;라는 호기심 유발 단어로 커뮤니티 내부인 정체성을 자극하나, 이미 이벤트가 종료된 상황이라 신규 유입 후킹력은 낮고 기존 팬 타깃 강도가 높음</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYqbt5Wkgv8" data-account="moneygraphyworld" data-field="message_arc" data-value="case_study | 1 이벤트 타이틀 후킹 + 감성 도입 → 2 행사 현장 분위기 사진 또는 방명록 도입 → 3 참여자 방명록 발췌 #1 → 4 참여자 방명록 발췌 #2 → 5 참여자 방명록 발췌 #3 → 6 행사 하이라이트 컷 또는 단체 사진 → 7 감사 인사 + 팔로우/다음 이벤트 예고 CTA">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>case_study</code> · low density<br><small>roles: 1 이벤트 타이틀 후킹 + 감성 도입, 2 행사 현장 분위기 사진 또는 방명록 도입, 3 참여자 방명록 발췌 #1, 4 참여자 방명록 발췌 #2, 5 참여자 방명록 발췌 #3, 6 행사 하이라이트 컷 또는 단체 사진</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYqbt5Wkgv8" data-account="moneygraphyworld" data-field="cta" data-value="follow | 다음 초대석도 기대해주세요 / 팔로우하면 다음 비밀파티 초대장이 제일 먼저 도착해요">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>follow</code> · last · 강도 5/5<br><i>"다음 초대석도 기대해주세요 / 팔로우하면 다음 비밀파티 초대장이 제일 먼저 도착해요"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYqbt5Wkgv8" data-account="moneygraphyworld" data-field="visual_palette" data-value="#1A1A2E, #F5F0E8, #E8D5B0, #4A90D9, #FFFFFF">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#1A1A2E"></span><code>#1A1A2E</code><span class="swatch" style="background:#F5F0E8"></span><code>#F5F0E8</code><span class="swatch" style="background:#E8D5B0"></span><code>#E8D5B0</code><span class="swatch" style="background:#4A90D9"></span><code>#4A90D9</code><span class="swatch" style="background:#FFFFFF"></span><code>#FFFFFF</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYqbt5Wkgv8" data-account="moneygraphyworld" data-field="visual_typography" data-value="산세리프 현대적 + 손글씨 혼용 추정. 본문은 굵기 대비 강조, 방명록 인용은 필기체 또는 이탤릭 처리 | 풀블리드 이미지 배경 + 중앙 정렬 텍스트 오버레이, 또는 사진-텍스트 상하 분할 구조">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>산세리프 현대적 + 손글씨 혼용 추정. 본문은 굵기 대비 강조, 방명록 인용은 필기체 또는 이탤릭 처리</code> · 풀블리드 이미지 배경 + 중앙 정렬 텍스트 오버레이, 또는 사진-텍스트 상하 분할 구조<br><small>이미지 우세</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYqbt5Wkgv8" data-account="moneygraphyworld" data-field="viral_factors" data-value="커뮤니티 소속감 트리거 · 사용자 생성 콘텐츠(방명록) 재활용 · 토스 협업 브랜드 후광 · FOMO + 배타성 프레이밍(&#x27;비밀파티&#x27;)">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>커뮤니티 소속감 트리거</code> conf=0.85 → likes<br><small>이벤트 참가자가 자신의 방명록을 발견하거나 지인을 태그하는 행동 유발로 유기적 좋아요 확산</small></li><li><code>사용자 생성 콘텐츠(방명록) 재활용</code> conf=0.8 → comments<br><small>방명록에 언급된 참가자가 댓글로 반응하거나 공유하면서 댓글 수 상승, 계정 친밀감 강화</small></li><li><code>토스 협업 브랜드 후광</code> conf=0.7 → likes<br><small>토스 팔로워 크로스오버 노출 및 신뢰도 보증으로 초기 도달 부스트</small></li><li><code>FOMO + 배타성 프레이밍(&#x27;비밀파티&#x27;)</code> conf=0.65 → saves<br><small>다음 이벤트를 놓치지 않으려는 심리로 저장 및 팔로우 유도</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYqbt5Wkgv8" data-account="moneygraphyworld" data-field="transferable_pattern" data-value="실제 고객·독자 목소리를 캐러셀 구조로 큐레이션하는 &#x27;사회적 증거 회고 포맷&#x27;이 핵심. onecpa 적용 시: 세무·절세 상담 후 고객 반응이나 세미나 참가자 후기를 익명 인용 카드로 배열하고, 마지막 슬라이드에서 다음 콘텐츠·상담 예약 CTA로 연결. &#x27;숫자 절세 팁&#x27;보다 인간 신뢰(human-trust) 톤에 맞는 스토리텔링 강화 경로로 활용 가능. 구조 추상: 이벤트/경험 회고 → 참여자 목소리 3-4장 → 브랜드 정체성 확인 → 다음 접점 CTA.">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"실제 고객·독자 목소리를 캐러셀 구조로 큐레이션하는 &#x27;사회적 증거 회고 포맷&#x27;이 핵심. onecpa 적용 시: 세무·절세 상담 후 고객 반응이나 세미나 참가자 후기를 익명 인용 카드로 배열하고, 마지막 슬라이드에서 다음 콘텐츠·상담 예약 CTA로 연결. &#x27;숫자 절세 팁&#x27;보다 인간 신뢰(human-trust) 톤에 맞는 스토리텔링 강화 경로로 활용 가능. 구조 추상: 이벤트/경험 회고 → 참여자 목소리 3-4장 → 브랜드 정체성 확인 → 다음 접점 CTA."</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card has-analysis">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/1fb344ae5af3a6bc.jpg" alt="" loading="lazy"><span class="idx">1/7</span></div><div class="slide"><img src="assets/fa924f00faf5bcac.jpg" alt="" loading="lazy"><span class="idx">2/7</span></div><div class="slide"><img src="assets/06b0f2a160d1d7c2.jpg" alt="" loading="lazy"><span class="idx">3/7</span></div><div class="slide"><img src="assets/4e8f4cfd65f4438d.jpg" alt="" loading="lazy"><span class="idx">4/7</span></div><div class="slide"><img src="assets/3deade3088848c94.jpg" alt="" loading="lazy"><span class="idx">5/7</span></div><div class="slide"><img src="assets/b21c98007e2fe6dd.jpg" alt="" loading="lazy"><span class="idx">6/7</span></div><div class="slide"><img src="assets/38eb3559d3695c1e.jpg" alt="" loading="lazy"><span class="idx">7/7</span></div></div><span class="analysis-badge">🔍 분석됨</span><span class="badge">📑 7장</span></div>
+      <div class="meta"><span><span class="topic">자본시장</span>♥ 1,922</span><span>💬 68</span></div>
+      <div class="caption">💵 코스피도, 환율도 심상치 않다?
+
+코스피는 사상 최고권인데, 원·달러 환율은 1,500원대입니다. 수출이 잘되면 달러가 들어오고 원화가 강해져야 하지만, 지금은 다릅니다. 외국인이 국내 주식의 수익 실현을 위해 팔아 달러로 바꾸고, 국내 투자자는 미국 주식을 사기 위해 달러를 찾습니다. 달러를 버는 힘보다 달러가 어디로 흘러가는지가 더 중요해진 것이죠. 코스피와 환율의 엇갈린 흐름이 무엇을 의미하는지 지금 확인해 보세요!
+</div>
+      <a class="open" href="https://www.instagram.com/p/DY1xO3vEl_A/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      <div class="field"><span class="copyright-warn">⚠ distinctive_design_avoid_close_emulation</span> — 직접 복제 회피, *추상 패턴*만 차용</div>
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY1xO3vEl_A" data-account="moneygraphyworld" data-field="hook" data-value="contrarian | 코스피도, 환율도 심상치 않다?">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>contrarian</code> · 강도 4/5<br><i>"코스피도, 환율도 심상치 않다?"</i><br><small>코스피 사상 최고가 + 환율 1,500원이라는 역설적 동시 발생을 짧은 의문문으로 압축, &#x27;상식이 깨졌다&#x27;는 인지 불일치를 즉각 유발함</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY1xO3vEl_A" data-account="moneygraphyworld" data-field="message_arc" data-value="myth_bust | 1 후킹 — 코스피↑ &amp; 환율↑ 역설 제시 → 2 상식 반박 — 수출↑이면 원화강세여야 한다는 통념 설명 → 3 현상 진단 — 외국인 국내주식 차익실현·달러 환전 메커니즘 → 4 현상 진단 — 국내 투자자 미국주식 매수·달러 수요 설명 → 5 핵심 인사이트 — 달러 &#x27;버는 힘&#x27;보다 &#x27;흐름&#x27;이 더 중요 → 6 시사점 — 코스피·환율 엇갈림이 의미하는 바 종합 → 7 CTA — 저장 또는 팔로우 유도">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>myth_bust</code> · high density<br><small>roles: 1 후킹 — 코스피↑ &amp; 환율↑ 역설 제시, 2 상식 반박 — 수출↑이면 원화강세여야 한다는 통념 설명, 3 현상 진단 — 외국인 국내주식 차익실현·달러 환전 메커니즘, 4 현상 진단 — 국내 투자자 미국주식 매수·달러 수요 설명, 5 핵심 인사이트 — 달러 &#x27;버는 힘&#x27;보다 &#x27;흐름&#x27;이 더 중요, 6 시사점 — 코스피·환율 엇갈림이 의미하는 바 종합</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY1xO3vEl_A" data-account="moneygraphyworld" data-field="cta" data-value="save | 지금 확인해 보세요! (캡션 내 소프트 CTA, 마지막 슬라이드 저장 유도 예상)">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>save</code> · last · 강도 3/5<br><i>"지금 확인해 보세요! (캡션 내 소프트 CTA, 마지막 슬라이드 저장 유도 예상)"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY1xO3vEl_A" data-account="moneygraphyworld" data-field="visual_palette" data-value="#0D1B2A, #FFFFFF, #F5A623, #2D9CDB">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#0D1B2A"></span><code>#0D1B2A</code><span class="swatch" style="background:#FFFFFF"></span><code>#FFFFFF</code><span class="swatch" style="background:#F5A623"></span><code>#F5A623</code><span class="swatch" style="background:#2D9CDB"></span><code>#2D9CDB</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY1xO3vEl_A" data-account="moneygraphyworld" data-field="visual_typography" data-value="Sans-serif 헤드라인 대비 강조 + 본문 경량체, 숫자 포인트 사이즈 극대화 | 중앙 정렬 단일 컬럼 + 하단 출처 크레딧 영역 고정">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>Sans-serif 헤드라인 대비 강조 + 본문 경량체, 숫자 포인트 사이즈 극대화</code> · 중앙 정렬 단일 컬럼 + 하단 출처 크레딧 영역 고정<br><small>텍스트 우세</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY1xO3vEl_A" data-account="moneygraphyworld" data-field="viral_factors" data-value="금융 역설(패러독스) 프레이밍 · 시의성(Timely relevance) · 통념 깨기(Myth-bust) 구조 · 인과관계 시각화(달러 흐름 메커니즘)">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>금융 역설(패러독스) 프레이밍</code> conf=0.88 → saves<br><small>코스피↑·환율↑ 동시 발생이라는 인지 불일치가 &#x27;나중에 다시 봐야 해&#x27;는 저장 동기를 강하게 유발</small></li><li><code>시의성(Timely relevance)</code> conf=0.85 → likes<br><small>실제 시장 상황을 5월 27일 당일 설명—뉴스 이슈와 콘텐츠가 동기화되어 피드 알고리즘 서핑 및 공감 좋아요 유발</small></li><li><code>통념 깨기(Myth-bust) 구조</code> conf=0.8 → comments<br><small>&#x27;수출 잘되면 원화 강세&#x27;라는 기존 상식을 정면 반박, 댓글에서 의견 충돌·질문 토론 유도</small></li><li><code>인과관계 시각화(달러 흐름 메커니즘)</code> conf=0.72 → saves<br><small>복잡한 자금 흐름을 단계별 슬라이드로 분해—북마크 후 반복 학습 유형 콘텐츠로 저장률 상승</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY1xO3vEl_A" data-account="moneygraphyworld" data-field="transferable_pattern" data-value="역설적 병치 후킹(A↑ &amp; B↑인데 왜?) + 상식 반박 2장 → 메커니즘 분해 2–3장 → 핵심 인사이트 1장 → 저장CTA 구조. onecpa 적용 예: &#x27;매출 올랐는데 세금이 더 많이 나왔다?&#x27; 역설 후킹으로 시작 → 절세 통념 반박 → 종합소득세·가산세 메커니즘 단계 분해 → 체크리스트 저장CTA. 숫자·수치를 타이틀 앵커로 쓰되 톤은 human-trust editorial로 유지.">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"역설적 병치 후킹(A↑ &amp; B↑인데 왜?) + 상식 반박 2장 → 메커니즘 분해 2–3장 → 핵심 인사이트 1장 → 저장CTA 구조. onecpa 적용 예: &#x27;매출 올랐는데 세금이 더 많이 나왔다?&#x27; 역설 후킹으로 시작 → 절세 통념 반박 → 종합소득세·가산세 메커니즘 단계 분해 → 체크리스트 저장CTA. 숫자·수치를 타이틀 앵커로 쓰되 톤은 human-trust editorial로 유지."</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card has-analysis">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/ea9265565ccd0e89.jpg" alt="" loading="lazy"><span class="idx">1/7</span></div><div class="slide"><img src="assets/b2bb6275d65ec8fd.jpg" alt="" loading="lazy"><span class="idx">2/7</span></div><div class="slide"><img src="assets/3caf3572453926a0.jpg" alt="" loading="lazy"><span class="idx">3/7</span></div><div class="slide"><img src="assets/72e57eb1abfe5596.jpg" alt="" loading="lazy"><span class="idx">4/7</span></div><div class="slide"><img src="assets/5dd4c9629dfa1701.jpg" alt="" loading="lazy"><span class="idx">5/7</span></div><div class="slide"><img src="assets/18b2c967b2fc8c35.jpg" alt="" loading="lazy"><span class="idx">6/7</span></div><div class="slide"><img src="assets/2a0e40bee83b809e.jpg" alt="" loading="lazy"><span class="idx">7/7</span></div></div><span class="analysis-badge">🔍 분석됨</span><span class="badge">📑 7장</span></div>
+      <div class="meta"><span><span class="topic">기타</span>♥ 1,789</span><span>💬 20</span></div>
+      <div class="caption">📆 머니그라피 팀 알고리즘에 걸린
+주목할 만한 콘텐츠7
+
+월루 아니고 회의 맞습니다…
+
+📷 출처: 각 슬라이드 태그
+유튜브: 파산일기, NPR Music, 킹선율</div>
+      <a class="open" href="https://www.instagram.com/p/DZCV_sfiF1Z/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZCV_sfiF1Z" data-account="moneygraphyworld" data-field="hook" data-value="number_stat | 머니그라피 팀 알고리즘에 걸린 주목할 만한 콘텐츠 7">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>number_stat</code> · 강도 4/5<br><i>"머니그라피 팀 알고리즘에 걸린 주목할 만한 콘텐츠 7"</i><br><small>&#x27;7&#x27;이라는 구체적 숫자 + &#x27;팀 알고리즘에 걸린&#x27;이라는 큐레이션 권위 프레이밍이 결합되어 클릭 동기 강하나, 카피 자체의 감정 자극은 중간 수준</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZCV_sfiF1Z" data-account="moneygraphyworld" data-field="message_arc" data-value="listicle | 1 후킹 — &#x27;팀이 고른 7개&#x27; 타이틀 커버 → 2 큐레이션 항목 1 → 3 큐레이션 항목 2 → 4 큐레이션 항목 3 → 5 큐레이션 항목 4 → 6 큐레이션 항목 5·6 → 7 큐레이션 항목 7 + 출처·CTA">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>listicle</code> · medium density<br><small>roles: 1 후킹 — &#x27;팀이 고른 7개&#x27; 타이틀 커버, 2 큐레이션 항목 1, 3 큐레이션 항목 2, 4 큐레이션 항목 3, 5 큐레이션 항목 4, 6 큐레이션 항목 5·6</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZCV_sfiF1Z" data-account="moneygraphyworld" data-field="cta" data-value="save | 나중에 보려면 저장해두세요 (캡션 및 마지막 슬라이드 관례적 유도)">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>save</code> · last · 강도 3/5<br><i>"나중에 보려면 저장해두세요 (캡션 및 마지막 슬라이드 관례적 유도)"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZCV_sfiF1Z" data-account="moneygraphyworld" data-field="visual_palette" data-value="#111111, #FFFFFF, #F5F0E8">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#111111"></span><code>#111111</code><span class="swatch" style="background:#FFFFFF"></span><code>#FFFFFF</code><span class="swatch" style="background:#F5F0E8"></span><code>#F5F0E8</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZCV_sfiF1Z" data-account="moneygraphyworld" data-field="visual_typography" data-value="산세리프 계열 굵은 헤드라인 + 보조 본문 텍스트, 에디토리얼 매거진풍 | 풀블리드 이미지 배경 + 하단 또는 중앙 텍스트 오버레이, 슬라이드별 단일 콘텐츠 포커스">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>산세리프 계열 굵은 헤드라인 + 보조 본문 텍스트, 에디토리얼 매거진풍</code> · 풀블리드 이미지 배경 + 하단 또는 중앙 텍스트 오버레이, 슬라이드별 단일 콘텐츠 포커스<br><small>이미지 우세</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZCV_sfiF1Z" data-account="moneygraphyworld" data-field="viral_factors" data-value="팀 큐레이션 권위 프레이밍 · 7이라는 구체적 숫자 리스트 · 오피스 유머 부캡션 (월루 아니고 회의) · 다양한 외부 크리에이터 태그 (파산일기·NPR·킹선율)">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>팀 큐레이션 권위 프레이밍</code> conf=0.82 → saves<br><small>&#x27;팀 알고리즘에 걸린&#x27;이라는 표현이 전문가 필터링 신뢰를 부여, 나중에 다시 보려는 저장 동기 강화</small></li><li><code>7이라는 구체적 숫자 리스트</code> conf=0.78 → likes<br><small>홀수 리스트는 완독 완결감을 높여 좋아요 전환율 상승</small></li><li><code>오피스 유머 부캡션 (월루 아니고 회의)</code> conf=0.65 → comments<br><small>공감형 자기 디스 유머가 댓글 참여 유도 및 브랜드 친근감 형성</small></li><li><code>다양한 외부 크리에이터 태그 (파산일기·NPR·킹선율)</code> conf=0.7 → likes<br><small>태그된 계정 팔로워 유입 및 피인용자 리포스팅 잠재성</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZCV_sfiF1Z" data-account="moneygraphyworld" data-field="transferable_pattern" data-value="숫자형 큐레이션 후킹(&#x27;팀이 고른 N개&#x27;) + 외부 권위 소스 태그 나열 + 친근한 부캡션 유머의 조합은 onecpa의 &#x27;human-trust editorial&#x27; 톤과 결합 시, 예를 들어 &#x27;이번 주 절세 실무자들이 저장한 판례·예규 7선&#x27; 형식으로 전환 가능. 핵심 추상 패턴: 에디터 필터 신뢰 선언 + 구체 숫자 + 출처 투명 공개 + 가벼운 인간미 한 줄 → 저장·팔로우 유도.">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"숫자형 큐레이션 후킹(&#x27;팀이 고른 N개&#x27;) + 외부 권위 소스 태그 나열 + 친근한 부캡션 유머의 조합은 onecpa의 &#x27;human-trust editorial&#x27; 톤과 결합 시, 예를 들어 &#x27;이번 주 절세 실무자들이 저장한 판례·예규 7선&#x27; 형식으로 전환 가능. 핵심 추상 패턴: 에디터 필터 신뢰 선언 + 구체 숫자 + 출처 투명 공개 + 가벼운 인간미 한 줄 → 저장·팔로우 유도."</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/389463e91c5a43db.jpg" alt="" loading="lazy"><span class="idx">1/5</span></div><div class="slide"><img src="assets/00c2227fc122c8a2.jpg" alt="" loading="lazy"><span class="idx">2/5</span></div><div class="slide"><img src="assets/47abea7bcaa6e16c.jpg" alt="" loading="lazy"><span class="idx">3/5</span></div><div class="slide"><img src="assets/77647c5ecbfd1ae3.jpg" alt="" loading="lazy"><span class="idx">4/5</span></div><div class="slide"><img src="assets/e6d5c19f7a4b857d.jpg" alt="" loading="lazy"><span class="idx">5/5</span></div></div><span class="badge">📑 5장</span></div>
+      <div class="meta"><span>♥ 1,537</span><span>💬 40</span></div>
+      <div class="caption">🎙️ 요즘은 팟캐스트를 듣는다
+
+라디오와 팟캐스트의 청취율이 10년 만에 완전히 뒤집혔습니다. 매주 팟캐스트를 듣는 미국인은 약 1억 1,500만 명. 넷플릭스 미국 가입자보다 많은 숫자예요.
+
+글로벌 미디어 재벌 머독 가문이 팟캐스트 네트워크에 3,000억 원을 투자한 이유, 슬라이드를 넘겨 확인해보세요!
+
+📷 Unsplash, Pinterest, Reuters, @callherdaddy 
+
+#팟캐스트 #라디오 #스포티파이 </div>
+      <a class="open" href="https://www.instagram.com/p/DYoUsNskq0t/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/74ab26975c3185de.jpg" alt="" loading="lazy"><span class="idx">1/8</span></div><div class="slide"><img src="assets/fedfa6be48fcc927.jpg" alt="" loading="lazy"><span class="idx">2/8</span></div><div class="slide"><img src="assets/42d128005cf49cb6.jpg" alt="" loading="lazy"><span class="idx">3/8</span></div><div class="slide"><img src="assets/94f7e4c1b43f6db9.jpg" alt="" loading="lazy"><span class="idx">4/8</span></div><div class="slide"><img src="assets/54711f5aede89dce.jpg" alt="" loading="lazy"><span class="idx">5/8</span></div><div class="slide"><img src="assets/0eef16fb9c426b35.jpg" alt="" loading="lazy"><span class="idx">6/8</span></div><div class="slide"><img src="assets/3748990c5f50a8dd.jpg" alt="" loading="lazy"><span class="idx">7/8</span></div><div class="slide"><img src="assets/85c9b83e4122c929.jpg" alt="" loading="lazy"><span class="idx">8/8</span></div></div><span class="badge">📑 8장</span></div>
+      <div class="meta"><span>♥ 1,502</span><span>💬 25</span></div>
+      <div class="caption">✏️ 이재용 회계사가 대신 읽어주는 엠피엠지 사업보고서
+바야흐로 페스티벌의 계절입니다. 야외에 누워 선선한 바람을 맞으며 음악을 듣기 좋은 때인데요. 페스티벌은 큰 공간에서, 많은 경우 야외에서 진행되는 데다가 공연 특성상 무대 장치 등 많은 비용이 발생하죠. 변수에 따라 매출이 크게 좌우된다는 뜻인데요. 그런 공연 업계에서 20년 간 업력을 쌓아온, 내일부터 열리는 뷰티풀 민트 라이프의 기획사 엠피엠지가 자리를 지켜온 방법을</div>
+      <a class="open" href="https://www.instagram.com/p/DY65aVegbYX/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/a2984e81f5793cc9.jpg" alt="" loading="lazy"><span class="idx">1/6</span></div><div class="slide"><img src="assets/15bd47bba215cb4d.jpg" alt="" loading="lazy"><span class="idx">2/6</span></div><div class="slide"><img src="assets/c644306e2fcec4e5.jpg" alt="" loading="lazy"><span class="idx">3/6</span></div><div class="slide"><img src="assets/bef4f5c720641d21.jpg" alt="" loading="lazy"><span class="idx">4/6</span></div><div class="slide"><img src="assets/9a838dc52aacd89a.jpg" alt="" loading="lazy"><span class="idx">5/6</span></div><div class="slide"><img src="assets/2726b4454d091620.jpg" alt="" loading="lazy"><span class="idx">6/6</span></div></div><span class="badge">📑 6장</span></div>
+      <div class="meta"><span>♥ 1,397</span><span>💬 30</span></div>
+      <div class="caption">⚽ 2026 북중미 월드컵 개막이 10일 앞으로 다가왔습니다. 이번 월드컵은 이전 대회들과는 다르다는 평가가 나오고 있는데요, 축구 경기를 넘어 거대한 엔터테인먼트 이벤트로 진화하고 있단 분석도 나옵니다. 그 이유는 무엇일지, 슬라이드를 넘겨 확인해보세요!
+
+📸 @FIFA, 피파 홈페이지, 로이터, 연합뉴스 
+
+#월드컵 #피파 #축구</div>
+      <a class="open" href="https://www.instagram.com/p/DZCSriZjkaX/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/c16287cc5a080277.jpg" alt="" loading="lazy"><span class="idx">1/7</span></div><div class="slide"><img src="assets/b09b9a54dc43e2a6.jpg" alt="" loading="lazy"><span class="idx">2/7</span></div><div class="slide"><img src="assets/6ef862b4f9f892b8.jpg" alt="" loading="lazy"><span class="idx">3/7</span></div><div class="slide"><img src="assets/7c123e733da8fd87.jpg" alt="" loading="lazy"><span class="idx">4/7</span></div><div class="slide"><img src="assets/5f7a21b3d1c8e379.jpg" alt="" loading="lazy"><span class="idx">5/7</span></div><div class="slide"><img src="assets/df2227ec46deab81.jpg" alt="" loading="lazy"><span class="idx">6/7</span></div><div class="slide"><img src="assets/a6b7bf31644b02a1.jpg" alt="" loading="lazy"><span class="idx">7/7</span></div></div><span class="badge">📑 7장</span></div>
+      <div class="meta"><span>♥ 1,519</span><span>💬 5</span></div>
+      <div class="caption">💸 넷플릭스로 경제 공부하기
+벌써 6월이 옵니다. 올해 목표로 ‘경제 공부하기’를 세우셨다면, 상반기가 지나기 전 넷플릭스 콘텐츠로 가볍게 기초를 다져보는 건 어떨까요? 알 사람은 다 안다는 EBS 경제 다큐 시리즈부터 차근차근 시작해봐요💪
+
+📸 넷플릭스, 넷플릭스 유튜브, Unsplash
+
+#넷플릭스 #경제 #주식 #다큐</div>
+      <a class="open" href="https://www.instagram.com/p/DY6eK5JgVVA/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/4ab56289d9c1737a.jpg" alt="" loading="lazy"><span class="idx">1/10</span></div><div class="slide"><img src="assets/86d592492575f87a.jpg" alt="" loading="lazy"><span class="idx">2/10</span></div><div class="slide"><img src="assets/ada8a17f6698d485.jpg" alt="" loading="lazy"><span class="idx">3/10</span></div><div class="slide"><img src="assets/43e5910c7b89a193.jpg" alt="" loading="lazy"><span class="idx">4/10</span></div><div class="slide"><img src="assets/d118a6a5fe230b0a.jpg" alt="" loading="lazy"><span class="idx">5/10</span></div><div class="slide"><img src="assets/6f2430024a0db62a.jpg" alt="" loading="lazy"><span class="idx">6/10</span></div><div class="slide"><img src="assets/48c41eb4f979db8e.jpg" alt="" loading="lazy"><span class="idx">7/10</span></div><div class="slide"><img src="assets/ee27a18fd6e88400.jpg" alt="" loading="lazy"><span class="idx">8/10</span></div><div class="slide"><img src="assets/4412d288f2391441.jpg" alt="" loading="lazy"><span class="idx">9/10</span></div><div class="slide"><img src="assets/542826708b9e72aa.jpg" alt="" loading="lazy"><span class="idx">10/10</span></div></div><span class="badge">📑 10장</span></div>
+      <div class="meta"><span>♥ 1,361</span><span>💬 18</span></div>
+      <div class="caption">👬 정영신(@yogshn) &amp; 김대봉(@9xdxbx2)
+
+단단한 브랜드 철학으로 자기만의 흐름을 만들어가는 패션 브랜드가 있다. 2023년에 론칭한 컬렉트 피시스(@collectpieces)는 자신들만의 이야기와 태도로 색을 쌓아가며, 팬덤을 빠르게 만들어가고 있다. 이 브랜드를 이끄는 정영신과 김대봉은 패션을 전공하지 않았지만, 뚜렷한 방향으로 브랜드를 이끈다. 서로 다른 두 사람은 각자 오랜 시간 쌓아온 것들을 바탕으로 컬</div>
+      <a class="open" href="https://www.instagram.com/p/DY8Y9y-kss4/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/7d7b6d90bdf96910.jpg" alt="" loading="lazy"><span class="idx">1/7</span></div><div class="slide"><img src="assets/bee69fd89e98c347.jpg" alt="" loading="lazy"><span class="idx">2/7</span></div><div class="slide"><img src="assets/e24bd83a67b82930.jpg" alt="" loading="lazy"><span class="idx">3/7</span></div><div class="slide"><img src="assets/ea2b419d9be4b136.jpg" alt="" loading="lazy"><span class="idx">4/7</span></div><div class="slide"><img src="assets/6c59515751586ca8.jpg" alt="" loading="lazy"><span class="idx">5/7</span></div><div class="slide"><img src="assets/4b6383e4f2f1f041.jpg" alt="" loading="lazy"><span class="idx">6/7</span></div><div class="slide"><img src="assets/08acf602ee8011f8.jpg" alt="" loading="lazy"><span class="idx">7/7</span></div></div><span class="badge">📑 7장</span></div>
+      <div class="meta"><span>♥ 1,345</span><span>💬 3</span></div>
+      <div class="caption">🏎️ 구찌가 F1 스폰서에 합류합니다. 알핀 F1팀의 타이틀 파트너로 함께 하며 투자 금액 추정치만 약 750억 원에 달하는데요, 이렇게 막대한 금액을 F1에 투자하는 이유는 무엇일까요? 슬라이드를 넘겨 확인해보세요!
+
+📸 benetton group 홈페이지, F1 홈페이지, @gucci, @grandprix, LVMH, 로이터, BWT Alpine Formula One Team 홈페이지
+
+#F1 #구찌 #알핀 #르노</div>
+      <a class="open" href="https://www.instagram.com/p/DY4k8cskgZX/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/fe988d1aa4d79f17.jpg" alt="" loading="lazy"><span class="idx">1/4</span></div><div class="slide"><img src="assets/5f5244475479f465.jpg" alt="" loading="lazy"><span class="idx">2/4</span></div><div class="slide"><img src="assets/3897d04445703107.jpg" alt="" loading="lazy"><span class="idx">3/4</span></div><div class="slide"><img src="assets/809dae72522dbdfd.jpg" alt="" loading="lazy"><span class="idx">4/4</span></div></div><span class="badge">📑 4장</span></div>
+      <div class="meta"><span>♥ 1,014</span><span>💬 43</span></div>
+      <div class="caption">🚫 금주가 유행이라는 요즘
+전 세계적으로 술을 마시지 않는 것이 멋있는 것이라는 소버 큐리어스 트렌드가 퍼지고 있습니다. 우리나라도 이런 흐름에 발맞춰 음주 소비량이 줄어들고 있는데요. 그 이유는 무엇인지, 또 주류회사는 어떻게 대응하는지 살펴보세요!
+
+📷 연합뉴스, 칠성사이다, 하이트진로, 핀터레스트
+
+#금주 #sober #sobercurious</div>
+      <a class="open" href="https://www.instagram.com/p/DZKRxYnAfQd/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+      </div>
+    </section>
+    
+
+    <section class="account">
+      <header class="profile">
+        <div class="avatar-empty"></div>
+        <div>
+          <div class="name">룩스 𝑳𝑼𝑿 | 마케팅 크리에이티브 매거진</div>
+          <a class="handle" href="https://www.instagram.com/luxmag.kr/" target="_blank">@luxmag.kr</a>
+          <div class="stats">팔로워 — · top 10 viral posts (engagement 정렬)</div>
+          <div class="bio"></div>
+        </div>
+      </header>
+      <div class="grid">
+        
+    <div class="card has-analysis">
+      <div class="media"><img class="single" src="assets/4a0a10705e7611f1.jpg" alt=""><span class="analysis-badge">🔍 분석됨</span><span class="badge video-badge">▶ 10,267회</span></div>
+      <div class="meta"><span><span class="topic">기타</span>♥ 7,550</span><span>💬 138</span></div>
+      <div class="caption">👖 성수동 일대를 뜨겁게 달군 팝업스토어에 이어, 이번에는 GUESS LA 플래그십 스토어 오픈을 맞아 브랜드 앰배서더 현진(@hynjinnnn)이 LA에 등장했습니다. 현장에는 레이저 그래픽 커스터마이징, 인터랙티브 월을 비롯해 GUESS의 모던 헤리티지를 경험할 수 있는 다양한 액티베이션이 마련됐는데요. 영상 속에서 지금 LA를 가장 뜨겁게 달구고 있는 GUESS 플래그십 스토어 현장을 확인해 보세요. 🙌
+
+@guessko</div>
+      <a class="open" href="https://www.instagram.com/p/DZL8spCz2ij/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZL8spCz2ij" data-account="luxmag.kr" data-field="hook" data-value="authority | 성수동을 달군 팝업에 이어, GUESS LA 플래그십 오픈 — 브랜드 앰배서더 현진이 LA에 등장했습니다">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>authority</code> · 강도 9/5<br><i>"성수동을 달군 팝업에 이어, GUESS LA 플래그십 오픈 — 브랜드 앰배서더 현진이 LA에 등장했습니다"</i><br><small>글로벌 K-pop 스타(현진/Stray Kids)의 얼굴이 썸네일을 점유해 팬덤 트래픽을 즉각 유인하는 최고강도 셀럽 오소리티 훅</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZL8spCz2ij" data-account="luxmag.kr" data-field="message_arc" data-value="case_study | 1 셀럽 등장 + 이벤트 앵글 훅 (영상 단일 자산)">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>case_study</code> · low density<br><small>roles: 1 셀럽 등장 + 이벤트 앵글 훅 (영상 단일 자산)</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZL8spCz2ij" data-account="luxmag.kr" data-field="cta" data-value="follow | 영상 속에서 지금 LA를 가장 뜨겁게 달구고 있는 GUESS 플래그십 스토어 현장을 확인해 보세요 🙌">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>follow</code> · last · 강도 5/5<br><i>"영상 속에서 지금 LA를 가장 뜨겁게 달구고 있는 GUESS 플래그십 스토어 현장을 확인해 보세요 🙌"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZL8spCz2ij" data-account="luxmag.kr" data-field="visual_palette" data-value="#000000, #FFFFFF, #C8A96E, #1C1C1C">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#000000"></span><code>#000000</code><span class="swatch" style="background:#FFFFFF"></span><code>#FFFFFF</code><span class="swatch" style="background:#C8A96E"></span><code>#C8A96E</code><span class="swatch" style="background:#1C1C1C"></span><code>#1C1C1C</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZL8spCz2ij" data-account="luxmag.kr" data-field="visual_typography" data-value="산세리프 볼드 오버레이 최소화 — 영상 내 브랜드 로고타입 위주, 텍스트 인터페이스 거의 없음 | 풀블리드 세로형 영상 (9:16 또는 4:5) 단일 프레임">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>산세리프 볼드 오버레이 최소화 — 영상 내 브랜드 로고타입 위주, 텍스트 인터페이스 거의 없음</code> · 풀블리드 세로형 영상 (9:16 또는 4:5) 단일 프레임<br><small>이미지 우세</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZL8spCz2ij" data-account="luxmag.kr" data-field="viral_factors" data-value="K-pop 셀럽 팬덤 유입 (현진/Stray Kids 글로벌 팬베이스) · 성수→LA 브랜드 여정 내러티브 (국내 팝업 연속성) · GUESS 브랜드 협찬 콘텐츠의 고품질 영상 프로덕션 · 글로벌 플래그십 오픈 타이밍 뉴스성">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>K-pop 셀럽 팬덤 유입 (현진/Stray Kids 글로벌 팬베이스)</code> conf=0.95 → likes<br><small>팬덤이 셀럽 태그 콘텐츠를 즉각 좋아요·공유하는 구조적 트래픽 소스</small></li><li><code>성수→LA 브랜드 여정 내러티브 (국내 팝업 연속성)</code> conf=0.8 → comments<br><small>성수동 팝업 기억이 있는 국내 팔로워가 &#x27;LA편&#x27; 연속성에 댓글로 반응</small></li><li><code>GUESS 브랜드 협찬 콘텐츠의 고품질 영상 프로덕션</code> conf=0.75 → saves<br><small>마케터·크리에이터가 레퍼런스용으로 저장하는 매거진 계정 특성</small></li><li><code>글로벌 플래그십 오픈 타이밍 뉴스성</code> conf=0.7 → comments<br><small>LA 플래그십 오픈이라는 이벤트성 정보가 마케팅 업계 관심 유발</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZL8spCz2ij" data-account="luxmag.kr" data-field="transferable_pattern" data-value="셀럽/공인 오소리티 훅은 onecpa에게 &#x27;실제 세무조사 경험 CPA&#x27; 또는 &#x27;수백 건 결산 담당 공인회계사&#x27;라는 인격 신뢰 앵커로 대체 가능. 패턴 요약: [신뢰 앵커(얼굴·자격·수치)] + [현장감 있는 단일 비주얼 or 1장 강렬 썸네일] + [이벤트성 맥락(신규 정책/시즌 마감)] → 팔로워가 &#x27;이 사람이 직접 경험한 것&#x27;으로 인식해 저장·공유 유도. onecpa 적용 예: &#x27;CPA가 직접 받은 세무조사 통지서 — 실제 대응 순서 공개&#x27; 형식의 1장 썸네일 + 캐러셀 체크리스트 구조">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"셀럽/공인 오소리티 훅은 onecpa에게 &#x27;실제 세무조사 경험 CPA&#x27; 또는 &#x27;수백 건 결산 담당 공인회계사&#x27;라는 인격 신뢰 앵커로 대체 가능. 패턴 요약: [신뢰 앵커(얼굴·자격·수치)] + [현장감 있는 단일 비주얼 or 1장 강렬 썸네일] + [이벤트성 맥락(신규 정책/시즌 마감)] → 팔로워가 &#x27;이 사람이 직접 경험한 것&#x27;으로 인식해 저장·공유 유도. onecpa 적용 예: &#x27;CPA가 직접 받은 세무조사 통지서 — 실제 대응 순서 공개&#x27; 형식의 1장 썸네"</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card has-analysis">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/0172c3392d353421.jpg" alt="" loading="lazy"><span class="idx">1/9</span></div><div class="slide"><img src="assets/e75a85f9bf2a9abd.jpg" alt="" loading="lazy"><span class="idx">2/9</span></div><div class="slide"><img src="assets/89544ae1f7e459e5.jpg" alt="" loading="lazy"><span class="idx">3/9</span></div><div class="slide"><img src="assets/b1d837aecd584dc3.jpg" alt="" loading="lazy"><span class="idx">4/9</span></div><div class="slide"><img src="assets/6a9ca75e8439ee4a.jpg" alt="" loading="lazy"><span class="idx">5/9</span></div><div class="slide"><img src="assets/85fd8930a0e2e8f9.jpg" alt="" loading="lazy"><span class="idx">6/9</span></div><div class="slide"><img src="assets/9b225fee8e8c77b3.jpg" alt="" loading="lazy"><span class="idx">7/9</span></div><div class="slide"><img src="assets/0ed62bd699790f81.jpg" alt="" loading="lazy"><span class="idx">8/9</span></div><div class="slide"><img src="assets/ff7183b2d29ca33b.jpg" alt="" loading="lazy"><span class="idx">9/9</span></div></div><span class="analysis-badge">🔍 분석됨</span><span class="badge">📑 9장</span></div>
+      <div class="meta"><span><span class="topic">기타</span>♥ 5,344</span><span>💬 38</span></div>
+      <div class="caption">📱 이 앱 심상치 않습니다. 친구와 스크린 타임을 설정해 함께 휴대폰 사용 시간을 공유하는 앱인 ‘Snitch’인데요. 최근 론칭을 알리는 릴스가 이틀 만에 약 70만 뷰를 기록하며 화제를 모으고 있습니다.
+
+실시간으로 친구가 어떤 앱을 얼마나 오래 사용 중인지 확인할 수 있으며, 과하게 휴대폰을 사용하고 있을 땐 메시지로 경고까지 보낼 수 있어요. 직관적인 UI와 간편한 기능으로 적극적인 디지털 디톡스 생활을 지원하죠.
+
+결</div>
+      <a class="open" href="https://www.instagram.com/p/DZKVmnFk6xs/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      <div class="field"><span class="copyright-warn">⚠ distinctive_design_avoid_close_emulation</span> — 직접 복제 회피, *추상 패턴*만 차용</div>
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZKVmnFk6xs" data-account="luxmag.kr" data-field="hook" data-value="curiosity_gap | 이 앱 심상치 않습니다 — 론칭 이틀 만에 약 70만 뷰를 기록한 &#x27;Snitch&#x27;">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>curiosity_gap</code> · 강도 4/5<br><i>"이 앱 심상치 않습니다 — 론칭 이틀 만에 약 70만 뷰를 기록한 &#x27;Snitch&#x27;"</i><br><small>&#x27;심상치 않습니다&#x27;라는 구어체 경고 어조 + 70만 뷰 수치 조합이 즉각적 궁금증을 유발하며 슬라이드 스와이프를 강제함</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZKVmnFk6xs" data-account="luxmag.kr" data-field="message_arc" data-value="case_study | 1 후킹 — Snitch 앱 소개 + 70만 뷰 수치 임팩트 → 2 문제정의 — 디지털 과의존·혼자 고치기 힘든 습관 문제 → 3 서비스 개념 설명 — 스크린타임 공유·경고 기능 → 4 UX 포인트 — 직관적 UI가 주는 낮은 진입장벽 → 5 트렌드 맥락 1 — 커뮤니티 기반 습관 개선 니즈 → 6 트렌드 맥락 2 — 폐쇄형 SNS(BeReal·Setlog 계보) → 7 사랑받는 서비스 조건 정리 — 핵심 인사이트 요약 → 8 브랜드·마케터 적용 시사점">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>case_study</code> · high density<br><small>roles: 1 후킹 — Snitch 앱 소개 + 70만 뷰 수치 임팩트, 2 문제정의 — 디지털 과의존·혼자 고치기 힘든 습관 문제, 3 서비스 개념 설명 — 스크린타임 공유·경고 기능, 4 UX 포인트 — 직관적 UI가 주는 낮은 진입장벽, 5 트렌드 맥락 1 — 커뮤니티 기반 습관 개선 니즈, 6 트렌드 맥락 2 — 폐쇄형 SNS(BeReal·Setlog 계보)</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZKVmnFk6xs" data-account="luxmag.kr" data-field="cta" data-value="save | 슬라이드를 넘겨, 오늘날 사랑받는 서비스 경험의 조건을 확인해 보세요 🙌">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>save</code> · last · 강도 3/5<br><i>"슬라이드를 넘겨, 오늘날 사랑받는 서비스 경험의 조건을 확인해 보세요 🙌"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZKVmnFk6xs" data-account="luxmag.kr" data-field="visual_palette" data-value="#0D0D0D, #FFFFFF, #F2F2F2, #B8A06A">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#0D0D0D"></span><code>#0D0D0D</code><span class="swatch" style="background:#FFFFFF"></span><code>#FFFFFF</code><span class="swatch" style="background:#F2F2F2"></span><code>#F2F2F2</code><span class="swatch" style="background:#B8A06A"></span><code>#B8A06A</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZKVmnFk6xs" data-account="luxmag.kr" data-field="visual_typography" data-value="고딕 계열 산세리프 + 세리프 혼용, 키워드 포인트 컬러 강조, 잡지식 에디토리얼 위계 | 단일 컬럼 중앙 정렬 기반, 상단 레이블 + 중앙 핵심 카피 + 하단 보조 텍스트 3단 구조">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>고딕 계열 산세리프 + 세리프 혼용, 키워드 포인트 컬러 강조, 잡지식 에디토리얼 위계</code> · 단일 컬럼 중앙 정렬 기반, 상단 레이블 + 중앙 핵심 카피 + 하단 보조 텍스트 3단 구조<br><small>텍스트 우세</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZKVmnFk6xs" data-account="luxmag.kr" data-field="viral_factors" data-value="수치 기반 사회적 증거(Social Proof) · Z세대 트렌드 편승(Trend-riding) · 마케터 인사이트 추출 포맷 · 호기심 갭 후킹 어조 · 공유 가능한 폐쇄형 커뮤니티 담론">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>수치 기반 사회적 증거(Social Proof)</code> conf=0.9 → likes<br><small>&#x27;이틀 만에 70만 뷰&#x27;라는 검증된 외부 바이럴 수치가 콘텐츠 자체의 신뢰성과 클릭 욕구를 동시에 높임</small></li><li><code>Z세대 트렌드 편승(Trend-riding)</code> conf=0.85 → saves<br><small>BeReal 계보의 폐쇄형 커뮤니티 앱 트렌드를 마케터 시각으로 해석해 업무 활용 가치가 높아 저장 동기 부여</small></li><li><code>마케터 인사이트 추출 포맷</code> conf=0.8 → saves<br><small>단순 앱 소개가 아닌 &#x27;사랑받는 서비스 조건&#x27;이라는 추상화된 배움으로 전환해 직군 특화 저장 가치 생성</small></li><li><code>호기심 갭 후킹 어조</code> conf=0.75 → likes<br><small>&#x27;심상치 않습니다&#x27;라는 구어 경고형 문장이 피드 캡션 첫 줄 컷오프 내 강한 클릭 유인을 형성</small></li><li><code>공유 가능한 폐쇄형 커뮤니티 담론</code> conf=0.65 → comments<br><small>디지털 디톡스·Z세대 앱 문화는 마케터 커뮤니티 내 의견 교환 욕구가 높아 댓글 토론 유발</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZKVmnFk6xs" data-account="luxmag.kr" data-field="transferable_pattern" data-value="바이럴 외부 지표(조회수·반응 수치)를 후킹 수치로 전용하고, 단일 서비스 사례를 &#x27;N가지 원칙&#x27; 형태로 추상화해 저장 가치를 극대화하는 케이스스터디 구조. onecpa 적용 시: 실제 절세 사례나 정부지원금 수혜 결과 수치를 후킹 수치로 전면 배치하고, 해당 사례에서 추출한 &#x27;오늘날 통하는 세무 전략 조건 N가지&#x27; 형태로 구성하면 human-trust editorial 톤을 유지하면서 저장·공유 욕구를 동시에 자극할 수 있음. 9장 분량의 문제→맥락→원칙 나열→시사점→CTA 아크는 세금·자금 주제의 정보 밀도와 궁합이 좋음.">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"바이럴 외부 지표(조회수·반응 수치)를 후킹 수치로 전용하고, 단일 서비스 사례를 &#x27;N가지 원칙&#x27; 형태로 추상화해 저장 가치를 극대화하는 케이스스터디 구조. onecpa 적용 시: 실제 절세 사례나 정부지원금 수혜 결과 수치를 후킹 수치로 전면 배치하고, 해당 사례에서 추출한 &#x27;오늘날 통하는 세무 전략 조건 N가지&#x27; 형태로 구성하면 human-trust editorial 톤을 유지하면서 저장·공유 욕구를 동시에 자극할 수 있음. 9장 분량의 문제→맥락→원칙 나열→시사점→CTA 아크는 세금·자금 주"</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card has-analysis">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/af68ab8381923f24.jpg" alt="" loading="lazy"><span class="idx">1/20</span></div><div class="slide"><img src="assets/238a3019b8362dd8.jpg" alt="" loading="lazy"><span class="idx">2/20</span></div><div class="slide"><img src="assets/6361e49403fabcce.jpg" alt="" loading="lazy"><span class="idx">3/20</span></div><div class="slide"><img src="assets/da30d2aa6484ca08.jpg" alt="" loading="lazy"><span class="idx">4/20</span></div><div class="slide"><img src="assets/d53ce9711fa2f6a1.jpg" alt="" loading="lazy"><span class="idx">5/20</span></div><div class="slide"><img src="assets/384b4c384dfe4abf.jpg" alt="" loading="lazy"><span class="idx">6/20</span></div><div class="slide"><img src="assets/c877e6802a8568d2.jpg" alt="" loading="lazy"><span class="idx">7/20</span></div><div class="slide"><img src="assets/e1cdfd4a5ff4173b.jpg" alt="" loading="lazy"><span class="idx">8/20</span></div><div class="slide"><img src="assets/32c5b6db7880b4a8.jpg" alt="" loading="lazy"><span class="idx">9/20</span></div><div class="slide"><img src="assets/227c956c15ffac8c.jpg" alt="" loading="lazy"><span class="idx">10/20</span></div><div class="slide"><img src="assets/1939c69ff43288e4.jpg" alt="" loading="lazy"><span class="idx">11/20</span></div><div class="slide"><img src="assets/055ea6d58d679864.jpg" alt="" loading="lazy"><span class="idx">12/20</span></div><div class="slide"><img src="assets/db9f62ed984c567b.jpg" alt="" loading="lazy"><span class="idx">13/20</span></div><div class="slide"><img src="assets/a3a975becfd3dfa5.jpg" alt="" loading="lazy"><span class="idx">14/20</span></div><div class="slide"><img src="assets/c9a0a327e44b1304.jpg" alt="" loading="lazy"><span class="idx">15/20</span></div><div class="slide"><img src="assets/b6c2af0564ef9021.jpg" alt="" loading="lazy"><span class="idx">16/20</span></div><div class="slide"><img src="assets/649047602708a7b6.jpg" alt="" loading="lazy"><span class="idx">17/20</span></div><div class="slide"><img src="assets/40ab783336d44147.jpg" alt="" loading="lazy"><span class="idx">18/20</span></div><div class="slide"><img src="assets/8646ea96f1032c92.jpg" alt="" loading="lazy"><span class="idx">19/20</span></div><div class="slide"><img src="assets/c3679762d8dde814.jpg" alt="" loading="lazy"><span class="idx">20/20</span></div></div><span class="analysis-badge">🔍 분석됨</span><span class="badge">📑 20장</span></div>
+      <div class="meta"><span><span class="topic">기타</span>♥ 4,072</span><span>💬 40</span></div>
+      <div class="caption">🎙️ 브랜디드 콘텐츠에서 출발해, ‘허간민’이라는 올해의 IP를 탄생시킨 토스 머니그라피(@moneygraphyworld)의 ‘B주류초대석’. 그러나 이러한 흐름 뒤에는 허간민이라는 세계관의 밑그림을 설계한 머니그라피 팀이 존재했습니다. 슬라이드를 넘겨, 룩스매거진이 담아온 B주류초대석의 여정, 그 시작과 다음을 확인해 보세요. 🙌
+
+Present by @luxmag.kr</div>
+      <a class="open" href="https://www.instagram.com/p/DYPAYheE19j/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      <div class="field"><span class="copyright-warn">⚠ distinctive_design_avoid_close_emulation</span> — 직접 복제 회피, *추상 패턴*만 차용</div>
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYPAYheE19j" data-account="luxmag.kr" data-field="hook" data-value="curiosity_gap | 브랜디드 콘텐츠에서 출발해 &#x27;올해의 IP 허간민&#x27;을 탄생시킨 토스 머니그라피의 B주류초대석, 그 시작과 다음">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>curiosity_gap</code> · 강도 7/5<br><i>"브랜디드 콘텐츠에서 출발해 &#x27;올해의 IP 허간민&#x27;을 탄생시킨 토스 머니그라피의 B주류초대석, 그 시작과 다음"</i><br><small>크리에이터·IP 이름을 전면에 내세워 &#x27;어떻게 만들었는가&#x27;라는 내부 공정 궁금증을 유발하지만, 수치형 손실 자극이 없어 중상급에 머무름</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYPAYheE19j" data-account="luxmag.kr" data-field="message_arc" data-value="case_study | 1 커버 — IP·시리즈명 제시 및 호기심 유발 → 2 배경 — 토스 머니그라피와 B주류초대석 소개 → 3 문제의식 — 브랜디드 콘텐츠가 독립 IP로 성장하는 드문 사례임을 강조 → 4-6 세계관 설계 과정 — 허간민 캐릭터·콘셉트 기획 여정 → 7-9 제작 구조 — 팀 역할 분담·콘텐츠 포맷 선택 근거 → 10-12 성과 지표 — 조회수·팬덤 형성·언론 반응 등 → 13-15 크리에이터 인터뷰 발췌 — 핵심 인사이트 큰따옴표 처리 → 16-18 다음 챕터 예고 — 시리즈 확장 방향 암시">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>case_study</code> · high density<br><small>roles: 1 커버 — IP·시리즈명 제시 및 호기심 유발, 2 배경 — 토스 머니그라피와 B주류초대석 소개, 3 문제의식 — 브랜디드 콘텐츠가 독립 IP로 성장하는 드문 사례임을 강조, 4-6 세계관 설계 과정 — 허간민 캐릭터·콘셉트 기획 여정, 7-9 제작 구조 — 팀 역할 분담·콘텐츠 포맷 선택 근거, 10-12 성과 지표 — 조회수·팬덤 형성·언론 반응 등</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYPAYheE19j" data-account="luxmag.kr" data-field="cta" data-value="follow | 슬라이드를 넘겨, 룩스매거진이 담아온 B주류초대석의 여정, 그 시작과 다음을 확인해 보세요 🙌">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>follow</code> · last · 강도 5/5<br><i>"슬라이드를 넘겨, 룩스매거진이 담아온 B주류초대석의 여정, 그 시작과 다음을 확인해 보세요 🙌"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYPAYheE19j" data-account="luxmag.kr" data-field="visual_palette" data-value="#1A1A1A, #F5F0EB, #C8A96E, #FFFFFF">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#1A1A1A"></span><code>#1A1A1A</code><span class="swatch" style="background:#F5F0EB"></span><code>#F5F0EB</code><span class="swatch" style="background:#C8A96E"></span><code>#C8A96E</code><span class="swatch" style="background:#FFFFFF"></span><code>#FFFFFF</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYPAYheE19j" data-account="luxmag.kr" data-field="visual_typography" data-value="세리프 헤드라인 + 산세리프 본문 혼용 — 매거진 에디토리얼 관습, 영문 로고타입 강조 | 좌우 여백 고정형 2단 그리드 추정 — 인물 사진 풀블리드 + 텍스트 오버레이 교차">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>세리프 헤드라인 + 산세리프 본문 혼용 — 매거진 에디토리얼 관습, 영문 로고타입 강조</code> · 좌우 여백 고정형 2단 그리드 추정 — 인물 사진 풀블리드 + 텍스트 오버레이 교차<br><small>균형</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYPAYheE19j" data-account="luxmag.kr" data-field="viral_factors" data-value="업계 내부 공정 공개 (behind-the-scenes IP 빌딩) · 토스·머니그라피라는 인지도 높은 브랜드 네임드롭 · 허간민 IP 인격화 — 캐릭터 서사 중심 스토리텔링 · 20장 고볼륨 심층 콘텐츠로 체류 시간 극대화">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>업계 내부 공정 공개 (behind-the-scenes IP 빌딩)</code> conf=0.85 → saves<br><small>마케터·크리에이터 타깃이 &#x27;어떻게 만들었나&#x27;를 레퍼런스로 저장하는 패턴과 정확히 맞닿음</small></li><li><code>토스·머니그라피라는 인지도 높은 브랜드 네임드롭</code> conf=0.8 → likes<br><small>기존 팬층을 가진 IP 언급이 알고리즘 노출 확장 및 초기 좋아요 가속에 기여</small></li><li><code>허간민 IP 인격화 — 캐릭터 서사 중심 스토리텔링</code> conf=0.75 → comments<br><small>캐릭터 팬덤이 댓글로 반응하고 공유 동기를 높임</small></li><li><code>20장 고볼륨 심층 콘텐츠로 체류 시간 극대화</code> conf=0.7 → saves<br><small>인스타그램 알고리즘이 슬라이드 완독률·체류 시간을 강화 신호로 처리하여 노출 증폭</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYPAYheE19j" data-account="luxmag.kr" data-field="transferable_pattern" data-value="실제 사례 기반 IP·브랜드 빌딩 해설 구조 — &#x27;이름난 사례의 내부 공정을 에디토리얼 시선으로 해부&#x27;하는 케이스스터디 아크. onecpa 적용 시: 실제 절세·지원금 수혜 사례를 &#x27;세무사가 설계한 전략의 백스테이지&#x27;로 재편집하되 고객 익명 처리. 커버에 수혜금액·세금환급액 같은 숫자형 결과를 노출해 curiosity_gap + 손실회피를 결합하고, 5-8장 내외 짧은 호흡으로 &#x27;문제→설계과정→결과→체크리스트→저장CTA&#x27; 순으로 압축. 매거진식 세리프 헤드라인은 human-trust editorial 톤과 호환되나 모바일 가독성을 위해 한 슬라이드당 핵심 문장 1개 원칙을 엄수할 것.">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"실제 사례 기반 IP·브랜드 빌딩 해설 구조 — &#x27;이름난 사례의 내부 공정을 에디토리얼 시선으로 해부&#x27;하는 케이스스터디 아크. onecpa 적용 시: 실제 절세·지원금 수혜 사례를 &#x27;세무사가 설계한 전략의 백스테이지&#x27;로 재편집하되 고객 익명 처리. 커버에 수혜금액·세금환급액 같은 숫자형 결과를 노출해 curiosity_gap + 손실회피를 결합하고, 5-8장 내외 짧은 호흡으로 &#x27;문제→설계과정→결과→체크리스트→저장CTA&#x27; 순으로 압축. 매거진식 세리프 헤드라인은 human-tru"</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/bf971931c98bc065.jpg" alt="" loading="lazy"><span class="idx">1/5</span></div><div class="slide"><img src="assets/ecb282bf89e772f9.jpg" alt="" loading="lazy"><span class="idx">2/5</span></div><div class="slide"><img src="assets/b44be6f875264a06.jpg" alt="" loading="lazy"><span class="idx">3/5</span></div><div class="slide"><img src="assets/3306b9a376cd813f.jpg" alt="" loading="lazy"><span class="idx">4/5</span></div><div class="slide"><img src="assets/32257dbbf09f1096.jpg" alt="" loading="lazy"><span class="idx">5/5</span></div></div><span class="badge">📑 5장</span></div>
+      <div class="meta"><span>♥ 2,474</span><span>💬 17</span></div>
+      <div class="caption">⚡️ 곧 이과의 댓글이 쏟아질 게시물
+
+최근 대만 기업 E Ink가 ICT·AI 전시회 COMPUTEX 2026에서 선보인 ‘전자잉크’ 기술이 화제를 모으고 있습니다. 하늘거리는 얇은 패널 위로 일렁임이 지나가자, 한 음식점의 광고가 나타나는 장면인데요.
+
+전자잉크(전자종이)는 전기장을 이용해 색상 입자를 이동시켜 이미지를 구현하는 기술로, 기존 종이 포스터와 LCD 디스플레이를 빠르게 대체하고 있습니다. 특히 정적인 이미지를</div>
+      <a class="open" href="https://www.instagram.com/p/DZUF6xsEx0s/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/b6351a4df5796467.jpg" alt="" loading="lazy"><span class="idx">1/7</span></div><div class="slide"><img src="assets/e0adca75badbe742.jpg" alt="" loading="lazy"><span class="idx">2/7</span></div><div class="slide"><img src="assets/47b3089462cebcbd.jpg" alt="" loading="lazy"><span class="idx">3/7</span></div><div class="slide"><img src="assets/f6ad35dc9d688367.jpg" alt="" loading="lazy"><span class="idx">4/7</span></div><div class="slide"><img src="assets/154fc7de080274c9.jpg" alt="" loading="lazy"><span class="idx">5/7</span></div><div class="slide"><img src="assets/5865964a8fbd9be6.jpg" alt="" loading="lazy"><span class="idx">6/7</span></div><div class="slide"><img src="assets/e250dfc672cad4ed.jpg" alt="" loading="lazy"><span class="idx">7/7</span></div></div><span class="badge">📑 7장</span></div>
+      <div class="meta"><span>♥ 1,395</span><span>💬 15</span></div>
+      <div class="caption">🧘 이런 스케일은 처음 봅니다. 룰루레몬이 지난 5월, 중국의 대표 랜드마크인 만리장성에서 대규모 요가 페스티벌을 개최한 건데요.
+
+2,000명이 넘는 참가자들은 하루 동안 다양한 요가 및 웰니스 프로그램과 공연을 즐기며, 룰루레몬이 추구하는 건강한 라이프스타일을 직접 경험했습니다. 거대한 만리장성 곳곳을 브랜드 요소로 채워낸 연출 역시 시각적으로 인상적이었죠.
+
+사실 룰루레몬은 2017년에도 만리장성에서 요가 세션을 진행한 </div>
+      <a class="open" href="https://www.instagram.com/p/DZJTLYAE_2V/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/a047a671403eeaea.jpg" alt="" loading="lazy"><span class="idx">1/9</span></div><div class="slide"><img src="assets/1e5f64db01f234c1.jpg" alt="" loading="lazy"><span class="idx">2/9</span></div><div class="slide"><img src="assets/86b6b1d3c8415410.jpg" alt="" loading="lazy"><span class="idx">3/9</span></div><div class="slide"><img src="assets/2d2938064461ecd8.jpg" alt="" loading="lazy"><span class="idx">4/9</span></div><div class="slide"><img src="assets/68a5c12444cd33a0.jpg" alt="" loading="lazy"><span class="idx">5/9</span></div><div class="slide"><img src="assets/9f6d2f3fa02cc98a.jpg" alt="" loading="lazy"><span class="idx">6/9</span></div><div class="slide"><img src="assets/29fac40e80c13f69.jpg" alt="" loading="lazy"><span class="idx">7/9</span></div><div class="slide"><img src="assets/8ce3500f5efe32cd.jpg" alt="" loading="lazy"><span class="idx">8/9</span></div><div class="slide"><img src="assets/489883da8577fddc.jpg" alt="" loading="lazy"><span class="idx">9/9</span></div></div><span class="badge">📑 9장</span></div>
+      <div class="meta"><span>♥ 911</span><span>💬 10</span></div>
+      <div class="caption">📍요즘 지도가 왜 이렇게 재밌지? 최근 국내외를 비롯해 다양한 브랜드와 개인이 만든 맵 서비스가 긍정적인 반응을 얻고 있습니다. 특히 단순히 장소를 찾는 지도의 원래 역할을 확장해, 특정 팬덤이나 취향을 반영하는 등 뾰족한 테마를 중심으로 기획하는 것이 요즘 사랑받는 맵 서비스의 특징인데요. 슬라이드를 넘겨, 최근 국내외에서 좋은 반응을 얻은 지도 마케팅 사례들을 확인해 보세요. 🙌
+
+썸네일 출처 | Isometric NYC</div>
+      <a class="open" href="https://www.instagram.com/p/DZMCJk-k90C/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/6c26bbd734fb8abd.jpg" alt="" loading="lazy"><span class="idx">1/9</span></div><div class="slide"><img src="assets/efff8d8fd06d1d3f.jpg" alt="" loading="lazy"><span class="idx">2/9</span></div><div class="slide"><img src="assets/5c14fda7266d9272.jpg" alt="" loading="lazy"><span class="idx">3/9</span></div><div class="slide"><img src="assets/f47ee80d42068b2c.jpg" alt="" loading="lazy"><span class="idx">4/9</span></div><div class="slide"><img src="assets/cfa6297c78f0a89f.jpg" alt="" loading="lazy"><span class="idx">5/9</span></div><div class="slide"><img src="assets/1922d19220588902.jpg" alt="" loading="lazy"><span class="idx">6/9</span></div><div class="slide"><img src="assets/2a75a36050f06732.jpg" alt="" loading="lazy"><span class="idx">7/9</span></div><div class="slide"><img src="assets/32699aacdec378c1.jpg" alt="" loading="lazy"><span class="idx">8/9</span></div><div class="slide"><img src="assets/5a0ef97b8590fa41.jpg" alt="" loading="lazy"><span class="idx">9/9</span></div></div><span class="badge">📑 9장</span></div>
+      <div class="meta"><span>♥ 914</span><span>💬 4</span></div>
+      <div class="caption">🩵 갑자기 캡컷 유료 구독이 늘고 있는 이유 알려드릴게요. 최근 K팝 팬덤 사이에서 유행 중인 신상 편집법부터 자극적인 SNS 환경에 힐링 열풍을 불러일으키고 있는 신상 챌린지까지, 에디터가 눈여겨본 최신 SNS 바이럴 트렌드를 전해 드립니다. 🙌
+
+썸네일 출처 | SBSKPOP X INKIGAYO</div>
+      <a class="open" href="https://www.instagram.com/p/DZMcFpHEw9c/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/ccba4b60ddfba810.jpg" alt="" loading="lazy"><span class="idx">1/9</span></div><div class="slide"><img src="assets/af10c7315bf9980b.jpg" alt="" loading="lazy"><span class="idx">2/9</span></div><div class="slide"><img src="assets/1090bf87047f64e5.jpg" alt="" loading="lazy"><span class="idx">3/9</span></div><div class="slide"><img src="assets/ada78468e23e7d1d.jpg" alt="" loading="lazy"><span class="idx">4/9</span></div><div class="slide"><img src="assets/e04f24c6abdfb29f.jpg" alt="" loading="lazy"><span class="idx">5/9</span></div><div class="slide"><img src="assets/5d1430b260d46e33.jpg" alt="" loading="lazy"><span class="idx">6/9</span></div><div class="slide"><img src="assets/b18634996d03b36c.jpg" alt="" loading="lazy"><span class="idx">7/9</span></div><div class="slide"><img src="assets/86e3805c45c9766a.jpg" alt="" loading="lazy"><span class="idx">8/9</span></div><div class="slide"><img src="assets/22d90ce7e1486319.jpg" alt="" loading="lazy"><span class="idx">9/9</span></div></div><span class="badge">📑 9장</span></div>
+      <div class="meta"><span>♥ 871</span><span>💬 7</span></div>
+      <div class="caption">📠 최근 틱톡 등의 SNS에서 ’사이버덱‘이라고 불리는 미니 DIY 컴퓨터를 만드는 게 유행하고 있습니다. 장난감 보관함이나 과자 패키지 등에 저렴한 미니 컴퓨터를 끼워 만든 이 엉성한 컴퓨터는 매번 수천만 뷰를 기록하며 바이럴 중인데요.
+
+과거에도 한차례 유행한 적이 있는 이 ’사이버덱‘. 지금 왜 다시 우리를 매료시킨 걸까요? 다양한 사례들과 함께 오늘날 소비자가 테크를 바라보는 시선의 변화를 따라가 봤습니다. 🙌
+
+썸네일</div>
+      <a class="open" href="https://www.instagram.com/p/DZOhmMjE0H1/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/a87c892e76da2c1d.jpg" alt="" loading="lazy"><span class="idx">1/7</span></div><div class="slide"><img src="assets/ac88004436ee5047.jpg" alt="" loading="lazy"><span class="idx">2/7</span></div><div class="slide"><img src="assets/64641ab2c006ada3.jpg" alt="" loading="lazy"><span class="idx">3/7</span></div><div class="slide"><img src="assets/7a2edc2877f4e8ba.jpg" alt="" loading="lazy"><span class="idx">4/7</span></div><div class="slide"><img src="assets/28b3f63b3167cf4b.jpg" alt="" loading="lazy"><span class="idx">5/7</span></div><div class="slide"><img src="assets/a354916dc78d9544.jpg" alt="" loading="lazy"><span class="idx">6/7</span></div><div class="slide"><img src="assets/50f722036c7308aa.jpg" alt="" loading="lazy"><span class="idx">7/7</span></div></div><span class="badge">📑 7장</span></div>
+      <div class="meta"><span>♥ -1</span><span>💬 13</span></div>
+      <div class="caption">#광고 🍉 음료와 럭키 맥싱 트렌드, 합쳐버렸습니다
+
+이디야커피(@ediya.coffee)가 포스텔러와 협업해 여름 생과일 음료 출시 기념 &lt;개운부적 이벤트&gt;를 진행합니다. 생과일수박주스, 생과일토마토주스, 생수박과일화채를 각각 水박, 土마토, 火채라는 콘셉트로 풀어냈는데요. 포스텔러 만세력에서 내 오행을 확인하고 SNS에 인증하면 개운부적과 음료 교환권을 받을 수 있습니다.
+
+사주를 보거나 행운템을 모으는 등, 스스로 행운을</div>
+      <a class="open" href="https://www.instagram.com/p/DZWWqAJExIy/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/b7101ab018b03121.jpg" alt="" loading="lazy"><span class="idx">1/8</span></div><div class="slide"><img src="assets/ba866e700da1866c.jpg" alt="" loading="lazy"><span class="idx">2/8</span></div><div class="slide"><img src="assets/a7aa917914eb3188.jpg" alt="" loading="lazy"><span class="idx">3/8</span></div><div class="slide"><img src="assets/8e3c3ef5a5fd459c.jpg" alt="" loading="lazy"><span class="idx">4/8</span></div><div class="slide"><img src="assets/5dcf343abd442c09.jpg" alt="" loading="lazy"><span class="idx">5/8</span></div><div class="slide"><img src="assets/8e1284a91cef17a3.jpg" alt="" loading="lazy"><span class="idx">6/8</span></div><div class="slide"><img src="assets/53c614787fc57d06.jpg" alt="" loading="lazy"><span class="idx">7/8</span></div><div class="slide"><img src="assets/ccbb2454fd5e6320.jpg" alt="" loading="lazy"><span class="idx">8/8</span></div></div><span class="badge">📑 8장</span></div>
+      <div class="meta"><span>♥ -1</span><span>💬 10</span></div>
+      <div class="caption">#광고 ”칭찬에 굶주린 K-직장인들 주목! 박수 쳐주는 트로피 등장 🏆“
+
+퍼시스가 동료간 나누는 격려의 말을 자동으로 인식해 박수를 쳐주는 기발한 ’박수 트로피‘를 선보였습니다. 스포트라이트 밖에서 꾸준히 일하는 수많은 오피스 히어로들을 응원하기 위해 탄생한 오브제인데요. 현재 퍼시스 공식 계정 프로필 링크에서는 격려하고 싶은 동료 혹은 자신의 사연을 신청하면 추첨을 통해 실제 박수 트로피를 증정하고 있죠.
+
+이벤트와 더불어</div>
+      <a class="open" href="https://www.instagram.com/p/DZMuIAkk54M/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+      </div>
+    </section>
+    
+
+    <section class="account">
+      <header class="profile">
+        <div class="avatar-empty"></div>
+        <div>
+          <div class="name">김기훈 Kihoon Kim</div>
+          <a class="handle" href="https://www.instagram.com/epic_investment/" target="_blank">@epic_investment</a>
+          <div class="stats">팔로워 — · top 10 viral posts (engagement 정렬)</div>
+          <div class="bio"></div>
+        </div>
+      </header>
+      <div class="grid">
+        
+    <div class="card has-analysis">
+      <div class="media"><img class="single" src="assets/fc702d04092ada28.jpg" alt=""><span class="analysis-badge">🔍 분석됨</span><span class="badge video-badge">▶ 48,874회</span></div>
+      <div class="meta"><span><span class="topic">자본시장</span>♥ 757</span><span>💬 3,505</span></div>
+      <div class="caption">댓글을 남겨주시면 자세한 내용 발송드립니다.
+
+삼성전자가 파업을 피했는데, 왜 SK하이닉스가 더 많이 올랐을까요.
+
+저는 삼성전자와 SK하이닉스를 둘 다 좋게 보고 있습니다. 다만 최근 주가 흐름만 보면 삼성전자보다 SK하이닉스가 훨씬 더 강하게 움직였습니다.
+
+최근 삼성전자는 파업 위험이 부각되면서 주가에 부담이 있었습니다. 수요일에는 협상이 결렬되는 듯했지만, 이후 극적으로 잠정 합의안이 나왔고 22일에는 찬반투표가 예정되</div>
+      <a class="open" href="https://www.instagram.com/p/DYoMyyGzmvG/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYoMyyGzmvG" data-account="epic_investment" data-field="hook" data-value="curiosity_gap | 삼성전자가 파업을 피했는데, 왜 SK하이닉스가 더 많이 올랐을까요.">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>curiosity_gap</code> · 강도 8/5<br><i>"삼성전자가 파업을 피했는데, 왜 SK하이닉스가 더 많이 올랐을까요."</i><br><small>실제 시장 이벤트(파업 협상 타결)와 반직관적 주가 결과를 대비시켜 &#x27;왜?&#x27;라는 즉각적 인지 불협화음을 만들어냄 — 시의성·반전·질문 삼박자</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYoMyyGzmvG" data-account="epic_investment" data-field="message_arc" data-value="myth_bust | 1 반전 질문 후킹 + 댓글 CTA 선제 노출">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>myth_bust</code> · high density<br><small>roles: 1 반전 질문 후킹 + 댓글 CTA 선제 노출</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYoMyyGzmvG" data-account="epic_investment" data-field="cta" data-value="comment_keyword | 댓글을 남겨주시면 자세한 내용 발송드립니다.">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>comment_keyword</code> · last · 강도 10/5<br><i>"댓글을 남겨주시면 자세한 내용 발송드립니다."</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYoMyyGzmvG" data-account="epic_investment" data-field="visual_palette" data-value="#1a1a2e, #0f3460, #ffffff">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#1a1a2e"></span><code>#1a1a2e</code><span class="swatch" style="background:#0f3460"></span><code>#0f3460</code><span class="swatch" style="background:#ffffff"></span><code>#ffffff</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYoMyyGzmvG" data-account="epic_investment" data-field="visual_typography" data-value="고딕 계열 굵은 본문, 강조 포인트에 컬러 텍스트 추정 — 실제 이미지 미확인 | 단일 프레임 (1:1 또는 4:5) — 슬라이드 미제공으로 추정">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>고딕 계열 굵은 본문, 강조 포인트에 컬러 텍스트 추정 — 실제 이미지 미확인</code> · 단일 프레임 (1:1 또는 4:5) — 슬라이드 미제공으로 추정<br><small>텍스트 우세</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYoMyyGzmvG" data-account="epic_investment" data-field="viral_factors" data-value="댓글 유도 자동응답 CTA (DM 자동화) · 반직관적 시장 사실 제시 (파업 회피 → 하이닉스 급등) · 시의성 — 실제 진행 중인 파업 협상·찬반투표 이벤트 연동 · AI·HBM 테마 연결 — 알고리즘 친화 키워드">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>댓글 유도 자동응답 CTA (DM 자동화)</code> conf=0.98 → comments<br><small>댓글 3,505 vs 좋아요 757 — 비율 역전이 ManyChat류 자동 DM 트리거 구조의 전형적 시그니처</small></li><li><code>반직관적 시장 사실 제시 (파업 회피 → 하이닉스 급등)</code> conf=0.9 → comments<br><small>인지 불협화음이 즉각적 댓글 참여(의견 표명·확인 욕구)를 자극</small></li><li><code>시의성 — 실제 진행 중인 파업 협상·찬반투표 이벤트 연동</code> conf=0.85 → likes<br><small>뉴스 주기와 동기화된 게시 타이밍이 피드 노출·저장 욕구 동시 자극</small></li><li><code>AI·HBM 테마 연결 — 알고리즘 친화 키워드</code> conf=0.75 → likes<br><small>AI 반도체 수혜주 프레임이 탐색 피드 추천 확률 상승 및 팔로워 저장 욕구 유발</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYoMyyGzmvG" data-account="epic_investment" data-field="transferable_pattern" data-value="반직관적 시장 사실 질문 후킹(기대 결과 vs 실제 결과 대비) + 캡션 고밀도 분석 본문 + 댓글-트리거 DM CTA 선제 배치 구조. onecpa 적용 시: &#x27;절세 신청 마감 지났는데 왜 환급받는 분들이 있을까요?&#x27; 형태의 반전 질문으로 후킹 → 카드뉴스 본문에 요건 분석 → 마지막 슬라이드에 &#x27;댓글에 업종 남겨주시면 적용 여부 확인해드립니다&#x27; 형태로 변환. 핵심은 댓글 수 자체가 사회적 증거로 작동해 도달 알고리즘을 자기강화하는 루프">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"반직관적 시장 사실 질문 후킹(기대 결과 vs 실제 결과 대비) + 캡션 고밀도 분석 본문 + 댓글-트리거 DM CTA 선제 배치 구조. onecpa 적용 시: &#x27;절세 신청 마감 지났는데 왜 환급받는 분들이 있을까요?&#x27; 형태의 반전 질문으로 후킹 → 카드뉴스 본문에 요건 분석 → 마지막 슬라이드에 &#x27;댓글에 업종 남겨주시면 적용 여부 확인해드립니다&#x27; 형태로 변환. 핵심은 댓글 수 자체가 사회적 증거로 작동해 도달 알고리즘을 자기강화하는 루프"</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card has-analysis">
+      <div class="media"><img class="single" src="assets/bec524fd719288ca.jpg" alt=""><span class="analysis-badge">🔍 분석됨</span><span class="badge video-badge">▶ 150,461회</span></div>
+      <div class="meta"><span><span class="topic">자본시장</span>♥ 2,644</span><span>💬 33</span></div>
+      <div class="caption">LG전자, 왜 이렇게 움직일까요?
+
+LG전자는 지난달까지만 해도 2008년 고점 수준의 주가에 머물러 있었습니다. 쉽게 말하면 약 18년 동안 주가가 거의 오르지 못했던 셈입니다.
+
+하지만 지금의 LG전자는 과거 우리가 알던 가전 중심의 회사와는 포인트가 많이 달라졌습니다. 물론 현재도 가전사업부는 안정적으로 돈을 벌고 있습니다. 다만 시장이 다시 LG전자를 주목하는 이유는 가전 그 자체보다, 그다음 성장동력에 있습니다.
+
+첫</div>
+      <a class="open" href="https://www.instagram.com/p/DY6NHYHzrr7/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY6NHYHzrr7" data-account="epic_investment" data-field="hook" data-value="curiosity_gap | LG전자, 왜 이렇게 움직일까요?">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>curiosity_gap</code> · 강도 8/5<br><i>"LG전자, 왜 이렇게 움직일까요?"</i><br><small>&#x27;왜&#x27;라는 미완성 질문 + 18년 주가 정체라는 구체적 수치가 즉각적 인지 공백을 만들어 스크롤 멈춤 효과 강함</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY6NHYHzrr7" data-account="epic_investment" data-field="message_arc" data-value="case_study | 1 후킹 — LG전자 주가 의문 제기 → 2 문제정의 — 18년 주가 정체 사실 제시 → 3 성장동력① — 전장·자율주행·인포테인먼트 → 4 성장동력② — 냉난방공조·AI 데이터센터 열관리 → 5 성장동력③ — 로봇·액추에이터 양산 → 6 반전 연결 — 엔비디아와의 깐부 서사 → 7 CTA — 저장·팔로우 유도">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>case_study</code> · high density<br><small>roles: 1 후킹 — LG전자 주가 의문 제기, 2 문제정의 — 18년 주가 정체 사실 제시, 3 성장동력① — 전장·자율주행·인포테인먼트, 4 성장동력② — 냉난방공조·AI 데이터센터 열관리, 5 성장동력③ — 로봇·액추에이터 양산, 6 반전 연결 — 엔비디아와의 깐부 서사</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY6NHYHzrr7" data-account="epic_investment" data-field="cta" data-value="save | 저장해두고 다시 보세요 (캡션 미완성 클리프행어로 전체 내용은 영상·슬라이드에서 유도)">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>save</code> · last · 강도 7/5<br><i>"저장해두고 다시 보세요 (캡션 미완성 클리프행어로 전체 내용은 영상·슬라이드에서 유도)"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY6NHYHzrr7" data-account="epic_investment" data-field="visual_palette" data-value="#0D0D0D, #FFFFFF, #E8B84B">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#0D0D0D"></span><code>#0D0D0D</code><span class="swatch" style="background:#FFFFFF"></span><code>#FFFFFF</code><span class="swatch" style="background:#E8B84B"></span><code>#E8B84B</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY6NHYHzrr7" data-account="epic_investment" data-field="visual_typography" data-value="굵은 산세리프 헤드라인 + 중간 웨이트 본문, 강조어 골드 컬러 포인트 | 중앙 정렬 단일 컬럼, 숫자·아이콘 강조 블록 상단 고정">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>굵은 산세리프 헤드라인 + 중간 웨이트 본문, 강조어 골드 컬러 포인트</code> · 중앙 정렬 단일 컬럼, 숫자·아이콘 강조 블록 상단 고정<br><small>텍스트 우세</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY6NHYHzrr7" data-account="epic_investment" data-field="viral_factors" data-value="18년 구체적 시간축 수치 · 엔비디아 연결 서사 · 3대 성장동력 리스트 프레임 · 캡션 클리프행어 (문장 미완성 &#x27;A&#x27;)">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>18년 구체적 시간축 수치</code> conf=0.87 → saves<br><small>추상적 &#x27;오래됐다&#x27; 대신 숫자를 쓰면 신뢰도와 저장 욕구 동시 자극</small></li><li><code>엔비디아 연결 서사</code> conf=0.82 → likes<br><small>초미관심 종목 언급이 공유·좋아요 충동을 유발하는 후광 효과</small></li><li><code>3대 성장동력 리스트 프레임</code> conf=0.78 → saves<br><small>정리된 구조는 &#x27;나중에 다시 볼 정보&#x27;로 인식돼 저장률을 끌어올리는 대표 패턴</small></li><li><code>캡션 클리프행어 (문장 미완성 &#x27;A&#x27;)</code> conf=0.72 → comments<br><small>의도적 문장 절단으로 슬라이드 시청 및 궁금증 댓글 유도</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY6NHYHzrr7" data-account="epic_investment" data-field="transferable_pattern" data-value="구체적 시간축 수치(X년간 변화 없음)로 손실회피 후킹 → 3대 테마 번호 열거 → 외부 메가트렌드(엔비디아·AI)와 연결해 &#x27;재발견 서사&#x27;를 완성하는 case_study 아크. onecpa 적용 시: &#x27;18년째 대부분이 모르는 절세 포인트&#x27; 식의 시간축 후킹 → 3대 절세 축(소득공제·세액공제·이월결손) 열거 → 최신 세법 개정·정부 지원책 연결로 7장 카드뉴스 구조화 가능. 핵심 추상 패턴: 숫자형 손실회피 후킹 + 구조화 열거(3의 법칙) + 시의성 있는 외부 이슈 연결 + 캡션 클리프행어로 슬라이드 완독 유도.">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"구체적 시간축 수치(X년간 변화 없음)로 손실회피 후킹 → 3대 테마 번호 열거 → 외부 메가트렌드(엔비디아·AI)와 연결해 &#x27;재발견 서사&#x27;를 완성하는 case_study 아크. onecpa 적용 시: &#x27;18년째 대부분이 모르는 절세 포인트&#x27; 식의 시간축 후킹 → 3대 절세 축(소득공제·세액공제·이월결손) 열거 → 최신 세법 개정·정부 지원책 연결로 7장 카드뉴스 구조화 가능. 핵심 추상 패턴: 숫자형 손실회피 후킹 + 구조화 열거(3의 법칙) + 시의성 있는 외부 이슈 연결 + 캡션 클리프행어로"</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card has-analysis">
+      <div class="media"><img class="single" src="assets/f710f487cf0f00b6.jpg" alt=""><span class="analysis-badge">🔍 분석됨</span><span class="badge video-badge">▶ 101,596회</span></div>
+      <div class="meta"><span><span class="topic">자본시장</span>♥ 2,147</span><span>💬 48</span></div>
+      <div class="caption">하이닉스 시가총액이 삼성전자를 넘을 수 있을까요.
+
+요즘 시장을 보면 오를 때는 하이닉스가 훨씬 크게 오르고, 삼성전자는 여러 가지 이슈로 쉬어가는 모습을 보이고 있습니다. 그러다 보니 이제는 시가총액에서도 하이닉스가 삼성전자를 넘어서는 것 아니냐는 이야기가 나오고 있습니다.
+
+우선주를 제외한 삼성전자 시가총액은 약 1770조 원, 하이닉스는 약 1630조 원 수준입니다. 이제 두 회사의 차이는 10%도 안 되는 상황입니다.
+</div>
+      <a class="open" href="https://www.instagram.com/p/DY3nMSSze4h/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY3nMSSze4h" data-account="epic_investment" data-field="hook" data-value="question | 하이닉스 시가총액이 삼성전자를 넘을 수 있을까요">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>question</code> · 강도 8/5<br><i>"하이닉스 시가총액이 삼성전자를 넘을 수 있을까요"</i><br><small>국민주 삼성전자 추월이라는 금기적 명제를 질문형으로 던져 즉각적 인지 충돌·클릭 반사 유발</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY3nMSSze4h" data-account="epic_investment" data-field="message_arc" data-value="myth_bust | 1 후킹 질문 — 하이닉스가 삼성전자 시총을 넘을 수 있나 → 2 현황 수치 제시 — 삼성 1770조 vs 하이닉스 1630조, 격차 10% 미만 → 3 직관적 반론 — 매출 규모 삼성 75조 vs 하이닉스 53조, 아직 삼성이 훨씬 큼 → 4 핵심 변수 전환 — 시장이 보는 것은 AI HBM 사이클 → 5 HBM 비중 비교 — 하이닉스 40%+ vs 삼성 10% 수준 시각화 → 6 추가 리스크 — 외국인 지분율 삼성 52%→48% 이탈 → 7 결론 + CTA">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>myth_bust</code> · high density<br><small>roles: 1 후킹 질문 — 하이닉스가 삼성전자 시총을 넘을 수 있나, 2 현황 수치 제시 — 삼성 1770조 vs 하이닉스 1630조, 격차 10% 미만, 3 직관적 반론 — 매출 규모 삼성 75조 vs 하이닉스 53조, 아직 삼성이 훨씬 큼, 4 핵심 변수 전환 — 시장이 보는 것은 AI HBM 사이클, 5 HBM 비중 비교 — 하이닉스 40%+ vs 삼성 10% 수준 시각화, 6 추가 리스크 — 외국인 지분율 삼성 52%→48% 이탈</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY3nMSSze4h" data-account="epic_investment" data-field="cta" data-value="comment_keyword | 이 내용이 도움이 되었다면 좋아요와 댓글을 남겨 주세요">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>comment_keyword</code> · last · 강도 5/5<br><i>"이 내용이 도움이 되었다면 좋아요와 댓글을 남겨 주세요"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY3nMSSze4h" data-account="epic_investment" data-field="visual_palette" data-value="#0D0D0D, #FFFFFF, #FF4500">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#0D0D0D"></span><code>#0D0D0D</code><span class="swatch" style="background:#FFFFFF"></span><code>#FFFFFF</code><span class="swatch" style="background:#FF4500"></span><code>#FF4500</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY3nMSSze4h" data-account="epic_investment" data-field="visual_typography" data-value="굵은 고딕 계열 수치 강조 + 중간 굵기 한글 본문, 키워드 포인트 컬러 처리 | 단일 중앙 정렬 텍스트 블록, 상단 질문 타이틀 하단 수치·비교 구조">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>굵은 고딕 계열 수치 강조 + 중간 굵기 한글 본문, 키워드 포인트 컬러 처리</code> · 단일 중앙 정렬 텍스트 블록, 상단 질문 타이틀 하단 수치·비교 구조<br><small>텍스트 우세</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY3nMSSze4h" data-account="epic_investment" data-field="viral_factors" data-value="국민주 삼성전자 역전 가능성 프레임 · HBM 비중 수치 대비 (40% vs 10%) — 저장형 인사이트 · 반직관 역설 구조 (규모 작은 기업이 시총 역전) · 외국인 지분율 하락 추가 리스크 시그널">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>국민주 삼성전자 역전 가능성 프레임</code> conf=0.92 → likes<br><small>삼성전자 보유 투자자가 광범위해 직접 이해관계 자극, 반사적 반응 및 공유 유발</small></li><li><code>HBM 비중 수치 대비 (40% vs 10%) — 저장형 인사이트</code> conf=0.82 → saves<br><small>투자 판단에 즉시 활용 가능한 구체 수치 비교는 복기·저장 패턴 강하게 유발</small></li><li><code>반직관 역설 구조 (규모 작은 기업이 시총 역전)</code> conf=0.78 → comments<br><small>상식 반전이 찬반 의견 충돌 댓글 증가로 이어짐</small></li><li><code>외국인 지분율 하락 추가 리스크 시그널</code> conf=0.68 → comments<br><small>보유자 불안 자극 → &#x27;어떻게 봐야 하나&#x27; 의견 요청 댓글 증가</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY3nMSSze4h" data-account="epic_investment" data-field="transferable_pattern" data-value="대형 당연한 1등 vs 도전자 격차를 구체 수치로 시각화하는 &#x27;역전 가능성 질문&#x27; 후킹 + myth_bust 7장 구조. onecpa 적용 시: 절세·지원금 상식으로 알려진 방법이 실제로는 불리할 수 있다는 반직관 질문(예: &#x27;연말 퇴직금 수령이 세금을 더 낼 수 있다?&#x27;)으로 시작 → 직관적 반론 제시 → 핵심 변수(세율 구간·공제 구조·업종 분류) → 수치 비교 슬라이드(A: X% vs B: Y%) → 실무 결론 → 저장 CTA. 숫자 대비형 슬라이드는 저장·공유 유도에 효과적이며 human-trust editorial 톤에서는 수치 출처를 한 줄로 명시해 신뢰도를 보강하는 방식으로 차별화.">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"대형 당연한 1등 vs 도전자 격차를 구체 수치로 시각화하는 &#x27;역전 가능성 질문&#x27; 후킹 + myth_bust 7장 구조. onecpa 적용 시: 절세·지원금 상식으로 알려진 방법이 실제로는 불리할 수 있다는 반직관 질문(예: &#x27;연말 퇴직금 수령이 세금을 더 낼 수 있다?&#x27;)으로 시작 → 직관적 반론 제시 → 핵심 변수(세율 구간·공제 구조·업종 분류) → 수치 비교 슬라이드(A: X% vs B: Y%) → 실무 결론 → 저장 CTA. 숫자 대비형 슬라이드는 저장·공유 유도에 효과적이며 human-"</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/5a615876a87ad5f7.jpg" alt=""><span class="badge video-badge">▶ 30,916회</span></div>
+      <div class="meta"><span>♥ 631</span><span>💬 14</span></div>
+      <div class="caption">롯데쇼핑 실적이 발표됐습니다.
+
+우리는 작년부터 신세계를 함께 공부하면서, 외국인 매출로 성장하는 백화점에 주목해왔습니다. 올해는 롯데쇼핑도 함께 봐야 한다고 말씀드렸습니다.
+
+이유는 명확합니다. 롯데쇼핑은 명동과 잠실이라는 핵심 입지를 가지고 있기 때문입니다.
+
+이번 실적에서 롯데쇼핑의 영업이익은 70% 이상 증가하며 2,500억 원을 넘어섰습니다. 만년 저평가주로만 여겨졌던 롯데쇼핑이 이제는 이익 성장주로 바뀌고 있는 모습</div>
+      <a class="open" href="https://www.instagram.com/p/DYL5XsOzKX8/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/2956312903362c4e.jpg" alt=""><span class="badge video-badge">▶ 29,951회</span></div>
+      <div class="meta"><span>♥ 470</span><span>💬 12</span></div>
+      <div class="caption">삼성전자는 프리캐시플로우, 즉 잉여현금흐름의 50%를 주주에게 환원하는 정책을 가지고 있습니다.
+
+잉여현금흐름은 정확히 계산하면 복잡하지만, 간단히 보면 회사가 영업으로 벌어들인 현금에서 공장 증설이나 장비 투자에 쓰는 CAPEX를 제외한 금액이라고 볼 수 있습니다.
+
+올해 삼성전자의 실적 회복 기대가 커지면서, 대규모 투자를 제외하고도 의미 있는 현금흐름이 나올 수 있다는 전망이 나오고 있습니다.
+
+그렇다면 자연스럽게 주주환</div>
+      <a class="open" href="https://www.instagram.com/p/DZCxrfxTiQB/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/e472261d1ddf14bd.jpg" alt=""><span class="badge video-badge">▶ 22,698회</span></div>
+      <div class="meta"><span>♥ 458</span><span>💬 11</span></div>
+      <div class="caption">이란 전쟁 이후, 지금 주식 시장에는 두 가지 힘이 동시에 충돌하고 있습니다. 하나는 AI 산업의 폭발적인 성장이고, 다른 하나는 높은 금리입니다.
+
+작년까지만 해도 시장에서는 “AI가 정말 돈을 벌 수 있느냐”라는 의문이 많았습니다. 하지만 이제는 분위기가 완전히 달라졌습니다. AI 모델들의 실제 매출이 빠르게 증가하고 있고, 에이전트 AI 시대가 본격적으로 시작되면서 AI 투자와 관련된 전체 시장 규모도 크게 확대되고 있습</div>
+      <a class="open" href="https://www.instagram.com/p/DYeLKCxTfIa/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/c55a4249e3de44d8.jpg" alt=""><span class="badge video-badge">▶ 18,684회</span></div>
+      <div class="meta"><span>♥ 408</span><span>💬 16</span></div>
+      <div class="caption">AI 모델은 이미 우리 현실이 되었습니다. 그리고 상업화도 빠르게 진행되고 있습니다. 앤트로픽 같은 AI 기업들은 이미 엄청난 매출 성장을 만들어내고 있습니다. 텍스트를 만들고, 이미지를 만들고, 코드를 작성하는 AI는 더 이상 먼 미래의 기술이 아닙니다.
+
+반면 휴머노이드 로봇은 아직 시간이 더 걸릴 것 같았습니다. 어쩌면 꿈같은 이야기처럼 느껴지기도 했습니다. 그런데 최근 보스턴다이내믹스가 보여주는 로봇의 움직임을 보면 생</div>
+      <a class="open" href="https://www.instagram.com/p/DYTrWwhzeM-/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/ef2ab0abe8a7c230.jpg" alt=""><span class="badge video-badge">▶ 21,017회</span></div>
+      <div class="meta"><span>♥ 397</span><span>💬 16</span></div>
+      <div class="caption">글로벌 메모리 반도체에 가장 쉽게 투자하는 방법은 무엇이 있을까요.
+바로 DRAM ETF가 있습니다.
+지금 시장에서 메모리 반도체는 어떤 업종보다도 이익 전망이 빠르게 올라가고 있는 산업 중 하나입니다. 에이전트 AI 수요가 늘어나면서 AI 투자 규모도 커지고 있고, 그 과정에서 메모리 반도체 시장의 전체 수요도 함께 확대되고 있습니다.
+
+미국 주식에 투자하는 분들 중에서도 삼성전자와 SK하이닉스에 함께 투자하고 싶을 때가 있</div>
+      <a class="open" href="https://www.instagram.com/p/DYjHFc2zCEZ/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/c54718e57c2007ed.jpg" alt=""><span class="badge video-badge">▶ 21,037회</span></div>
+      <div class="meta"><span>♥ 335</span><span>💬 3</span></div>
+      <div class="caption">요즘 반도체를 포함한 주도주들의 등락이 심합니다. 중요한 건 단순히 “많이 빠졌다”가 아니라, 왜 빠지고 있는지를 보는 것입니다. 현재 하락 이유는 크게 두 가지로 볼 수 있습니다.
+
+첫 번째는 반도체 산업 자체에 대한 우려입니다. 메모리 반도체 공급 부족이 심해지면서, 엔비디아의 다음 플랫폼인 베라 루빈에서 메모리 탑재량이 줄어들 수 있다는 이야기가 나오고 있습니다. 그래서 시장은 메모리 반도체 전체 수요가 줄어드는 것 아니</div>
+      <a class="open" href="https://www.instagram.com/p/DZWqaC4xzSA/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/890c63c807f8c31a.jpg" alt=""></div>
+      <div class="meta"><span>♥ 279</span><span>💬 6</span></div>
+      <div class="caption">LG전자가 5월에만 무려 두 번의 상한가를 기록했습니다.
+5월 21일과 5월 29일이죠!
+야구로 치면 백투백 홈런입니다. 😆🤣
+
+그런데 이렇게만 보면 너무 많이 오른 것처럼 느껴집니다.
+하지만 장기로 보면 이야기가 완전히 달라집니다.
+
+LG전자의 2008년 고점은 16만 8천 원이었습니다.
+지금으로부터 18년 전 가격입니다.
+그런데 바로 지난달인 2026년 4월 고점이 14만 원 수준이었습니다.
+
+18년이 지났는데도, 주가는 </div>
+      <a class="open" href="https://www.instagram.com/p/DY6azPLzthm/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+      </div>
+    </section>
+    
+
+    <section class="account">
+      <header class="profile">
+        <div class="avatar-empty"></div>
+        <div>
+          <div class="name">호퍼네 레퍼창고</div>
+          <a class="handle" href="https://www.instagram.com/ref.hopper/" target="_blank">@ref.hopper</a>
+          <div class="stats">팔로워 — · top 6 viral posts (engagement 정렬)</div>
+          <div class="bio"></div>
+        </div>
+      </header>
+      <div class="grid">
+        
+    <div class="card has-analysis">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/ce1653c63f3bc89b.jpg" alt="" loading="lazy"><span class="idx">1/8</span></div><div class="slide"><img src="assets/f9fe28cda72c1718.jpg" alt="" loading="lazy"><span class="idx">2/8</span></div><div class="slide"><img src="assets/4422b7e8b4009b8e.jpg" alt="" loading="lazy"><span class="idx">3/8</span></div><div class="slide"><img src="assets/ec7f6cf5559093b9.jpg" alt="" loading="lazy"><span class="idx">4/8</span></div><div class="slide"><img src="assets/4f38015ec3dbf676.jpg" alt="" loading="lazy"><span class="idx">5/8</span></div><div class="slide"><img src="assets/eaa1b872d4ccee58.jpg" alt="" loading="lazy"><span class="idx">6/8</span></div><div class="slide"><img src="assets/bbdf5873ed754563.jpg" alt="" loading="lazy"><span class="idx">7/8</span></div><div class="slide"><img src="assets/42fae762246e416f.jpg" alt="" loading="lazy"><span class="idx">8/8</span></div></div><span class="analysis-badge">🔍 분석됨</span><span class="badge">📑 8장</span></div>
+      <div class="meta"><span><span class="topic">기타</span>♥ 192</span><span>💬 2</span></div>
+      <div class="caption">마지막 사진도 누가 제보해주신건데 출처를 까뭇으요. (등장해주라.. 🩵💍)</div>
+      <a class="open" href="https://www.instagram.com/p/DZFJuiyGNXF/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZFJuiyGNXF" data-account="ref.hopper" data-field="hook" data-value="curiosity_gap | (캡션 기준) 출처 불명 제보 사진 포함 — &#x27;누가 찍었는지 모를 만큼 좋은 레퍼런스&#x27; 암시로 클릭 유도">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>curiosity_gap</code> · 강도 3/5<br><i>"(캡션 기준) 출처 불명 제보 사진 포함 — &#x27;누가 찍었는지 모를 만큼 좋은 레퍼런스&#x27; 암시로 클릭 유도"</i><br><small>1번 슬라이드 이미지 미확보로 캡션 맥락만 판단; 레퍼창고 계정 특성상 시각 임팩트 의존도가 높으나 카피 후킹 장치 명시 없음</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZFJuiyGNXF" data-account="ref.hopper" data-field="message_arc" data-value="listicle | 1 레퍼런스 #1 (후킹 이미지) → 2 레퍼런스 #2 → 3 레퍼런스 #3 → 4 레퍼런스 #4 → 5 레퍼런스 #5 → 6 레퍼런스 #6 → 7 레퍼런스 #7 → 8 레퍼런스 #8 (출처 불명 제보컷 / 비공식 CTA)">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>listicle</code> · low density<br><small>roles: 1 레퍼런스 #1 (후킹 이미지), 2 레퍼런스 #2, 3 레퍼런스 #3, 4 레퍼런스 #4, 5 레퍼런스 #5, 6 레퍼런스 #6</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZFJuiyGNXF" data-account="ref.hopper" data-field="cta" data-value="comment_keyword | 마지막 사진 출처 아는 분 등장해주라.. 🩵💍">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>comment_keyword</code> · last · 강도 2/5<br><i>"마지막 사진 출처 아는 분 등장해주라.. 🩵💍"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZFJuiyGNXF" data-account="ref.hopper" data-field="visual_palette" data-value="#FFFFFF, #1A1A1A, #B0C4DE">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#FFFFFF"></span><code>#FFFFFF</code><span class="swatch" style="background:#1A1A1A"></span><code>#1A1A1A</code><span class="swatch" style="background:#B0C4DE"></span><code>#B0C4DE</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZFJuiyGNXF" data-account="ref.hopper" data-field="visual_typography" data-value="미니멀 산세리프 또는 무(無)타이포 — 이미지 큐레이션 계정 관례상 자막 최소 | 풀블리드 단일 이미지 반복 (그리드 분할 없음, 슬라이드당 1컷)">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>미니멀 산세리프 또는 무(無)타이포 — 이미지 큐레이션 계정 관례상 자막 최소</code> · 풀블리드 단일 이미지 반복 (그리드 분할 없음, 슬라이드당 1컷)<br><small>이미지 우세</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZFJuiyGNXF" data-account="ref.hopper" data-field="viral_factors" data-value="큐레이션 희소성 — 검색하기 어려운 레퍼런스 한 곳에 모음 · 제보 참여 유도 — 출처 미공개로 댓글 커뮤니티 자연 생성 · 스와이프 완료율 — 결말(마지막 제보컷) 궁금증이 전체 슬라이드 소비 촉진">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>큐레이션 희소성 — 검색하기 어려운 레퍼런스 한 곳에 모음</code> conf=0.82 → saves<br><small>레퍼창고 포맷은 저장 동기가 핵심; 192 좋아요 대비 댓글 2개는 &#x27;조용한 저장&#x27; 패턴과 일치</small></li><li><code>제보 참여 유도 — 출처 미공개로 댓글 커뮤니티 자연 생성</code> conf=0.55 → comments<br><small>캡션의 &#x27;출처 아는 분&#x27; 호출이 팔로워 참여를 낮은 비용으로 유발</small></li><li><code>스와이프 완료율 — 결말(마지막 제보컷) 궁금증이 전체 슬라이드 소비 촉진</code> conf=0.7 → likes<br><small>&#x27;마지막 사진도&#x27; 언급으로 끝까지 보게 만드는 내러티브 장치 역할</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZFJuiyGNXF" data-account="ref.hopper" data-field="transferable_pattern" data-value="8장 무편집 큐레이션 + 마지막 슬라이드 미스터리 컷 구조: onecpa 적용 시 → &#x27;세금 절약 실전 사례 7선 + 마지막 한 장은 실제 클라이언트 익명 후기&#x27;처럼, 정보형 카드뉴스 말미에 제보·사례 공유를 요청하는 참여형 종결 슬라이드를 배치. 큐레이션 신뢰감(모아주는 사람)과 커뮤니티 온기(당신의 이야기도 여기)를 동시에 확보하는 human-trust editorial 구조로 전환 가능.">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"8장 무편집 큐레이션 + 마지막 슬라이드 미스터리 컷 구조: onecpa 적용 시 → &#x27;세금 절약 실전 사례 7선 + 마지막 한 장은 실제 클라이언트 익명 후기&#x27;처럼, 정보형 카드뉴스 말미에 제보·사례 공유를 요청하는 참여형 종결 슬라이드를 배치. 큐레이션 신뢰감(모아주는 사람)과 커뮤니티 온기(당신의 이야기도 여기)를 동시에 확보하는 human-trust editorial 구조로 전환 가능."</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card has-analysis">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/04c4885bcda7766b.jpg" alt="" loading="lazy"><span class="idx">1/13</span></div><div class="slide"><img src="assets/4d8c2b683cf861b5.jpg" alt="" loading="lazy"><span class="idx">2/13</span></div><div class="slide"><img src="assets/4af2bc734238e50e.jpg" alt="" loading="lazy"><span class="idx">3/13</span></div><div class="slide"><img src="assets/0992727b7bd4cdcd.jpg" alt="" loading="lazy"><span class="idx">4/13</span></div><div class="slide"><img src="assets/0b40333d05d55189.jpg" alt="" loading="lazy"><span class="idx">5/13</span></div><div class="slide"><img src="assets/0c9c8b901ebcfa65.jpg" alt="" loading="lazy"><span class="idx">6/13</span></div><div class="slide"><img src="assets/de45bf5464076484.jpg" alt="" loading="lazy"><span class="idx">7/13</span></div><div class="slide"><img src="assets/e45c17e80a7613c3.jpg" alt="" loading="lazy"><span class="idx">8/13</span></div><div class="slide"><img src="assets/05f13af52fe604f1.jpg" alt="" loading="lazy"><span class="idx">9/13</span></div><div class="slide"><img src="assets/4fd10d61d5648871.jpg" alt="" loading="lazy"><span class="idx">10/13</span></div><div class="slide"><img src="assets/a13d02ea779fafbb.jpg" alt="" loading="lazy"><span class="idx">11/13</span></div><div class="slide"><img src="assets/20ab72ad2dcd1428.jpg" alt="" loading="lazy"><span class="idx">12/13</span></div><div class="slide"><img src="assets/8589f8cec2b19eb9.jpg" alt="" loading="lazy"><span class="idx">13/13</span></div></div><span class="analysis-badge">🔍 분석됨</span><span class="badge">📑 13장</span></div>
+      <div class="meta"><span><span class="topic">기타</span>♥ 171</span><span>💬 2</span></div>
+      <div class="caption">안 웃기다고요? 당신은 진정한 마케터입니다</div>
+      <a class="open" href="https://www.instagram.com/p/DY_punMGLlv/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY_punMGLlv" data-account="ref.hopper" data-field="hook" data-value="contrarian | 안 웃기다고요? 당신은 진정한 마케터입니다">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>contrarian</code> · 강도 7/5<br><i>"안 웃기다고요? 당신은 진정한 마케터입니다"</i><br><small>독자를 &#x27;진정한 마케터&#x27;로 호명하는 정체성 역설로 공감+자부심을 동시에 자극, 비웃음 대신 소속감 유발</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY_punMGLlv" data-account="ref.hopper" data-field="message_arc" data-value="listicle | 1 후킹 – &#x27;안 웃기면 진짜 마케터&#x27; 역설 선언 → 2 상황 제시 1 – 마케터만 아는 고통 또는 업계 밈 → 3 상황 제시 2 → 4 상황 제시 3 → 5 상황 제시 4 → 6 상황 제시 5 → 7 상황 제시 6 → 8 상황 제시 7">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>listicle</code> · low density<br><small>roles: 1 후킹 – &#x27;안 웃기면 진짜 마케터&#x27; 역설 선언, 2 상황 제시 1 – 마케터만 아는 고통 또는 업계 밈, 3 상황 제시 2, 4 상황 제시 3, 5 상황 제시 4, 6 상황 제시 5</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY_punMGLlv" data-account="ref.hopper" data-field="cta" data-value="save | 공감되면 저장해두세요 / 마케터 동료에게 공유하세요 (추정)">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>save</code> · last · 강도 6/5<br><i>"공감되면 저장해두세요 / 마케터 동료에게 공유하세요 (추정)"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY_punMGLlv" data-account="ref.hopper" data-field="visual_palette" data-value="#FFFFFF, #1A1A1A, #FF4444">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#FFFFFF"></span><code>#FFFFFF</code><span class="swatch" style="background:#1A1A1A"></span><code>#1A1A1A</code><span class="swatch" style="background:#FF4444"></span><code>#FF4444</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY_punMGLlv" data-account="ref.hopper" data-field="visual_typography" data-value="굵은 고딕 계열, 대형 포인트 텍스트 중심, 밈 감성 폰트 혼용 추정 | 풀블리드 배경 + 중앙 정렬 텍스트 1-2줄, 심플 싱글 컬럼">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>굵은 고딕 계열, 대형 포인트 텍스트 중심, 밈 감성 폰트 혼용 추정</code> · 풀블리드 배경 + 중앙 정렬 텍스트 1-2줄, 심플 싱글 컬럼<br><small>텍스트 우세</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY_punMGLlv" data-account="ref.hopper" data-field="viral_factors" data-value="마케터 정체성 호명 (Identity Calling) · 자조적 유머 (Self-deprecating Humor) · 역설적 첫 문장 (Contrarian Opener) · 고정 타깃 (Niche Audience Lock-in)">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>마케터 정체성 호명 (Identity Calling)</code> conf=0.88 → saves<br><small>특정 직군을 명시적으로 호명하면 해당 독자가 &#x27;나 얘기다&#x27; 반응으로 저장·공유율 상승</small></li><li><code>자조적 유머 (Self-deprecating Humor)</code> conf=0.82 → comments<br><small>업계 내부자만 웃는 구조가 소속감 댓글(&#x27;ㅋㅋ 맞아&#x27;)을 유발</small></li><li><code>역설적 첫 문장 (Contrarian Opener)</code> conf=0.75 → likes<br><small>&#x27;안 웃기다 = 진짜 마케터&#x27;라는 반전 논리가 초반 클릭 충동 강화</small></li><li><code>고정 타깃 (Niche Audience Lock-in)</code> conf=0.7 → saves<br><small>마케터 한정 콘텐츠는 피드 알고리즘 내 관련 팔로워에게 집중 노출돼 저장 밀도 높음</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DY_punMGLlv" data-account="ref.hopper" data-field="transferable_pattern" data-value="직군 호명형 역설 후킹(당신이 [직군]이라면 이게 왜 [반응]인지 안다) + 10장 내외 단문 공감 리스트 + 마지막 저장·공유 CTA 구조. onecpa에서는 &#x27;세금 신고 전날 이 생각 해본 적 있으면 당신은 진짜 사장입니다&#x27; 방식으로 대표·CFO 타깃 정체성 후킹에 적용 가능. 각 슬라이드는 절세·지원금 현장에서 실무자가 실제 겪는 상황 1가지씩 압축, 마지막에 저장 CTA. 유머 대신 human-trust editorial 톤(공감+전문가 위로)으로 치환해 신뢰감 유지">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"직군 호명형 역설 후킹(당신이 [직군]이라면 이게 왜 [반응]인지 안다) + 10장 내외 단문 공감 리스트 + 마지막 저장·공유 CTA 구조. onecpa에서는 &#x27;세금 신고 전날 이 생각 해본 적 있으면 당신은 진짜 사장입니다&#x27; 방식으로 대표·CFO 타깃 정체성 후킹에 적용 가능. 각 슬라이드는 절세·지원금 현장에서 실무자가 실제 겪는 상황 1가지씩 압축, 마지막에 저장 CTA. 유머 대신 human-trust editorial 톤(공감+전문가 위로)으로 치환해 신뢰감 유지"</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card has-analysis">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/24c9b5afe62d3271.jpg" alt="" loading="lazy"><span class="idx">1/12</span></div><div class="slide"><img src="assets/d68175f1fc57b018.jpg" alt="" loading="lazy"><span class="idx">2/12</span></div><div class="slide"><img src="assets/1f3f5e9f5022e4ee.jpg" alt="" loading="lazy"><span class="idx">3/12</span></div><div class="slide"><img src="assets/d14df717ae7e5c26.jpg" alt="" loading="lazy"><span class="idx">4/12</span></div><div class="slide"><img src="assets/90c75a8cad7bef9e.jpg" alt="" loading="lazy"><span class="idx">5/12</span></div><div class="slide"><img src="assets/29a2f68413a3f03f.jpg" alt="" loading="lazy"><span class="idx">6/12</span></div><div class="slide"><img src="assets/c48c4ad568c5ee8a.jpg" alt="" loading="lazy"><span class="idx">7/12</span></div><div class="slide"><img src="assets/b445a2293d8534dd.jpg" alt="" loading="lazy"><span class="idx">8/12</span></div><div class="slide"><img src="assets/d6c12705fb9c3493.jpg" alt="" loading="lazy"><span class="idx">9/12</span></div><div class="slide"><img src="assets/8c8df66cc5d4159e.jpg" alt="" loading="lazy"><span class="idx">10/12</span></div><div class="slide"><img src="assets/6195d1a9b09efe66.jpg" alt="" loading="lazy"><span class="idx">11/12</span></div><div class="slide"><img src="assets/a60be23b016b65a6.jpg" alt="" loading="lazy"><span class="idx">12/12</span></div></div><span class="analysis-badge">🔍 분석됨</span><span class="badge">📑 12장</span></div>
+      <div class="meta"><span><span class="topic">기타</span>♥ 154</span><span>💬 0</span></div>
+      <div class="caption">#광고 디저트로 시작해서 ai 도입까지.. 로손 편의점이 일본 사람들의 ‘동네 핫 스테이션’이 된 비결이 궁금하다면 이 책 추천합니다‼️
+잘 설계된 브랜딩과 프로덕트 개선은 너무 흥미로움.. 
+
+#선택받는브랜드의조건 #동양북스</div>
+      <a class="open" href="https://www.instagram.com/p/DZMmlwGmHAT/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZMmlwGmHAT" data-account="ref.hopper" data-field="hook" data-value="curiosity_gap | 디저트로 시작해서 AI 도입까지… 로손이 일본 &#x27;동네 핫 스테이션&#x27;이 된 비결">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>curiosity_gap</code> · 강도 4/5<br><i>"디저트로 시작해서 AI 도입까지… 로손이 일본 &#x27;동네 핫 스테이션&#x27;이 된 비결"</i><br><small>시간 범위(디저트→AI)와 &#x27;비결&#x27;이라는 미지 정보로 스크롤 정지를 유도하나, 광고 태그 노출로 순수 궁금증이 일부 희석됨</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZMmlwGmHAT" data-account="ref.hopper" data-field="message_arc" data-value="case_study | 1 후킹: 책 표지 or 로손 비주얼 + &#x27;동네 핫 스테이션의 비결&#x27; 카피 → 2 문제정의: 왜 편의점이 동네 거점이 될 수 있었나? → 3 인사이트1: 디저트 전략 — 카테고리 차별화 → 4 인사이트2: 프로덕트 개선 사이클 → 5 인사이트3: 지역 밀착 브랜딩 → 6 인사이트4: 고객 경험 설계 → 7 인사이트5: AI·데이터 도입 배경 → 8 인사이트6: 내부 조직 문화 변화">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>case_study</code> · medium density<br><small>roles: 1 후킹: 책 표지 or 로손 비주얼 + &#x27;동네 핫 스테이션의 비결&#x27; 카피, 2 문제정의: 왜 편의점이 동네 거점이 될 수 있었나?, 3 인사이트1: 디저트 전략 — 카테고리 차별화, 4 인사이트2: 프로덕트 개선 사이클, 5 인사이트3: 지역 밀착 브랜딩, 6 인사이트4: 고객 경험 설계</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZMmlwGmHAT" data-account="ref.hopper" data-field="cta" data-value="save | 나중에 읽을 책 리스트에 저장해두세요 / 구매 링크는 프로필에">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>save</code> · last · 강도 3/5<br><i>"나중에 읽을 책 리스트에 저장해두세요 / 구매 링크는 프로필에"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZMmlwGmHAT" data-account="ref.hopper" data-field="visual_palette" data-value="#F5F0EA, #1A1A1A, #E8523A, #FFFFFF">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#F5F0EA"></span><code>#F5F0EA</code><span class="swatch" style="background:#1A1A1A"></span><code>#1A1A1A</code><span class="swatch" style="background:#E8523A"></span><code>#E8523A</code><span class="swatch" style="background:#FFFFFF"></span><code>#FFFFFF</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZMmlwGmHAT" data-account="ref.hopper" data-field="visual_typography" data-value="산세리프 헤드라인 + 세리프 보조 — 편집 잡지 감성 | 단일 중앙 정렬 컬럼, 상단 키비주얼 + 하단 카피 분리">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>산세리프 헤드라인 + 세리프 보조 — 편집 잡지 감성</code> · 단일 중앙 정렬 컬럼, 상단 키비주얼 + 하단 카피 분리<br><small>균형</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZMmlwGmHAT" data-account="ref.hopper" data-field="viral_factors" data-value="일본 성공 사례 해외 간접 경험 · 브랜드·마케팅 종사자 타깃 적중 · 디저트→AI 시간 점프 프레이밍 · 광고 태그 신뢰 저하 상쇄 — 큐레이터 진정성">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>일본 성공 사례 해외 간접 경험</code> conf=0.75 → saves<br><small>국내에서 직접 검증 어려운 해외 브랜드 케이스는 &#x27;레퍼런스 저장&#x27; 동기를 강하게 자극함</small></li><li><code>브랜드·마케팅 종사자 타깃 적중</code> conf=0.7 → saves<br><small>계정명 &#x27;레퍼창고&#x27;가 이미 마케터·디자이너 팔로워를 집중시켜, 책 추천 콘텐츠 저장률이 일반 계정 대비 높을 것으로 추정</small></li><li><code>디저트→AI 시간 점프 프레이밍</code> conf=0.65 → likes<br><small>양극단 키워드 병치가 첫 캡션에서 호기심을 자극해 좋아요 전환 유도</small></li><li><code>광고 태그 신뢰 저하 상쇄 — 큐레이터 진정성</code> conf=0.55 → likes<br><small>스폰서임에도 &#x27;너무 흥미로움&#x27;이라는 개인 감상이 광고 경계감을 낮춰 좋아요로 이어질 가능성</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZMmlwGmHAT" data-account="ref.hopper" data-field="transferable_pattern" data-value="해외 성공 브랜드의 &#x27;비결&#x27;을 curiosity_gap 후킹으로 열고, 인사이트 1개당 1슬라이드 원칙으로 8~10장 전개한 뒤 핵심 요약 + 저장 CTA로 닫는 케이스스터디 구조. onecpa 적용 시: &#x27;일본 중소기업이 세금 폭탄을 피한 법적 구조&#x27;처럼 해외·타업종 실제 사례를 &#x27;비결&#x27; 프레임으로 후킹하고, 절세·정부지원금 핵심 포인트를 1슬라이드 1원칙으로 나열 후 &#x27;이 구조가 한국 1인 사업자에게도 적용 가능한 이유&#x27;로 귀환하는 흐름. 광고성이 아닌 editorial 큐레이터 톤을 유지하면 human-trust 브랜드 포지셔닝과 충돌하지 않음.">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"해외 성공 브랜드의 &#x27;비결&#x27;을 curiosity_gap 후킹으로 열고, 인사이트 1개당 1슬라이드 원칙으로 8~10장 전개한 뒤 핵심 요약 + 저장 CTA로 닫는 케이스스터디 구조. onecpa 적용 시: &#x27;일본 중소기업이 세금 폭탄을 피한 법적 구조&#x27;처럼 해외·타업종 실제 사례를 &#x27;비결&#x27; 프레임으로 후킹하고, 절세·정부지원금 핵심 포인트를 1슬라이드 1원칙으로 나열 후 &#x27;이 구조가 한국 1인 사업자에게도 적용 가능한 이유&#x27;로 귀환하는 흐름. 광고성이 아닌 ed"</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/9d0aca9dfd274054.jpg" alt="" loading="lazy"><span class="idx">1/19</span></div><div class="slide"><img src="assets/bb04bb9061153c76.jpg" alt="" loading="lazy"><span class="idx">2/19</span></div><div class="slide"><img src="assets/bef7b99f58b37a32.jpg" alt="" loading="lazy"><span class="idx">3/19</span></div><div class="slide"><img src="assets/b8594b6711c61cd6.jpg" alt="" loading="lazy"><span class="idx">4/19</span></div><div class="slide"><img src="assets/7460ee15eca1bdfe.jpg" alt="" loading="lazy"><span class="idx">5/19</span></div><div class="slide"><img src="assets/1319405040748ef6.jpg" alt="" loading="lazy"><span class="idx">6/19</span></div><div class="slide"><img src="assets/12f4a174e2b7db2c.jpg" alt="" loading="lazy"><span class="idx">7/19</span></div><div class="slide"><img src="assets/55ad600fee5f1321.jpg" alt="" loading="lazy"><span class="idx">8/19</span></div><div class="slide"><img src="assets/90a03e9f3dcae367.jpg" alt="" loading="lazy"><span class="idx">9/19</span></div><div class="slide"><img src="assets/db3b63aa60f642a1.jpg" alt="" loading="lazy"><span class="idx">10/19</span></div><div class="slide"><img src="assets/f2929526095f605c.jpg" alt="" loading="lazy"><span class="idx">11/19</span></div><div class="slide"><img src="assets/2c164cb7deb937da.jpg" alt="" loading="lazy"><span class="idx">12/19</span></div><div class="slide"><img src="assets/6d3eb5c822a7ca96.jpg" alt="" loading="lazy"><span class="idx">13/19</span></div><div class="slide"><img src="assets/0cbe1860b5d35dbd.jpg" alt="" loading="lazy"><span class="idx">14/19</span></div><div class="slide"><img src="assets/a2f2e0e96d608364.jpg" alt="" loading="lazy"><span class="idx">15/19</span></div><div class="slide"><img src="assets/133a1cd84020779a.jpg" alt="" loading="lazy"><span class="idx">16/19</span></div><div class="slide"><img src="assets/5f469e756b954d66.jpg" alt="" loading="lazy"><span class="idx">17/19</span></div><div class="slide"><img src="assets/481deac14132182e.jpg" alt="" loading="lazy"><span class="idx">18/19</span></div><div class="slide"><img src="assets/55b1dd658c7b7803.jpg" alt="" loading="lazy"><span class="idx">19/19</span></div></div><span class="badge">📑 19장</span></div>
+      <div class="meta"><span>♥ 131</span><span>💬 0</span></div>
+      <div class="caption">잠깐 열었다 마는 이벤트성 팝업은 모두 제외했어요</div>
+      <a class="open" href="https://www.instagram.com/p/DYUZdLkDhno/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/c264c5e4bc842b65.jpg" alt="" loading="lazy"><span class="idx">1/8</span></div><div class="slide"><img src="assets/deb8d51878c074dc.jpg" alt="" loading="lazy"><span class="idx">2/8</span></div><div class="slide"><img src="assets/cc53b674fb223a1c.jpg" alt="" loading="lazy"><span class="idx">3/8</span></div><div class="slide"><img src="assets/d562be50c976202b.jpg" alt="" loading="lazy"><span class="idx">4/8</span></div><div class="slide"><img src="assets/d2af565e713ce1dc.jpg" alt="" loading="lazy"><span class="idx">5/8</span></div><div class="slide"><img src="assets/77c1da736abf3157.jpg" alt="" loading="lazy"><span class="idx">6/8</span></div><div class="slide"><img src="assets/785e3bd97f3ebdfa.jpg" alt="" loading="lazy"><span class="idx">7/8</span></div><div class="slide"><img src="assets/3212ab7b52bfb6e0.jpg" alt="" loading="lazy"><span class="idx">8/8</span></div></div><span class="badge">📑 8장</span></div>
+      <div class="meta"><span>♥ 105</span><span>💬 1</span></div>
+      <div class="caption">초코우유 사랑.. 여기서 끝이 아니다!</div>
+      <a class="open" href="https://www.instagram.com/p/DYMkKzXGHZB/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/04e366fc1cb63b48.jpg" alt="" loading="lazy"><span class="idx">1/10</span></div><div class="slide"><img src="assets/94be2a68b719211c.jpg" alt="" loading="lazy"><span class="idx">2/10</span></div><div class="slide"><img src="assets/3378be8a0f7e8abf.jpg" alt="" loading="lazy"><span class="idx">3/10</span></div><div class="slide"><img src="assets/7445d4d9da687180.jpg" alt="" loading="lazy"><span class="idx">4/10</span></div><div class="slide"><img src="assets/7ee5c7f3ece8bf65.jpg" alt="" loading="lazy"><span class="idx">5/10</span></div><div class="slide"><img src="assets/8f321b950f728f4e.jpg" alt="" loading="lazy"><span class="idx">6/10</span></div><div class="slide"><img src="assets/d5f9b01f54649835.jpg" alt="" loading="lazy"><span class="idx">7/10</span></div><div class="slide"><img src="assets/6b1d96093272c7d6.jpg" alt="" loading="lazy"><span class="idx">8/10</span></div><div class="slide"><img src="assets/5a58de57d4f31476.jpg" alt="" loading="lazy"><span class="idx">9/10</span></div><div class="slide"><img src="assets/adbf97a2bdb8e79a.jpg" alt="" loading="lazy"><span class="idx">10/10</span></div></div><span class="badge">📑 10장</span></div>
+      <div class="meta"><span>♥ -1</span><span>💬 3</span></div>
+      <div class="caption">음성은 품바야 &gt; 이게 ㄹㅇ 폭력적임</div>
+      <a class="open" href="https://www.instagram.com/p/DZUj4kLmL6k/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+      </div>
+    </section>
+    
+
+    <section class="account">
+      <header class="profile">
+        <div class="avatar-empty"></div>
+        <div>
+          <div class="name">The Financial Diet</div>
+          <a class="handle" href="https://www.instagram.com/thefinancialdiet/" target="_blank">@thefinancialdiet</a>
+          <div class="stats">팔로워 — · top 10 viral posts (engagement 정렬)</div>
+          <div class="bio"></div>
+        </div>
+      </header>
+      <div class="grid">
+        
+    <div class="card has-analysis">
+      <div class="media"><img class="single" src="assets/27f34190a04a99bc.jpg" alt=""><span class="analysis-badge">🔍 분석됨</span><span class="badge video-badge">▶ 393,159회</span></div>
+      <div class="meta"><span><span class="topic">기타</span>♥ 25,954</span><span>💬 1,014</span></div>
+      <div class="caption">Especially when young women and girls are the audience, how we talk about sickness, as a society, really freaking matters.</div>
+      <a class="open" href="https://www.instagram.com/p/DZU_PM9O92N/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZU_PM9O92N" data-account="thefinancialdiet" data-field="hook" data-value="contrarian | 우리 사회가 아픔을 이야기하는 방식, 특히 청년 여성과 소녀들이 청중일 때, 그 방식은 정말 중요하다.">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>contrarian</code> · 강도 8/5<br><i>"우리 사회가 아픔을 이야기하는 방식, 특히 청년 여성과 소녀들이 청중일 때, 그 방식은 정말 중요하다."</i><br><small>사회 통념을 정면으로 반박하는 어조와 강한 감정 소구로 타깃(여성 밀레니얼·Z세대)의 즉각적 공감과 분노 유발, 댓글 폭발 구조</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZU_PM9O92N" data-account="thefinancialdiet" data-field="message_arc" data-value="myth_bust | 1 후킹+테제 선언: &#x27;우리가 여성의 아픔을 말하는 방식이 중요하다&#x27;">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>myth_bust</code> · medium density<br><small>roles: 1 후킹+테제 선언: &#x27;우리가 여성의 아픔을 말하는 방식이 중요하다&#x27;</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZU_PM9O92N" data-account="thefinancialdiet" data-field="cta" data-value="comment_keyword | 댓글로 의견 공유 유도 (명시적 CTA 없이 논쟁적 발언 자체가 댓글 유도 장치로 작동)">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>comment_keyword</code> · last · 강도 7/5<br><i>"댓글로 의견 공유 유도 (명시적 CTA 없이 논쟁적 발언 자체가 댓글 유도 장치로 작동)"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZU_PM9O92N" data-account="thefinancialdiet" data-field="visual_palette" data-value="#1a1a1a, #ffffff, #e63946">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#1a1a1a"></span><code>#1a1a1a</code><span class="swatch" style="background:#ffffff"></span><code>#ffffff</code><span class="swatch" style="background:#e63946"></span><code>#e63946</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZU_PM9O92N" data-account="thefinancialdiet" data-field="visual_typography" data-value="굵은 산세리프 헤드라인, 고대비 텍스트 오버레이, 감정 강조 키워드 색상 분리 | 풀스크린 단일 텍스트 중심 레이아웃, 중앙 정렬 또는 좌측 정렬 타이포그래피">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>굵은 산세리프 헤드라인, 고대비 텍스트 오버레이, 감정 강조 키워드 색상 분리</code> · 풀스크린 단일 텍스트 중심 레이아웃, 중앙 정렬 또는 좌측 정렬 타이포그래피<br><small>텍스트 우세</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZU_PM9O92N" data-account="thefinancialdiet" data-field="viral_factors" data-value="젠더·건강 사회비평: 여성 건강 경시 문화에 대한 직접 비판 · 타깃 오디언스 직접 호명(young women and girls) · 감정 강도 높은 캡션 어조(&#x27;really freaking matters&#x27;) · 고조회수(393k) 대비 높은 댓글 비율: 토픽 분극화">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>젠더·건강 사회비평: 여성 건강 경시 문화에 대한 직접 비판</code> conf=0.9 → comments<br><small>1014댓글은 논쟁·공감 양극화 주제가 토론 허브로 기능한 결과</small></li><li><code>타깃 오디언스 직접 호명(young women and girls)</code> conf=0.85 → likes<br><small>청중을 명시하면 해당 그룹의 정체성 기반 공감 좋아요가 급증</small></li><li><code>감정 강도 높은 캡션 어조(&#x27;really freaking matters&#x27;)</code> conf=0.8 → comments<br><small>구어체 강조 표현이 친밀감·진정성 신호로 작용, 팔로워 반응 유도</small></li><li><code>고조회수(393k) 대비 높은 댓글 비율: 토픽 분극화</code> conf=0.75 → comments<br><small>사회적 불평등 주제는 동의와 반박 모두 댓글로 수렴되어 알고리즘 노출 지속</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DZU_PM9O92N" data-account="thefinancialdiet" data-field="transferable_pattern" data-value="사회적 통념 직격 반박(myth-bust) 구조 + 타깃 집단 명시 호명 + 감정 강도 높은 단문 선언형 카피 조합. onecpa 적용 시: &#x27;세금·지원금에 대해 우리 사회가 말하는 방식&#x27;처럼 절세·창업 주제에서 잘못된 통념을 감정 소구로 정면 반박하는 카드뉴스로 변환 가능. 1장 선언 → 통념 나열 → 팩트 반전 → 저장 CTA 구조가 human-trust editorial 톤과 정합성 높음.">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"사회적 통념 직격 반박(myth-bust) 구조 + 타깃 집단 명시 호명 + 감정 강도 높은 단문 선언형 카피 조합. onecpa 적용 시: &#x27;세금·지원금에 대해 우리 사회가 말하는 방식&#x27;처럼 절세·창업 주제에서 잘못된 통념을 감정 소구로 정면 반박하는 카드뉴스로 변환 가능. 1장 선언 → 통념 나열 → 팩트 반전 → 저장 CTA 구조가 human-trust editorial 톤과 정합성 높음."</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card has-analysis">
+      <div class="media"><img class="single" src="assets/1ebb45e056690b2d.jpg" alt=""><span class="analysis-badge">🔍 분석됨</span><span class="badge video-badge">▶ 95,745회</span></div>
+      <div class="meta"><span><span class="topic">기타</span>♥ 8,859</span><span>💬 156</span></div>
+      <div class="caption">Let’s remove the taboo around older women dating younger men because the proof is in the pudding: older women are extremely in demand—especially by younger men. 
+
+Season 2 of “Just Getting Good” (your favorite podcast featuring women over 5</div>
+      <a class="open" href="https://www.instagram.com/p/DYsgprnvPlU/" target="_blank">Instagram에서 열기</a>
+      
+    <details class="analysis">
+      <summary>🔍 분석 보기 (체크 항목이 BSD/CCD로 전송)</summary>
+      
+      
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYsgprnvPlU" data-account="thefinancialdiet" data-field="hook" data-value="contrarian | 나이 든 여성이 어린 남성과 사귀는 것에 붙은 금기를 없애자 — 증거는 이미 있다: 나이 든 여성은 극도로 수요가 높다, 특히 어린 남성에게.">
+        <span class="k">Hook 카피</span>
+        <span class="v"><code>contrarian</code> · 강도 8/5<br><i>"나이 든 여성이 어린 남성과 사귀는 것에 붙은 금기를 없애자 — 증거는 이미 있다: 나이 든 여성은 극도로 수요가 높다, 특히 어린 남성에게."</i><br><small>사회적 금기에 정면으로 도전하는 contrarian 선언이 즉각적 감정 반응과 공유 욕구를 자극; 95k+ 조회수가 이를 검증</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYsgprnvPlU" data-account="thefinancialdiet" data-field="message_arc" data-value="myth_bust | 1 금기 해체 선언 + 팟캐스트 시즌2 론칭 알림 + 댓글 키워드 CTA">
+        <span class="k">메시지 흐름</span>
+        <span class="v"><code>myth_bust</code> · low density<br><small>roles: 1 금기 해체 선언 + 팟캐스트 시즌2 론칭 알림 + 댓글 키워드 CTA</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYsgprnvPlU" data-account="thefinancialdiet" data-field="cta" data-value="comment_keyword | JGG 댓글 달면 시즌 첫 에피소드 링크 전송">
+        <span class="k">CTA 패턴</span>
+        <span class="v"><code>comment_keyword</code> · last · 강도 9/5<br><i>"JGG 댓글 달면 시즌 첫 에피소드 링크 전송"</i></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYsgprnvPlU" data-account="thefinancialdiet" data-field="visual_palette" data-value="#2D4A3E, #F5ECD7, #C8A96E, #FFFFFF">
+        <span class="k">팔레트</span>
+        <span class="v"><span class="swatch" style="background:#2D4A3E"></span><code>#2D4A3E</code><span class="swatch" style="background:#F5ECD7"></span><code>#F5ECD7</code><span class="swatch" style="background:#C8A96E"></span><code>#C8A96E</code><span class="swatch" style="background:#FFFFFF"></span><code>#FFFFFF</code></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYsgprnvPlU" data-account="thefinancialdiet" data-field="visual_typography" data-value="굵은 sans-serif 헤드라인 + 가독성 높은 본문 서체, 에디토리얼 매거진 스타일 | 중앙 정렬 텍스트 블록, 여백 넉넉, 브랜드 로고 고정 위치">
+        <span class="k">타이포·그리드</span>
+        <span class="v"><code>굵은 sans-serif 헤드라인 + 가독성 높은 본문 서체, 에디토리얼 매거진 스타일</code> · 중앙 정렬 텍스트 블록, 여백 넉넉, 브랜드 로고 고정 위치<br><small>텍스트 우세</small></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYsgprnvPlU" data-account="thefinancialdiet" data-field="viral_factors" data-value="사회적 금기 도전 (contrarian hook) · 댓글 키워드 CTA (comment keyword mechanic) · 특정 정체성 집단 타겟팅 (50대 이상 여성 커뮤니티) · 시즌 론칭 이벤트성 타이밍">
+        <span class="k">Viral factors</span>
+        <span class="v"><ul style="margin:4px 0 0 16px;padding:0;"><li><code>사회적 금기 도전 (contrarian hook)</code> conf=0.88 → comments<br><small>논쟁을 유발하는 선언이 찬반 댓글을 폭발적으로 생성하며 알고리즘 노출 극대화</small></li><li><code>댓글 키워드 CTA (comment keyword mechanic)</code> conf=0.92 → comments<br><small>JGG 댓글 유도가 참여 장벽을 낮추고 댓글 수를 직접 끌어올려 도달 확장에 기여</small></li><li><code>특정 정체성 집단 타겟팅 (50대 이상 여성 커뮤니티)</code> conf=0.82 → saves<br><small>소외감을 느끼던 특정 집단에게 &#x27;나를 위한 콘텐츠&#x27;라는 강한 소속감을 제공해 저장 및 공유 동기 생성</small></li><li><code>시즌 론칭 이벤트성 타이밍</code> conf=0.75 → likes<br><small>새 시즌 출시 알림이 기존 팬의 즉각적 좋아요·알림 반응을 유도</small></li></ul></span>
+      </label>
+    </div>
+    
+    <div class="field">
+      <label class="cb">
+        <input type="checkbox" class="pick" data-post-id="DYsgprnvPlU" data-account="thefinancialdiet" data-field="transferable_pattern" data-value="금기·통념 해체 선언형 후킹 + 특정 정체성 집단(예: &#x27;법인 대표&#x27;, &#x27;프리랜서&#x27;, &#x27;50대 사업주&#x27;)에 대한 소속감 소구 + 댓글 키워드 CTA로 알고리즘 부스트. onecpa 적용 예: &#x27;법인 전환이 항상 유리하다는 말, 사실일까요?&#x27; 같은 절세 통념 타파 선언을 1장 후킹으로 쓰고, &#x27;체크&#x27;·&#x27;궁금해요&#x27; 등 키워드 댓글을 CTA로 설정하면 조회-댓글-팔로우 전환 루프 구성 가능. 핵심 구조: [통념 반박 선언 1문장] → [대상 집단 명시 공감] → [키워드 댓글 CTA]. human-trust editorial 톤에서는 도발보다 &#x27;전문가가 깨주는 오해&#x27; 프레이밍으로 조정.">
+        <span class="k">재사용 패턴</span>
+        <span class="v"><i>"금기·통념 해체 선언형 후킹 + 특정 정체성 집단(예: &#x27;법인 대표&#x27;, &#x27;프리랜서&#x27;, &#x27;50대 사업주&#x27;)에 대한 소속감 소구 + 댓글 키워드 CTA로 알고리즘 부스트. onecpa 적용 예: &#x27;법인 전환이 항상 유리하다는 말, 사실일까요?&#x27; 같은 절세 통념 타파 선언을 1장 후킹으로 쓰고, &#x27;체크&#x27;·&#x27;궁금해요&#x27; 등 키워드 댓글을 CTA로 설정하면 조회-댓글-팔로우 전환 루프 구성 가능. 핵심 구조: [통념 반박 선언 1문장] "</i></span>
+      </label>
+    </div>
+    
+    </details>
+    
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/b96ec898af17a203.jpg" alt=""><span class="badge video-badge">▶ 82,330회</span></div>
+      <div class="meta"><span>♥ 8,309</span><span>💬 201</span></div>
+      <div class="caption">🗣️ Do not waste your youth feeling old!
+
+Season 2 of “Just Getting Good” (your favorite podcast featuring women over 50 talking about life, love, money, aging, and everything in between!) is OFFICIALLY OUT🥳🥳
+
+Comment JGG for to be sent the </div>
+      <a class="open" href="https://www.instagram.com/p/DY71V2-SXAR/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/0421b998e2e11719.jpg" alt="" loading="lazy"><span class="idx">1/9</span></div><div class="slide"><img src="assets/05110e8d7378e0be.jpg" alt="" loading="lazy"><span class="idx">2/9</span></div><div class="slide"><img src="assets/adc84f0e4a11647d.jpg" alt="" loading="lazy"><span class="idx">3/9</span></div><div class="slide"><img src="assets/d6cb28541a55feb2.jpg" alt="" loading="lazy"><span class="idx">4/9</span></div><div class="slide"><img src="assets/dd3997600acac251.jpg" alt="" loading="lazy"><span class="idx">5/9</span></div><div class="slide"><img src="assets/1cf68984fac30837.jpg" alt="" loading="lazy"><span class="idx">6/9</span></div><div class="slide"><img src="assets/ef1fd3fdb1f8f164.jpg" alt="" loading="lazy"><span class="idx">7/9</span></div><div class="slide"><img src="assets/8693d5408bbb252a.jpg" alt="" loading="lazy"><span class="idx">8/9</span></div><div class="slide"><img src="assets/982fc69063f4d005.jpg" alt="" loading="lazy"><span class="idx">9/9</span></div></div><span class="badge">📑 9장</span></div>
+      <div class="meta"><span>♥ 8,876</span><span>💬 61</span></div>
+      <div class="caption">If you don’t consider these unhinged… you’re our type of person 😉
+
+💌 Share with a friend that needs to see these!</div>
+      <a class="open" href="https://www.instagram.com/p/DY46MPhjupQ/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/709e3c1f0e57cf78.jpg" alt=""><span class="badge video-badge">▶ 91,910회</span></div>
+      <div class="meta"><span>♥ 7,417</span><span>💬 248</span></div>
+      <div class="caption">Guys…chill out. We just need to vibe😌
+
+Season 2 of “Just Getting Good” (your favorite podcast featuring women over 50 talking about life, love, money, aging, and everything in between!) is OFFICIALLY OUT🥳🥳
+
+Comment JGG for to be sent the li</div>
+      <a class="open" href="https://www.instagram.com/p/DY21Dk6y2l9/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/e8009c33369b7071.jpg" alt=""><span class="badge video-badge">▶ 84,665회</span></div>
+      <div class="meta"><span>♥ 7,530</span><span>💬 91</span></div>
+      <div class="caption">Getting married and having kids should not be the only reasons we gather to celebrate women.
+
+Season 2 of “Just Getting Good” (your favorite podcast featuring women over 50 talking about life, love, money, aging, and everything in between!)</div>
+      <a class="open" href="https://www.instagram.com/p/DYxqwBfyxvc/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/cee1d8d6b181d79b.jpg" alt=""><span class="badge video-badge">▶ 60,116회</span></div>
+      <div class="meta"><span>♥ 5,246</span><span>💬 164</span></div>
+      <div class="caption">Ageism is just self-hate on a delay.😮‍💨
+
+Season 2 of “Just Getting Good” (your favorite podcast featuring women over 50 talking about life, love, money, aging, and everything in between!) is OFFICIALLY OUT🥳🥳
+
+Comment JGG for to be sent the </div>
+      <a class="open" href="https://www.instagram.com/p/DY-PgAcusxD/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="empty">이미지 없음</div><span class="badge video-badge">▶ 40,172회</span></div>
+      <div class="meta"><span>♥ 3,610</span><span>💬 109</span></div>
+      <div class="caption">However a woman decides to age IS the appropriate way for her to age.
+
+Season 2 of “Just Getting Good” (your favorite podcast featuring women over 50 talking about life, love, money, aging, and everything in between!) is OFFICIALLY OUT🥳🥳
+
+C</div>
+      <a class="open" href="https://www.instagram.com/p/DYvDrhdOTM7/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/7e072142e8b176e0.jpg" alt="" loading="lazy"><span class="idx">1/12</span></div><div class="slide"><img src="assets/03c3d39d13888ffb.jpg" alt="" loading="lazy"><span class="idx">2/12</span></div><div class="slide"><img src="assets/0949d1d1831f94bb.jpg" alt="" loading="lazy"><span class="idx">3/12</span></div><div class="slide"><img src="assets/48f72e38fe387a8b.jpg" alt="" loading="lazy"><span class="idx">4/12</span></div><div class="slide"><img src="assets/ff6ca8719e0a27fa.jpg" alt="" loading="lazy"><span class="idx">5/12</span></div><div class="slide"><img src="assets/d6831bc98aefe9b1.jpg" alt="" loading="lazy"><span class="idx">6/12</span></div><div class="slide"><img src="assets/aa4e4d8ba352fbfb.jpg" alt="" loading="lazy"><span class="idx">7/12</span></div><div class="slide"><img src="assets/9ede9058cc147252.jpg" alt="" loading="lazy"><span class="idx">8/12</span></div><div class="slide"><img src="assets/c0da692dbe79fb50.jpg" alt="" loading="lazy"><span class="idx">9/12</span></div><div class="slide"><img src="assets/7fdb91ad0ff0933a.jpg" alt="" loading="lazy"><span class="idx">10/12</span></div><div class="slide"><img src="assets/167dd8e1a368b4d7.jpg" alt="" loading="lazy"><span class="idx">11/12</span></div><div class="slide"><img src="assets/47f8f505da1b2e62.jpg" alt="" loading="lazy"><span class="idx">12/12</span></div></div><span class="badge">📑 12장</span></div>
+      <div class="meta"><span>♥ 3,489</span><span>💬 39</span></div>
+      <div class="caption">You deserve to feel like you have people in your corner. Not because you’ve earned it through exhaustion, burnout, or managing it alone. 
+
+Love, care, and support shouldn’t be offered on a merit-based system. &lt;3</div>
+      <a class="open" href="https://www.instagram.com/p/DYsLKl_lQs-/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/e26ebc53be19dac2.jpg" alt=""><span class="badge video-badge">▶ 31,941회</span></div>
+      <div class="meta"><span>♥ 3,162</span><span>💬 83</span></div>
+      <div class="caption">Not just any partnership is better than no partnership🫡
+
+Season 2 of “Just Getting Good” (your favorite podcast featuring women over 50 talking about life, love, money, aging, and everything in between!) is OFFICIALLY OUT🥳🥳
+
+Comment JGG for</div>
+      <a class="open" href="https://www.instagram.com/p/DZBJx3rS31d/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+      </div>
+    </section>
+    
+</main>
+<footer style="text-align:center;padding:32px;color:#999;font-size:12px;">
+  Brand System Designer 작업용 viral 레퍼런스. Reference & Trend Analyst 자동 산출 (Apify + Anthropic).
+</footer>
+<div class="submitbar" id="submitbar"><div class="count">선택 <span class="n" id="pick-count">0</span>건</div><button id="submit-btn" disabled>Submit picks → BSD/CCD</button></div>
+<script>
+(function() {
+  const date = document.body.dataset.date;
+  const bridgeUrl = document.body.dataset.bridgeUrl || 'http://localhost:8765/submit-picks';
+  const bridgeToken = document.body.dataset.bridgeToken || '';
+  const bar = document.getElementById('submitbar');
+  const countEl = document.getElementById('pick-count');
+  const btn = document.getElementById('submit-btn');
+  if (!bar) return;
+
+  function gather() {
+    const picks = {};
+    document.querySelectorAll('input.pick[type=checkbox]:checked').forEach(cb => {
+      const postId = cb.dataset.postId;
+      const field = cb.dataset.field;
+      const value = cb.dataset.value;
+      picks[postId] = picks[postId] || { post_id: postId, account: cb.dataset.account, picked: {} };
+      picks[postId].picked[field] = value;
+    });
+    return Object.values(picks);
+  }
+
+  function update() {
+    const n = document.querySelectorAll('input.pick[type=checkbox]:checked').length;
+    countEl.textContent = n;
+    btn.disabled = n === 0;
+  }
+
+  let toastEl;
+  function toast(kind, msgHtml, durationMs) {
+    if (!toastEl) {
+      toastEl = document.createElement('div');
+      toastEl.id = 'toast';
+      document.body.appendChild(toastEl);
+    }
+    toastEl.className = kind;
+    toastEl.innerHTML = msgHtml;
+    requestAnimationFrame(() => toastEl.classList.add('show'));
+    if (toastEl._timer) clearTimeout(toastEl._timer);
+    toastEl._timer = setTimeout(() => toastEl.classList.remove('show'), durationMs || 8000);
+  }
+
+  function downloadJson(payload) {
+    const blob = new Blob([JSON.stringify(payload, null, 2)], {type: 'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `picks-${date}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
+  async function submitViaBridge(payload) {
+    const res = await fetch(bridgeUrl, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'X-Bridge-Token': bridgeToken},
+      body: JSON.stringify(payload),
+    });
+    const text = await res.text();
+    let data = {};
+    try { data = JSON.parse(text); } catch (e) { /* ignore */ }
+    if (res.status < 400 && data.ok !== false) return {ok: true, data, status: res.status};
+    return {ok: false, data, status: res.status, text};
+  }
+
+  document.addEventListener('change', e => {
+    if (e.target.matches('input.pick[type=checkbox]')) update();
+  });
+
+  btn.addEventListener('click', async () => {
+    const picks = gather();
+    if (!picks.length) return;
+    const payload = {
+      date: date,
+      submitted_at: new Date().toISOString(),
+      picks_count: picks.length,
+      picks: picks,
+    };
+    btn.disabled = true;
+    btn.textContent = '전송 중…';
+
+    try {
+      const r = await submitViaBridge(payload);
+      if (r.ok) {
+        const d = r.data || {};
+        const bsd = d.bsd_identifier ? `<code>${d.bsd_identifier}</code>` : '<code>—</code>';
+        const ccd = d.ccd_identifier ? `<code>${d.ccd_identifier}</code>` : '<code>—</code>';
+        const idem = d.idempotent ? ' (이미 전송됨 — 동일 picks)' : '';
+        toast('ok', `✓ BSD/CCD에게 전달 완료${idem}<br>BSD: ${bsd} · CCD: ${ccd}<br><small>vault + agent memory 동기됨</small>`, 10000);
+        btn.textContent = '✓ 전달 완료';
+      } else {
+        downloadJson(payload);
+        const err = (r.data && r.data.error) || r.text || `HTTP ${r.status}`;
+        toast('warn', `⚠ 자동 전달 실패 — JSON 다운로드됨<br><small>오류: ${String(err).slice(0,200)}</small><br><small>수동: <code>python3 sync_picks.py ~/Downloads/picks-${date}.json</code></small>`, 12000);
+        btn.textContent = '⚠ 다운로드 fallback';
+      }
+    } catch (e) {
+      downloadJson(payload);
+      toast('warn', `⚠ 브릿지 서버 미응답 — JSON 다운로드됨<br><small>${String(e.message || e).slice(0,150)}</small><br><small>LaunchAgent 점검: <code>launchctl list | grep picks-bridge</code></small>`, 12000);
+      btn.textContent = '⚠ 다운로드 fallback';
+    }
+
+    setTimeout(() => {
+      btn.textContent = 'Submit picks → BSD/CCD';
+      update();
+    }, 6000);
+  });
+
+  update();
+})();
+</script>
+</body>
+</html>
