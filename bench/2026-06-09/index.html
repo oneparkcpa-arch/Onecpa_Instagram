@@ -60,9 +60,15 @@ details.analysis[open] summary { padding-bottom:8px; border-bottom:1px solid #f0
 .submitbar button { background:#0095f6; color:#fff; border:none; padding:10px 24px; border-radius:6px; font-size:14px; font-weight:600; cursor:pointer; }
 .submitbar button:hover { background:#0076c0; }
 .submitbar button:disabled { background:#555; cursor:not-allowed; }
+#toast { position:fixed; right:24px; bottom:80px; max-width:440px; padding:14px 18px; border-radius:8px; font-size:13px; line-height:1.5; box-shadow:0 4px 16px rgba(0,0,0,0.18); z-index:200; opacity:0; transform:translateY(8px); transition:opacity 0.2s, transform 0.2s; pointer-events:none; }
+#toast.show { opacity:1; transform:translateY(0); pointer-events:auto; }
+#toast.ok { background:#e8f5e9; color:#1b5e20; border:1px solid #a5d6a7; }
+#toast.warn { background:#fff8e1; color:#7c5300; border:1px solid #ffe082; }
+#toast.err { background:#ffebee; color:#b71c1c; border:1px solid #ef9a9a; }
+#toast code { background:rgba(0,0,0,0.08); padding:1px 5px; border-radius:3px; font-size:12px; }
 </style>
 </head>
-<body data-date="2026-06-09">
+<body data-date="2026-06-09" data-bridge-url="http://localhost:8765/submit-picks" data-bridge-token="IWwvMC-3X0KHGkc9Z6lIG6oCk_c38JkwGvVFly5B5So">
 <header class="top">
   <h1>🔎 onecpa Instagram Bench — 2026-06-09</h1>
   <div class="meta">생성: 2026-06-09T06:47:50.702225+09:00 · 계정 8 · 게시물 78 · 🔍 분석 24건 (sonnet)</div>
@@ -2951,6 +2957,8 @@ AI가 다 해주는 시대.
 <script>
 (function() {
   const date = document.body.dataset.date;
+  const bridgeUrl = document.body.dataset.bridgeUrl || 'http://localhost:8765/submit-picks';
+  const bridgeToken = document.body.dataset.bridgeToken || '';
   const bar = document.getElementById('submitbar');
   const countEl = document.getElementById('pick-count');
   const btn = document.getElementById('submit-btn');
@@ -2974,11 +2982,48 @@ AI가 다 해주는 시대.
     btn.disabled = n === 0;
   }
 
+  let toastEl;
+  function toast(kind, msgHtml, durationMs) {
+    if (!toastEl) {
+      toastEl = document.createElement('div');
+      toastEl.id = 'toast';
+      document.body.appendChild(toastEl);
+    }
+    toastEl.className = kind;
+    toastEl.innerHTML = msgHtml;
+    requestAnimationFrame(() => toastEl.classList.add('show'));
+    if (toastEl._timer) clearTimeout(toastEl._timer);
+    toastEl._timer = setTimeout(() => toastEl.classList.remove('show'), durationMs || 8000);
+  }
+
+  function downloadJson(payload) {
+    const blob = new Blob([JSON.stringify(payload, null, 2)], {type: 'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `picks-${date}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
+  async function submitViaBridge(payload) {
+    const res = await fetch(bridgeUrl, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'X-Bridge-Token': bridgeToken},
+      body: JSON.stringify(payload),
+    });
+    const text = await res.text();
+    let data = {};
+    try { data = JSON.parse(text); } catch (e) { /* ignore */ }
+    if (res.status < 400 && data.ok !== false) return {ok: true, data, status: res.status};
+    return {ok: false, data, status: res.status, text};
+  }
+
   document.addEventListener('change', e => {
     if (e.target.matches('input.pick[type=checkbox]')) update();
   });
 
-  btn.addEventListener('click', () => {
+  btn.addEventListener('click', async () => {
     const picks = gather();
     if (!picks.length) return;
     const payload = {
@@ -2987,21 +3032,34 @@ AI가 다 해주는 시대.
       picks_count: picks.length,
       picks: picks,
     };
-    const blob = new Blob([JSON.stringify(payload, null, 2)], {type: 'application/json'});
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `picks-${date}.json`;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-
     btn.disabled = true;
-    btn.textContent = '✓ 다운로드됨 — sync_picks.py로 vault 동기';
+    btn.textContent = '전송 중…';
+
+    try {
+      const r = await submitViaBridge(payload);
+      if (r.ok) {
+        const d = r.data || {};
+        const bsd = d.bsd_identifier ? `<code>${d.bsd_identifier}</code>` : '<code>—</code>';
+        const ccd = d.ccd_identifier ? `<code>${d.ccd_identifier}</code>` : '<code>—</code>';
+        const idem = d.idempotent ? ' (이미 전송됨 — 동일 picks)' : '';
+        toast('ok', `✓ BSD/CCD에게 전달 완료${idem}<br>BSD: ${bsd} · CCD: ${ccd}<br><small>vault + agent memory 동기됨</small>`, 10000);
+        btn.textContent = '✓ 전달 완료';
+      } else {
+        downloadJson(payload);
+        const err = (r.data && r.data.error) || r.text || `HTTP ${r.status}`;
+        toast('warn', `⚠ 자동 전달 실패 — JSON 다운로드됨<br><small>오류: ${String(err).slice(0,200)}</small><br><small>수동: <code>python3 sync_picks.py ~/Downloads/picks-${date}.json</code></small>`, 12000);
+        btn.textContent = '⚠ 다운로드 fallback';
+      }
+    } catch (e) {
+      downloadJson(payload);
+      toast('warn', `⚠ 브릿지 서버 미응답 — JSON 다운로드됨<br><small>${String(e.message || e).slice(0,150)}</small><br><small>LaunchAgent 점검: <code>launchctl list | grep picks-bridge</code></small>`, 12000);
+      btn.textContent = '⚠ 다운로드 fallback';
+    }
+
     setTimeout(() => {
-      btn.disabled = false;
       btn.textContent = 'Submit picks → BSD/CCD';
       update();
-    }, 5000);
+    }, 6000);
   });
 
   update();
