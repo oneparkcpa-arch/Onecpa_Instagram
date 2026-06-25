@@ -1,0 +1,875 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>onecpa Instagram Bench — 2026-06-26</title>
+<style>
+* { box-sizing: border-box; }
+body { margin:0; background:#f6f7f9; font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif; color:#222; padding-bottom:80px; }
+.top { background:#222; color:#fff; padding:24px 32px; }
+.top h1 { margin:0 0 6px; font-size:22px; }
+.top .meta { font-size:13px; opacity:0.7; }
+.container { max-width:1400px; margin:0 auto; padding:24px; }
+.account { background:#fff; border-radius:12px; padding:24px; margin-bottom:32px; box-shadow:0 1px 3px rgba(0,0,0,0.05); }
+.profile { display:flex; align-items:center; gap:16px; padding-bottom:16px; border-bottom:1px solid #eee; margin-bottom:20px; }
+.profile img.avatar { width:80px; height:80px; border-radius:50%; object-fit:cover; }
+.profile .avatar-empty { background:#ddd; width:80px; height:80px; border-radius:50%; }
+.profile .name { font-weight:700; font-size:20px; }
+.profile .handle { color:#0095f6; text-decoration:none; font-size:15px; }
+.profile .stats { color:#555; font-size:13px; margin-top:4px; }
+.profile .bio { font-size:13px; color:#444; margin-top:6px; max-width:600px; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:14px; }
+.card { background:#fafafa; border:1px solid #ececec; border-radius:8px; overflow:hidden; display:flex; flex-direction:column; }
+.card.has-analysis { border-color:#0095f6; box-shadow:0 0 0 2px rgba(0,149,246,0.05); }
+.card .media { position:relative; background:#000; }
+.card .media-track { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:thin; scroll-behavior:smooth; }
+.card .media-track::-webkit-scrollbar { height:6px; }
+.card .media-track::-webkit-scrollbar-track { background:#000; }
+.card .media-track::-webkit-scrollbar-thumb { background:#555; border-radius:3px; }
+.card .media-track .slide { flex:0 0 100%; scroll-snap-align:start; position:relative; }
+.card .media-track .slide img { width:100%; display:block; aspect-ratio:1/1; object-fit:cover; }
+.card .media-track .slide .idx { position:absolute; top:8px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.7); color:#fff; font-size:11px; padding:2px 8px; border-radius:10px; pointer-events:none; }
+.card .media img.single { width:100%; display:block; aspect-ratio:1/1; object-fit:cover; }
+.card .badge { position:absolute; top:8px; right:8px; background:rgba(0,0,0,0.6); color:#fff; font-size:11px; padding:3px 7px; border-radius:4px; z-index:2; }
+.card .video-badge { background:#e0245e; }
+.card .analysis-badge { position:absolute; top:8px; left:8px; background:#0095f6; color:#fff; font-size:11px; padding:3px 7px; border-radius:4px; }
+.card .meta { padding:10px 12px; font-size:13px; color:#555; display:flex; justify-content:space-between; }
+.card .caption { padding:0 12px 10px; font-size:12px; color:#333; line-height:1.45; max-height:80px; overflow:hidden; }
+.card .topic { display:inline-block; padding:2px 6px; background:#eef5ff; color:#0066cc; border-radius:3px; font-size:11px; font-weight:600; margin-right:4px; }
+.card a.open { display:block; padding:8px 12px; background:#0095f6; color:#fff; text-decoration:none; text-align:center; font-size:12px; font-weight:600; }
+.card a.open:hover { background:#0076c0; }
+.empty { color:#999; font-size:14px; padding:20px; text-align:center; }
+details.analysis { background:#fff; border-top:1px solid #ececec; padding:8px 12px; font-size:12px; }
+details.analysis summary { cursor:pointer; padding:6px 0; font-weight:600; color:#0066cc; user-select:none; }
+details.analysis summary:hover { color:#004080; }
+details.analysis[open] summary { padding-bottom:8px; border-bottom:1px solid #f0f0f0; }
+.field { padding:6px 0; border-bottom:1px solid #f5f5f5; display:flex; align-items:flex-start; gap:8px; }
+.field:last-child { border-bottom:none; }
+.field label.cb { display:flex; align-items:flex-start; gap:6px; cursor:pointer; flex:1; user-select:none; }
+.field input[type=checkbox] { margin-top:3px; cursor:pointer; }
+.field .k { font-weight:600; color:#555; min-width:90px; }
+.field .v { color:#222; flex:1; word-break:break-word; }
+.field .v code { background:#f0f0f0; padding:1px 4px; border-radius:3px; font-size:11px; }
+.swatch { display:inline-block; width:14px; height:14px; border-radius:3px; margin-right:4px; vertical-align:middle; border:1px solid #ddd; }
+.copyright-warn { color:#e0245e; font-weight:600; }
+.subbar { background:#fff; border-radius:8px; padding:12px 16px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 1px 3px rgba(0,0,0,0.05); }
+.subbar.warning { background:#fff8e1; border:1px solid #ffe082; color:#666; }
+.submitbar { position:fixed; bottom:0; left:0; right:0; background:#222; color:#fff; padding:14px 32px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 -2px 8px rgba(0,0,0,0.15); z-index:100; }
+.submitbar .count { font-size:14px; }
+.submitbar .count .n { font-size:18px; font-weight:700; color:#0095f6; }
+.submitbar button { background:#0095f6; color:#fff; border:none; padding:10px 24px; border-radius:6px; font-size:14px; font-weight:600; cursor:pointer; }
+.submitbar button:hover { background:#0076c0; }
+.submitbar button:disabled { background:#555; cursor:not-allowed; }
+#toast { position:fixed; right:24px; bottom:80px; max-width:440px; padding:14px 18px; border-radius:8px; font-size:13px; line-height:1.5; box-shadow:0 4px 16px rgba(0,0,0,0.18); z-index:200; opacity:0; transform:translateY(8px); transition:opacity 0.2s, transform 0.2s; pointer-events:none; }
+#toast.show { opacity:1; transform:translateY(0); pointer-events:auto; }
+#toast.ok { background:#e8f5e9; color:#1b5e20; border:1px solid #a5d6a7; }
+#toast.warn { background:#fff8e1; color:#7c5300; border:1px solid #ffe082; }
+#toast.err { background:#ffebee; color:#b71c1c; border:1px solid #ef9a9a; }
+#toast code { background:rgba(0,0,0,0.08); padding:1px 5px; border-radius:3px; font-size:12px; }
+</style>
+</head>
+<body data-date="2026-06-26" data-bridge-url="http://localhost:8765/submit-picks" data-bridge-token="IWwvMC-3X0KHGkc9Z6lIG6oCk_c38JkwGvVFly5B5So">
+<header class="top">
+  <h1>🔎 onecpa Instagram Bench — 2026-06-26</h1>
+  <div class="meta">생성: 2026-06-26T00:34:26.264649+09:00 · 계정 5 · 게시물 41</div>
+</header>
+<main class="container">
+  <div class="subbar warning">⚠ 분석 미실행 — analyze_posts.py 실행 후 --analysis 플래그로 재렌더 시 BSD/CCD 전송 UI 활성</div>
+  
+    <section class="account">
+      <header class="profile">
+        <div class="avatar-empty"></div>
+        <div>
+          <div class="name">머니투데이 공식 계정</div>
+          <a class="handle" href="https://www.instagram.com/moneytodaynews/" target="_blank">@moneytodaynews</a>
+          <div class="stats">팔로워 — · top 10 viral posts (engagement 정렬)</div>
+          <div class="bio"></div>
+        </div>
+      </header>
+      <div class="grid">
+        
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/22d83c031ac6634b.jpg" alt="" loading="lazy"><span class="idx">1/2</span></div><div class="slide"><img src="assets/17accf5095fc1810.jpg" alt="" loading="lazy"><span class="idx">2/2</span></div></div><span class="badge">📑 2장</span></div>
+      <div class="meta"><span>♥ 1,961</span><span>💬 76</span></div>
+      <div class="caption">제주지역 한 농협 하나로마트에서 20대 노동자가 지게차에 깔려 사망한 사고와 관련해 &quot;정규직 전환 압박이 있었다&quot;라는 유족들의 주장이 나왔다.
+
+23일 온라인 커뮤니티 &#x27;보배드림&#x27;에는 &#x27;2주 뒤 아빠가 될 26살 제 사촌 언니 남편의 억울한 죽음을 알려주세요&#x27;라는 제목의 글이 올라왔다.
+
+글을 쓴 A씨는 최근 지게차 사고로 사망한 20대 남성의 아내와 사촌지간이라고 자신을 소개하며 &quot;사촌 언니의 남편이 너무나 억울하게 돌아가셨</div>
+      <a class="open" href="https://www.instagram.com/p/DZ6WZSrAuX7/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/d380d818d0702c64.jpg" alt=""></div>
+      <div class="meta"><span>♥ 1,313</span><span>💬 25</span></div>
+      <div class="caption">합동참모본부가 지난 23일 밤 중부전선에서 북한군 1명의 신병을 확보했다고 24일 밝혔다.
+
+합참은 &quot;관련 세부사항에 대해서는 관계기관에서 조사 중&quot;이라고 설명했다.
+
+해당 군인의 귀순 의사를 밝힌 것으로 알려졌다. 군과 관계기관은 심층 조사를 통해 북한군의 귀순 동기와 신원, 실제 귀순 의사 유무 등을 파악하고 있다.
+
+이재명 정부 출범 후 귀순 사례는 이번이 네 번째다. 군인 귀순으로는 두 번째다. 지난해 10월 북한군 1</div>
+      <a class="open" href="https://www.instagram.com/p/DZ9Wp8wj7Y1/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/2922a7916743f7a7.jpg" alt="" loading="lazy"><span class="idx">1/2</span></div><div class="slide"><img src="assets/b1fbafe27514f001.jpg" alt="" loading="lazy"><span class="idx">2/2</span></div></div><span class="badge">📑 2장</span></div>
+      <div class="meta"><span>♥ 1,015</span><span>💬 3</span></div>
+      <div class="caption">고(故) 이채원양이 명예소방관으로 위촉되며 못다 한 꿈을 이뤘다.
+
+22일 전국공무원노조 광주소방지부에 따르면 전날 광주 광산구 광주시교육청시민협치진흥원에서 이채원양의 49재 추모식이 열렸다. 이양의 49재는 이날이지만 이양의 친구들이 참석할 수 있도록 주말로 하루 앞당겨 추모식을 진행했다.
+
+이 자리에서 이양의 부모는 이양을 대신해 명예소방관 위촉장과 함께 이양의 이름 석 자가 적힌 소방대원 활동복을 받아들었다. 위촉장에는 </div>
+      <a class="open" href="https://www.instagram.com/p/DZ3uHTKDfNs/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/99f7215f853c0665.jpg" alt=""></div>
+      <div class="meta"><span>♥ 584</span><span>💬 60</span></div>
+      <div class="caption">지난해 10월 예비 신부였던 20대 여성 소방관이 스스로 목숨을 끊은 사건 관련 고인이 생전 호소한 직장 내 괴롭힘 의혹이 대부분 사실로 드러났다.
+
+24일 뉴스1·뉴시스에 따르면 국무조정실 정부합동 공직복무점검단(점검단)은 지난 11일부터 2주간 소방청과 광주소방안전본부, 광산소방서를 대상으로 집중 점검한 결과를 이날 발표했다.
+
+조사 결과 숨진 A소방교는 소속 부서 회식 참석을 강요받아 2024년 7월부터 15개월간 총 2</div>
+      <a class="open" href="https://www.instagram.com/p/DZ_fXEOmFd1/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/0ba268a966d0a383.jpg" alt=""></div>
+      <div class="meta"><span>♥ 497</span><span>💬 58</span></div>
+      <div class="caption">국제 의료구호단체 국경없는의사회(MSF) 일부 직원들이 수단 난민을 상대로 성 착취를 일삼은 사실이 드러나 충격을 주고 있다.
+
+15일(현지 시간) 프랑스 일간 르몽드 등에 따르면 MSF는 이날 수단 여성 난민들이 제기한 59건의 성 착취 및 성폭행 사건과 관련해 혐의가 확인된 차드 지부 직원 18명을 해고하고 향후 MSF 재취업을 금지했다고 밝혔다.
+
+피해자들은 수단 내전을 피해 접경 지역인 차드 동부로 피난 온 여성들로 이</div>
+      <a class="open" href="https://www.instagram.com/p/DZ1F01vDGCX/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/87f2879aa151bc16.jpg" alt=""></div>
+      <div class="meta"><span>♥ 532</span><span>💬 16</span></div>
+      <div class="caption">동대문엽기떡볶이(이하 엽떡)가 내년 7월부터 전 제품 가격을 약 7% 인상한다고 22일 밝혔다. 이에 따라 대표메뉴인 기본 엽기떡볶이 가격이 기존 1만4000원에서 약 1만5000원이 될 전망이다. 엽떡이 가격을 인상하는 것은 17년 만이다.
+
+22일 엽떡을 운영하는 핫시즈너는 자사 홈페이지 공지사항을 통해 &quot;최근 몇 년 간 가파르게 상승한 식·원자재 가격으로 부득이하게 소비자분들에게 죄송한 말씀을 드리게 됐다&quot;며 이같이 밝혔</div>
+      <a class="open" href="https://www.instagram.com/p/DZ4V6JhGGlW/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/5e03f5148ec84990.jpg" alt=""></div>
+      <div class="meta"><span>♥ 280</span><span>💬 39</span></div>
+      <div class="caption">한밤중 주택가 골목길에 누워있던 여대생이 택배 차량에 치여 숨지는 사고가 발생했다.
+
+22일 뉴스1·뉴시스와 경기 남양주남부경찰서에 따르면 전날(21일) 오후 11시30분쯤 남양주시 다산동 한 아파트 단지 인근 이면도로에서 50대 남성 A씨가 몰던 택배 차량이 도로에 누워있던 여대생 B씨를 치고 지나갔다.
+
+이 사고로 복부 등을 크게 다친 B씨는 119 구급대에 의해 인근 병원으로 옮겨졌지만 끝내 숨졌다.
+
+A씨는 당시 주변이</div>
+      <a class="open" href="https://www.instagram.com/p/DZ6M4EHmFUn/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/f7b17991cab6ef2e.jpg" alt=""><span class="badge video-badge">▶ 33,911회</span></div>
+      <div class="meta"><span>♥ 364</span><span>💬 14</span></div>
+      <div class="caption">&#x27;수원 마약 좀비남&#x27;,
+잡고 보니 진짜 &#x27;마약 양성&#x27;</div>
+      <a class="open" href="https://www.instagram.com/p/DZ7J2ayD_EL/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/8846d99a46790e48.jpg" alt="" loading="lazy"><span class="idx">1/2</span></div><div class="slide"><img src="assets/66099cc7b7c43892.jpg" alt="" loading="lazy"><span class="idx">2/2</span></div></div><span class="badge">📑 2장</span></div>
+      <div class="meta"><span>♥ 220</span><span>💬 37</span></div>
+      <div class="caption">대한민국 축구대표팀이 남아프리카공화국(이하 남아공)에 0대 1로 패한 가운데 수비수 설영우가 욕설과 인신공격성 악성 댓글에 대해 강경 대응을 예고했다.
+
+25일(한국시간) 북중미 월드컵 조별리그 3차전에서 한국 대표팀이 남아공에 0대 1로 패한 직후 설영우의 에이전트가 운영하는 공식 SNS(소셜미디어) 계정에는 &quot;최근 일부 댓글 및 메시지 중에는 욕설, 인신공격, 명예훼손, 허위사실 유포 등 건전한 의견 표현의 범위를 명백히 </div>
+      <a class="open" href="https://www.instagram.com/p/DZ_7iLBmLcO/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/3ed3b088f0e8a6e7.jpg" alt=""></div>
+      <div class="meta"><span>♥ 203</span><span>💬 13</span></div>
+      <div class="caption">중고거래 플랫폼에서 청소 아르바이트생을 구한 여성이 범죄 표적이 되는 사건이 발생했다.
+
+25일 경기 남양주남부경찰서는 여성을 흉기로 위협한 혐의를 받는 30대 남성 A씨를 붙잡아 조사 중이라고 밝혔다.
+
+A씨는 전날 남양주시 한 아파트에서 30대 여성 B씨를 흉기로 위협한 혐의를 받는다.
+
+B씨는 범행 장소인 아파트 거주자로, 중고거래 플랫폼을 통해 A씨를 청소 아르바이트생으로 구했다.
+
+피해자는 별다른 의심 없이 A씨에게 </div>
+      <a class="open" href="https://www.instagram.com/p/DZ_Z-ZMmEk9/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+      </div>
+    </section>
+    
+
+    <section class="account">
+      <header class="profile">
+        <div class="avatar-empty"></div>
+        <div>
+          <div class="name">미도리 작업실 • m♪r workroom</div>
+          <a class="handle" href="https://www.instagram.com/mdrlife.kr/" target="_blank">@mdrlife.kr</a>
+          <div class="stats">팔로워 — · top 7 viral posts (engagement 정렬)</div>
+          <div class="bio"></div>
+        </div>
+      </header>
+      <div class="grid">
+        
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/ba83e7d4d0cf276e.jpg" alt="" loading="lazy"><span class="idx">1/10</span></div><div class="slide"><img src="assets/18d4daf4af617f13.jpg" alt="" loading="lazy"><span class="idx">2/10</span></div><div class="slide"><img src="assets/ad218572a4ad25e3.jpg" alt="" loading="lazy"><span class="idx">3/10</span></div><div class="slide"><img src="assets/9cb6ab9d8eaa3a98.jpg" alt="" loading="lazy"><span class="idx">4/10</span></div><div class="slide"><img src="assets/1118da75f741aece.jpg" alt="" loading="lazy"><span class="idx">5/10</span></div><div class="slide"><img src="assets/956251b5ab330626.jpg" alt="" loading="lazy"><span class="idx">6/10</span></div><div class="slide"><img src="assets/37532ca7409b0a28.jpg" alt="" loading="lazy"><span class="idx">7/10</span></div><div class="slide"><img src="assets/e4628ca6a5d3a39b.jpg" alt="" loading="lazy"><span class="idx">8/10</span></div><div class="slide"><img src="assets/7380228001a076a5.jpg" alt="" loading="lazy"><span class="idx">9/10</span></div><div class="slide"><img src="assets/59ffa608e4285893.jpg" alt="" loading="lazy"><span class="idx">10/10</span></div></div><span class="badge">📑 10장</span></div>
+      <div class="meta"><span>♥ 314</span><span>💬 13</span></div>
+      <div class="caption">26年 6月 22日 • 안녕하세요- 미도리입니다. 새롭게 한 주가 시작했습니다. 가벼운 마음으로 퇴근하고 앉아 글을 쓰고 있어요. 월요일 잘 맞이하셨을까요? ♪♪♪ 
+
+유월은 말이지요. 왜인지 분주해서 이리 저리 움직이다 보니 한 주가 금~방 지나갔더랍니다. 다음주가 7월인 게 믿기지 않을 정도로요! 후후 .. 소식을 전하지 못 했던 시간동안 여러 물건을 만들기도, 소개하기도 했습니다. 큰 마음으로 우리 공간을 찾아주시는 분들</div>
+      <a class="open" href="https://www.instagram.com/p/DZ42Jejgb06/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/c1c7cdb94527534e.jpg" alt="" loading="lazy"><span class="idx">1/9</span></div><div class="slide"><img src="assets/afffb8af7828b31b.jpg" alt="" loading="lazy"><span class="idx">2/9</span></div><div class="slide"><img src="assets/d5c8a4f5316be5fa.jpg" alt="" loading="lazy"><span class="idx">3/9</span></div><div class="slide"><img src="assets/29821a9da86ca295.jpg" alt="" loading="lazy"><span class="idx">4/9</span></div><div class="slide"><img src="assets/456796f91637b5de.jpg" alt="" loading="lazy"><span class="idx">5/9</span></div><div class="slide"><img src="assets/d3b0f1bda5ec3224.jpg" alt="" loading="lazy"><span class="idx">6/9</span></div><div class="slide"><img src="assets/078086f81b194c7e.jpg" alt="" loading="lazy"><span class="idx">7/9</span></div><div class="slide"><img src="assets/14cc16af78a85fbd.jpg" alt="" loading="lazy"><span class="idx">8/9</span></div><div class="slide"><img src="assets/b558e06fdecf361c.jpg" alt="" loading="lazy"><span class="idx">9/9</span></div></div><span class="badge">📑 9장</span></div>
+      <div class="meta"><span>♥ 289</span><span>💬 10</span></div>
+      <div class="caption">26年 6月 23日 • 안녕하세요— 미도리입니다 .. 우리 공간 12시부터 19시까지 시원하게 열려 있습니다. 어제 내린 비 덕분인지, 온 세상이 맑고 깨끗해요. 오시는 길이 즐거우실 수 있도록~ 오늘은 일찍 글을 올려 보냅니다. 후후 .. ♪
+
+생각이 많은 편이에요. 짧지만 많은 생각들이 하루에도 몇 십 번씩 머리를 스쳐 지나가는지 모르겠어요. 이것도 저것도 해보고 싶다는 생각도 하고요. 얼른 해야 하는데! 하며 마음을 재촉</div>
+      <a class="open" href="https://www.instagram.com/p/DZ6yGlMgcH3/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/0529f3d50fefa0e2.jpg" alt="" loading="lazy"><span class="idx">1/10</span></div><div class="slide"><img src="assets/58c30471dabff7ab.jpg" alt="" loading="lazy"><span class="idx">2/10</span></div><div class="slide"><img src="assets/de3216c7c1c566a9.jpg" alt="" loading="lazy"><span class="idx">3/10</span></div><div class="slide"><img src="assets/c72d8d9d5497a690.jpg" alt="" loading="lazy"><span class="idx">4/10</span></div><div class="slide"><img src="assets/30fc92a13491bd92.jpg" alt="" loading="lazy"><span class="idx">5/10</span></div><div class="slide"><img src="assets/e5053c0e57eb8f79.jpg" alt="" loading="lazy"><span class="idx">6/10</span></div><div class="slide"><img src="assets/f339c6d77d14480a.jpg" alt="" loading="lazy"><span class="idx">7/10</span></div><div class="slide"><img src="assets/a2ded9b46eeaccc2.jpg" alt="" loading="lazy"><span class="idx">8/10</span></div><div class="slide"><img src="assets/56ab7d35456a0d5d.jpg" alt="" loading="lazy"><span class="idx">9/10</span></div><div class="slide"><img src="assets/1980d3abd532afe4.jpg" alt="" loading="lazy"><span class="idx">10/10</span></div></div><span class="badge">📑 10장</span></div>
+      <div class="meta"><span>♥ 261</span><span>💬 5</span></div>
+      <div class="caption">26年 5月 27日 • 안녕하세요! 미도리작업실 미도리입니다. 드디어— 바인더 3종과 카드포켓 3종을 넷숍에서 만나보실 수 있습니다! 기다려 주셔서 고맙습니다. ( ⌒ ͜ ⌒ ) ♪
+
+바인더 세팅을 모두 마치고 사진 찍고 싶었는데 말이지요 .. 얼른 보내드리고 싶은 마음에 !!!!!!!!!! 이대로 올려 두었습니다. 이름을 어떻게 지어주면 좋을까- 하다가, 역시나 자유롭게 꾸밀 수 있는 제품이니 나만의 방식대로! 를 붙여야겠다</div>
+      <a class="open" href="https://www.instagram.com/p/DY1_ZlGAd05/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/1f77d02236a1f5cb.jpg" alt="" loading="lazy"><span class="idx">1/6</span></div><div class="slide"><img src="assets/c5e8412a596fb1a9.jpg" alt="" loading="lazy"><span class="idx">2/6</span></div><div class="slide"><img src="assets/faf76a98785701de.jpg" alt="" loading="lazy"><span class="idx">3/6</span></div><div class="slide"><img src="assets/4c78fdfc0e18437b.jpg" alt="" loading="lazy"><span class="idx">4/6</span></div><div class="slide"><img src="assets/497ff07155adfd5c.jpg" alt="" loading="lazy"><span class="idx">5/6</span></div><div class="slide"><img src="assets/2a68c8b2b69df458.jpg" alt="" loading="lazy"><span class="idx">6/6</span></div></div><span class="badge">📑 6장</span></div>
+      <div class="meta"><span>♥ 189</span><span>💬 0</span></div>
+      <div class="caption">26年 5月 29日 • 안녕하세요– 미도리작업실 미도리입니다. 우리 공간 12시부터 19시까지 열려 있고요. 기다리고 기다리고 기다려주신 아오리 네코 단우산이 넷숍과 오프라인에 입고 되었습니다 .. • 🤸🏻‍♂️ ~ ♪ (품절되었던 수모와 new 수모도 진열해두었어요)
+
+겉과 속이 다르면 안 되는 걸까? 아오리 네코는 이 작은 의문에서 시작되었어요. 아오리 사과의 풋풋하고 상큼한 겉모습과는 다르게— 누구도 쉽게 짐작하지 못할 </div>
+      <a class="open" href="https://www.instagram.com/p/DY6dYJDgZLZ/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/0b2925378199ddff.jpg" alt="" loading="lazy"><span class="idx">1/6</span></div><div class="slide"><img src="assets/18850df08361d2ee.jpg" alt="" loading="lazy"><span class="idx">2/6</span></div><div class="slide"><img src="assets/eb243d659b2f120a.jpg" alt="" loading="lazy"><span class="idx">3/6</span></div><div class="slide"><img src="assets/ee3646af80f1e21f.jpg" alt="" loading="lazy"><span class="idx">4/6</span></div><div class="slide"><img src="assets/c6b349a3329d8bf8.jpg" alt="" loading="lazy"><span class="idx">5/6</span></div><div class="slide"><img src="assets/3b31572bc90d2073.jpg" alt="" loading="lazy"><span class="idx">6/6</span></div></div><span class="badge">📑 6장</span></div>
+      <div class="meta"><span>♥ 118</span><span>💬 5</span></div>
+      <div class="caption">26年 5月 30日 • 안녕하세요— 미도리작업실 미도리입니다. 토요일에도 열심히 발송 업무를 마치고 ~ 손님 분들을 만나 뵙고 ~ 퇴근했습니다 ~ ♪♪♪ 홀가분한 저녁이에요!
+
+오월 잘 보내셨나요? 저는 오래 준비했던 것들을 꺼내보였던 달이었는데요. 만든 것을 세상에 보여주는 일— 역시 재밌구나! 느꼈던 초여름이었습니다. 조금 더 열심히 해보고 싶은 것들도 생기고~ 하루 하루 건강하게 보내고 싶은 마음도 커진 5월이었습니다!
+</div>
+      <a class="open" href="https://www.instagram.com/p/DY9sVQOgWZa/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/e128a5a066dc7a10.jpg" alt="" loading="lazy"><span class="idx">1/5</span></div><div class="slide"><img src="assets/a88c5470b73b30cf.jpg" alt="" loading="lazy"><span class="idx">2/5</span></div><div class="slide"><img src="assets/5dd034f4786c7445.jpg" alt="" loading="lazy"><span class="idx">3/5</span></div><div class="slide"><img src="assets/c3cbd7b7e1b16ab3.jpg" alt="" loading="lazy"><span class="idx">4/5</span></div><div class="slide"><img src="assets/f3aed484cde676e1.jpg" alt="" loading="lazy"><span class="idx">5/5</span></div></div><span class="badge">📑 5장</span></div>
+      <div class="meta"><span>♥ 84</span><span>💬 6</span></div>
+      <div class="caption">26年 6月 24日 • 안녕하세요– 미도리작업실 미도리입니다. 우리 공간 같은 시간에 열려 있었고요. 행복하게~ 즐겁게~ 오늘 영업을 마쳤습니다. 귀한 걸음 이 곳으로 향해주셔서 고맙습니다~ 사랑합니다~ ♪♪♪
+
+오늘은 어떤 하루 보내셨나요? 저는 말이지요~ 아오리 네코 양우산 아래서 쨍쨍 내리쬐는 햇빛을 즐겼고요~ 출근해서는 보낼 물건들에 바코드를 붙이고, 오시는 손님들을 맞이하고, 열심히 택배를 포장하고, 놓치거나 실수한 </div>
+      <a class="open" href="https://www.instagram.com/p/DZ9_YSEgXVa/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="empty">이미지 없음</div><span class="badge video-badge">▶ 528회</span></div>
+      <div class="meta"><span>♥ 90</span><span>💬 4</span></div>
+      <div class="caption">~금일의 표어~ 좋은 기분 만들기</div>
+      <a class="open" href="https://www.instagram.com/p/DZ_ehb1ht24/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+      </div>
+    </section>
+    
+
+    <section class="account">
+      <header class="profile">
+        <div class="avatar-empty"></div>
+        <div>
+          <div class="name">스브스뉴스</div>
+          <a class="handle" href="https://www.instagram.com/subusunews/" target="_blank">@subusunews</a>
+          <div class="stats">팔로워 — · top 10 viral posts (engagement 정렬)</div>
+          <div class="bio"></div>
+        </div>
+      </header>
+      <div class="grid">
+        
+    <div class="card">
+      <div class="media"><img class="single" src="assets/2fc7d73502ec5b02.jpg" alt=""><span class="badge video-badge">▶ 263,970회</span></div>
+      <div class="meta"><span>♥ 3,328</span><span>💬 26</span></div>
+      <div class="caption">&quot;하지만 예뻤죠?&quot; 드리미 선풍기 MF10 리뷰 / 오목교 전자상가
+
+미감은 대박인데, 마감은 쪽박인 선풍기가 하나 있습니다.
+
+드리미 MF10은 바닥 주변 공기를 흡입해
+위로 끌어올린 뒤 좁은 틈새로 뿜어내는
+독특한 작동 방식의 날개 없는 선풍기입니다.
+
+유독 바람이 멀리 뻗어나가기 때문에
+서큘레이터처럼 공기 순환에 탁월한데요.
+특히 바닥에 가라앉은 에어컨 냉기를 방 전체로 퍼뜨려
+구역별 냉방을 만들 때 효과적입니다.
+
+하지</div>
+      <a class="open" href="https://www.instagram.com/p/DZMKUFqBiol/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/738d5376275ffc7c.jpg" alt=""></div>
+      <div class="meta"><span>♥ 2,064</span><span>💬 51</span></div>
+      <div class="caption">내일 열리는 월드컵 멕시코전, 승리할 수 있을까? ⚽🔥 
+
+32강 진출을 확정 지을 수 있는 운명의 멕시코전!
+지난 체코전 승리로 우리 대표팀을 향한
+국민들의 기대가 뜨거운데요.
+
+멕시코와의 역대 맞대결 전적과
+내일 있을 경기를 분석해 봤습니다.
+
+1) 대한민국 vs 멕시코 역대 전적 📊 
+멕시코 상대 A매치 통산전적 4승 3무 8패
+2006년 LA 친선경기 1-0 승리가 마지막
+
+2) 1차전 이후 멕시코에 대한 평가 🎤
+남아</div>
+      <a class="open" href="https://www.instagram.com/p/DZuMfKqGp_s/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/ca55d507b91da429.jpg" alt=""></div>
+      <div class="meta"><span>♥ 877</span><span>💬 104</span></div>
+      <div class="caption">출구조사와 전혀 달랐던 실제 서울시장 표심 🗳️
+
+정원오 후보의 당선을 예측했던 출구조사와 달리,
+오세훈 후보가 서울시장의 자리에 올랐습니다.
+
+사상 첫 5선 서울시장이 된 오세훈 당선인
+반전을 거듭한 서울 시민의 표심은 어떻게 갈렸을까요?
+
+1) 뚜렷했던 성별·연령 데이터 📊 
+20대 이하 남성층의 압도적인 오세훈 후보 지지율
+4050세대에서는 정원오 후보에 대한 높은 지지율을 보인 것도 특징
+
+2) ‘투표용지 부족 사태’ </div>
+      <a class="open" href="https://www.instagram.com/p/DZKVDuUGlKi/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/0b2e582f5ad9e9a6.jpg" alt=""></div>
+      <div class="meta"><span>♥ 346</span><span>💬 179</span></div>
+      <div class="caption">☕ ‘탱크데이’ 논란으로 100억 넘게 잃었다는 스벅 근황 ㄷㄷ
+
+&#x27;5·18 탱크데이&#x27; 마케팅 논란 이후 
+많은 소비자들이 ‘탈벅’을 선언했는데요.
+
+불매운동 직격탄을 맞은 스타벅스는
+지난 1일 선불 카드 잔액 환불을 허용하고
+서머 프로모션, e-프리퀀시도 줄줄이 중단하는 등
+금이 간 이미지를 회복하기 위해 노력하는 중이죠.
+
+📌 탱크데이 논란은 스타벅스에 얼마나 큰 타격을 줬을까?
+
+1️⃣ 논란 직후 매출 급락
+논란 발생 후</div>
+      <a class="open" href="https://www.instagram.com/p/DZZ4B7kGjRl/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/f144596917c828be.jpg" alt=""><span class="badge video-badge">▶ 25,839회</span></div>
+      <div class="meta"><span>♥ 792</span><span>💬 74</span></div>
+      <div class="caption">검열?? 커뮤니티 이미지 사전 필터링? 루리웹 운영자의 반응 / 오목교 전자상가
+
+AI 이미지 필터링, 디지털 성범죄를 막는 방패일까요. 
+아니면 무엇이 왜 걸러지는지 아무도 알 수 없는 블랙박스일까요.
+
+7월 1일부터 일정 규모 이상의 국내 커뮤니티와 SNS 사업자는, 
+이용자가 올린 이미지가 불법촬영물 등으로 
+등록된 자료와 일치하는지 대조하는 조치를 의무적으로 시행해야 합니다. 
+
+이미 등록된 불법 자료의 특징값, 
+이른</div>
+      <a class="open" href="https://www.instagram.com/p/DZty-mDxiIB/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/dbd2bc55ffbba489.jpg" alt=""></div>
+      <div class="meta"><span>♥ 244</span><span>💬 141</span></div>
+      <div class="caption">🖥️‘AI 사전 검열’ 때문에 비상이라는 커뮤니티 상황??
+
+오는 7월 1일부터 국내 주요 온라인 커뮤니티와
+SNS 플랫폼에 새로운 의무가 적용되는데요.
+
+이용자가 이미지를 업로드하면 게시 전에
+AI가 먼저 검사하는 시스템이 도입될 예정이라고 합니다.
+
+그런데 이 법, 시행을 두고 커뮤니티에서 큰 이슈가 되고 있습니다.🤔
+
+📌 현재 논란이 되는 세 가지 쟁점
+
+1️⃣ 사전 검열이다?
+일부 이용자들은 게시 전에
+AI가 이미지를 </div>
+      <a class="open" href="https://www.instagram.com/p/DZmlICoGi0Z/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/61d1d5b886247aa6.jpg" alt=""><span class="badge video-badge">▶ 139,583회</span></div>
+      <div class="meta"><span>♥ 903</span><span>💬 8</span></div>
+      <div class="caption">일단 그냥 타! 가 아니라 쉽게 정리해드림
+
+벌써부터 AI로 인한 전력 위기를 실감하는 인류에게
+구원투수로 꼽히는 기술이 있습니다.
+
+전 세계가 사활을 걸고 있는 이것, 바로 양자 기술인데요. 
+자주 접하다 보니 익숙하게 느껴지지만, 
+막상 설명하자니 어렵게만 느껴지는 이 기술.
+
+도대체 뭐가 그렇게 대단한 걸까요?
+
+양자 기술의 정의부터,
+우리가 올해 이 기술에 주목해야 하는 이유까지
+스브스뉴스가 알아봤습니다.</div>
+      <a class="open" href="https://www.instagram.com/p/DZMzi4fmkAo/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/85f9bd765df2d796.jpg" alt=""><span class="badge video-badge">▶ 52,328회</span></div>
+      <div class="meta"><span>♥ 823</span><span>💬 12</span></div>
+      <div class="caption">코스피 8000의 숨은 조력자? 해외에서 국위선양 중인 중소 IT 기업들 근황 / 스브스뉴스
+
+코스피의 기록적인 상승세에 정신이 없었던 요즘,
+폭발적인 AI 반도체 수요에 힘입어 우리나라 IT 산업은 수출 면에서도 역대급 기록을 이어가는 중인데요.
+
+이 전례없는 수출 호황의 뒷편에 있는 의외의 주인공들이 있습니다.
+글로벌 IT시장은 대기업만의 것인 줄 알았는데 요즘은 AI, IoT로 무장한 우리나라 중소 IT기업들도 전 세계에</div>
+      <a class="open" href="https://www.instagram.com/p/DY6rGfKicP5/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/f26f64c423f7c0b8.jpg" alt=""></div>
+      <div class="meta"><span>♥ 658</span><span>💬 33</span></div>
+      <div class="caption">🗳️ 초접전 서울시장 선거, 오세훈 당선인은 어떻게 이겼을까?
+
+끝까지 승자를 가리기 어려웠던
+이번 제40대 서울시장 선거.
+
+개표 초중반까지는 정원오 후보가 앞섰지만
+오늘 오전 7시,
+오세훈 후보가 극적으로 역전에 성공하며
+제40대 서울시장 자리를 차지했습니다.
+
+오세훈 당선인이 무사히 취임하면
+최초의 5선 서울시장이 탄생할 예정이죠.
+
+📌 오세훈 당선인을 승리로 이끈 핵심 공약은?
+
+1️⃣ 압도적 주택 공급 ‘신속통합기획 </div>
+      <a class="open" href="https://www.instagram.com/p/DZKECxNmhQu/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/a2b1e8335aa0a994.jpg" alt=""></div>
+      <div class="meta"><span>♥ 373</span><span>💬 1</span></div>
+      <div class="caption">🇲🇽멕시코: 한국을 사랑할 수밖에..♥
+
+지난 6월 11일 개막한
+&#x27;2026 FIFA 북중미 월드컵&#x27;
+
+대한민국 대표팀은 체코와의 첫 경기에서부터
+승리를 거머쥐며 힘찬 출발을 알렸는데요.
+
+그런데 한국 대표팀의 승리를
+한국인보다 더 기뻐하는 이들이 있었으니...
+
+…멕시코 사람들이요?!
+
+📌멕시코가 한국을 지독히 사랑하게 된 이유
+
+1️⃣ 때는 2018년 러시아 월드컵으로 거슬러 올라 감
+독일, 멕시코, 스웨덴과 같은 조에 편</div>
+      <a class="open" href="https://www.instagram.com/p/DZr98_3mgL7/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+      </div>
+    </section>
+    
+
+    <section class="account">
+      <header class="profile">
+        <div class="avatar-empty"></div>
+        <div>
+          <div class="name">광고줍줍 광줍이 | 광고•마케팅</div>
+          <a class="handle" href="https://www.instagram.com/ad_zupzup/" target="_blank">@ad_zupzup</a>
+          <div class="stats">팔로워 — · top 4 viral posts (engagement 정렬)</div>
+          <div class="bio"></div>
+        </div>
+      </header>
+      <div class="grid">
+        
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/894a771469a21a33.jpg" alt="" loading="lazy"><span class="idx">1/12</span></div><div class="slide"><img src="assets/83b0381e789ed22c.jpg" alt="" loading="lazy"><span class="idx">2/12</span></div><div class="slide"><img src="assets/616ad14defdb3521.jpg" alt="" loading="lazy"><span class="idx">3/12</span></div><div class="slide"><img src="assets/092ac0d2a4442f2d.jpg" alt="" loading="lazy"><span class="idx">4/12</span></div><div class="slide"><img src="assets/f1be3bbfbc173b92.jpg" alt="" loading="lazy"><span class="idx">5/12</span></div><div class="slide"><img src="assets/5768d694f0f1b68d.jpg" alt="" loading="lazy"><span class="idx">6/12</span></div><div class="slide"><img src="assets/9dc1ed70aca06419.jpg" alt="" loading="lazy"><span class="idx">7/12</span></div><div class="slide"><img src="assets/26a4946a00ea1657.jpg" alt="" loading="lazy"><span class="idx">8/12</span></div><div class="slide"><img src="assets/17756c52d68ac495.jpg" alt="" loading="lazy"><span class="idx">9/12</span></div><div class="slide"><img src="assets/c507549c8a2c420c.jpg" alt="" loading="lazy"><span class="idx">10/12</span></div><div class="slide"><img src="assets/ecc01f21899fb8f0.jpg" alt="" loading="lazy"><span class="idx">11/12</span></div><div class="slide"><img src="assets/50d78ad52fb94e81.jpg" alt="" loading="lazy"><span class="idx">12/12</span></div></div><span class="badge">📑 12장</span></div>
+      <div class="meta"><span>♥ 61</span><span>💬 3</span></div>
+      <div class="caption">이거 만들다가 치킨 내돈내산 했습니다🍗
+
+📍Brand : @chris.p__official @cjcheiljedang 
+📍Agency : @studiok110</div>
+      <a class="open" href="https://www.instagram.com/p/DZn-W0qkzE7/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/9898a715c81bbfd3.jpg" alt="" loading="lazy"><span class="idx">1/12</span></div><div class="slide"><img src="assets/e1bb9efb24b34140.jpg" alt="" loading="lazy"><span class="idx">2/12</span></div><div class="slide"><img src="assets/818b095638b3d786.jpg" alt="" loading="lazy"><span class="idx">3/12</span></div><div class="slide"><img src="assets/38956860b627bb41.jpg" alt="" loading="lazy"><span class="idx">4/12</span></div><div class="slide"><img src="assets/8fd59ec643e5bd3c.jpg" alt="" loading="lazy"><span class="idx">5/12</span></div><div class="slide"><img src="assets/e1e3b4241495f9be.jpg" alt="" loading="lazy"><span class="idx">6/12</span></div><div class="slide"><img src="assets/c78efdceab7bb01b.jpg" alt="" loading="lazy"><span class="idx">7/12</span></div><div class="slide"><img src="assets/32c50a4079c1515c.jpg" alt="" loading="lazy"><span class="idx">8/12</span></div><div class="slide"><img src="assets/db41296197f88ce4.jpg" alt="" loading="lazy"><span class="idx">9/12</span></div><div class="slide"><img src="assets/e20f3fa57685d2f9.jpg" alt="" loading="lazy"><span class="idx">10/12</span></div><div class="slide"><img src="assets/7a3091841a8b58c5.jpg" alt="" loading="lazy"><span class="idx">11/12</span></div><div class="slide"><img src="assets/483f6f227171a0a8.jpg" alt="" loading="lazy"><span class="idx">12/12</span></div></div><span class="badge">📑 12장</span></div>
+      <div class="meta"><span>♥ 47</span><span>💬 4</span></div>
+      <div class="caption">월드컵은 못 봐도 마케팅은 봐야지⚽️⚽️
+
+2026월드컵 마케팅 재밌는 것만 가져옴🗂️
+
+📍Adidas
+[Backyard legend]
+
+📍Nike
+[Rip the script] 
+
+📍Heineken
+[Fan Volunteers] 
+
+📍Coors Light
+[The Coooors Call]
+
+📍Lay’s
+[No Lay’s No Game] 
+
+📍Nike x Lego
+[Nike Football Collection]
+
+📍Mcdona</div>
+      <a class="open" href="https://www.instagram.com/p/DZWAHcyj6Od/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/71f9ee52f2ab9a12.jpg" alt="" loading="lazy"><span class="idx">1/13</span></div><div class="slide"><img src="assets/f384a8201361b4e9.jpg" alt="" loading="lazy"><span class="idx">2/13</span></div><div class="slide"><img src="assets/12d6f2e60bead58a.jpg" alt="" loading="lazy"><span class="idx">3/13</span></div><div class="slide"><img src="assets/cab2f1d908ac9d03.jpg" alt="" loading="lazy"><span class="idx">4/13</span></div><div class="slide"><img src="assets/8dce48565647fbbc.jpg" alt="" loading="lazy"><span class="idx">5/13</span></div><div class="slide"><img src="assets/898514919209e0e9.jpg" alt="" loading="lazy"><span class="idx">6/13</span></div><div class="slide"><img src="assets/c7422479d28e4d2a.jpg" alt="" loading="lazy"><span class="idx">7/13</span></div><div class="slide"><img src="assets/dc0b169cc2110084.jpg" alt="" loading="lazy"><span class="idx">8/13</span></div><div class="slide"><img src="assets/ca23b88d7862247d.jpg" alt="" loading="lazy"><span class="idx">9/13</span></div><div class="slide"><img src="assets/1c292b81dad05bec.jpg" alt="" loading="lazy"><span class="idx">10/13</span></div><div class="slide"><img src="assets/d770e1704112eb06.jpg" alt="" loading="lazy"><span class="idx">11/13</span></div><div class="slide"><img src="assets/b9d227d0507f424e.jpg" alt="" loading="lazy"><span class="idx">12/13</span></div><div class="slide"><img src="assets/ee3595de04897074.jpg" alt="" loading="lazy"><span class="idx">13/13</span></div></div><span class="badge">📑 13장</span></div>
+      <div class="meta"><span>♥ 26</span><span>💬 3</span></div>
+      <div class="caption">📢 광줍이의 NEW 시리즈 #브랜드줍줍
+
+독보적인 커뮤니케이션으로 소비자를 넘어 씬을 빛내는 브랜드들을 소개할게요✨
+
+첫 번째 브랜드는 산산기어 @sansan_gear 
+
+앞으로도 광줍이가 새로운 시선을 깨워줄 브랜드를 콕 집어 소개해 드릴게요!</div>
+      <a class="open" href="https://www.instagram.com/p/DZD5nMDGC-S/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/3ac3682c726a7a87.jpg" alt="" loading="lazy"><span class="idx">1/9</span></div><div class="slide"><img src="assets/4abfbd29d2815fee.jpg" alt="" loading="lazy"><span class="idx">2/9</span></div><div class="slide"><img src="assets/33c441e571e1a354.jpg" alt="" loading="lazy"><span class="idx">3/9</span></div><div class="slide"><img src="assets/7fa0555c1d971ae2.jpg" alt="" loading="lazy"><span class="idx">4/9</span></div><div class="slide"><img src="assets/0dccf38f627e8be2.jpg" alt="" loading="lazy"><span class="idx">5/9</span></div><div class="slide"><img src="assets/c4a8b0a844431556.jpg" alt="" loading="lazy"><span class="idx">6/9</span></div><div class="slide"><img src="assets/24878d560475baab.jpg" alt="" loading="lazy"><span class="idx">7/9</span></div><div class="slide"><img src="assets/459bac19093c36f5.jpg" alt="" loading="lazy"><span class="idx">8/9</span></div><div class="slide"><img src="assets/fdf1295f8d9e6697.jpg" alt="" loading="lazy"><span class="idx">9/9</span></div></div><span class="badge">📑 9장</span></div>
+      <div class="meta"><span>♥ 26</span><span>💬 2</span></div>
+      <div class="caption">무쉰사 vs 지긁재긁
+댓글로 의견을 남겨주세요!🤔</div>
+      <a class="open" href="https://www.instagram.com/p/DaASv-WmFQE/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+      </div>
+    </section>
+    
+
+    <section class="account">
+      <header class="profile">
+        <div class="avatar-empty"></div>
+        <div>
+          <div class="name">Morning Brew</div>
+          <a class="handle" href="https://www.instagram.com/morningbrew/" target="_blank">@morningbrew</a>
+          <div class="stats">팔로워 — · top 10 viral posts (engagement 정렬)</div>
+          <div class="bio"></div>
+        </div>
+      </header>
+      <div class="grid">
+        
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/4afccbbe02e76b09.jpg" alt="" loading="lazy"><span class="idx">1/3</span></div><div class="slide"><img src="assets/d2e0bed9fcf1f3b0.jpg" alt="" loading="lazy"><span class="idx">2/3</span></div><div class="slide"><img src="assets/7063aa1960be8506.jpg" alt="" loading="lazy"><span class="idx">3/3</span></div></div><span class="badge">📑 3장</span></div>
+      <div class="meta"><span>♥ 20,735</span><span>💬 751</span></div>
+      <div class="caption">It&#x27;s not just the NL East they&#x27;re leading...⁣
+⁣
+With the US spending a total of $2.63 billion on OnlyFans last year, Atlanta played a major role per a new report from OnlyFans search engine OnlyGuider.⁣
+⁣
+According to the analysis, which at</div>
+      <a class="open" href="https://www.instagram.com/p/DZv4yt-EyMA/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/4753118f29e28ceb.jpg" alt="" loading="lazy"><span class="idx">1/5</span></div><div class="slide"><img src="assets/59d7b744c8fce825.jpg" alt="" loading="lazy"><span class="idx">2/5</span></div><div class="slide"><img src="assets/97552912b0ef0477.jpg" alt="" loading="lazy"><span class="idx">3/5</span></div><div class="slide"><img src="assets/5502da63f1825618.jpg" alt="" loading="lazy"><span class="idx">4/5</span></div><div class="slide"><img src="assets/b5131afdba2d6ae9.jpg" alt="" loading="lazy"><span class="idx">5/5</span></div></div><span class="badge">📑 5장</span></div>
+      <div class="meta"><span>♥ 6,933</span><span>💬 60</span></div>
+      <div class="caption">We&#x27;ll see you at the movies. ⁣
+⁣
+If Lou Bega taught us anything, it’s that No. 5 has value. Proving that lesson yet again, the fifth installment of Pixar&#x27;s &#x27;Toy Story&#x27; franchise notched the strongest box office debut of 2026 over the weeken</div>
+      <a class="open" href="https://www.instagram.com/p/DZ8wxznkylV/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/21010bc6fca82ce6.jpg" alt="" loading="lazy"><span class="idx">1/3</span></div><div class="slide"><img src="assets/c447779b51f0b80c.jpg" alt="" loading="lazy"><span class="idx">2/3</span></div><div class="slide"><img src="assets/0572a3a7d87f50a5.jpg" alt="" loading="lazy"><span class="idx">3/3</span></div></div><span class="badge">📑 3장</span></div>
+      <div class="meta"><span>♥ 5,698</span><span>💬 132</span></div>
+      <div class="caption">Congrats, you finally bought a home...now good luck with the upkeep.⁣
+⁣
+According to a new analysis conducted by the Wall Street Journal, the combined total of basic annual homeowner costs (maintenance, insurance, property taxes, emergency </div>
+      <a class="open" href="https://www.instagram.com/p/DZ5-QC5E37U/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/160c6fa0d6273edc.jpg" alt="" loading="lazy"><span class="idx">1/3</span></div><div class="slide"><img src="assets/6b5222c47819f87f.jpg" alt="" loading="lazy"><span class="idx">2/3</span></div><div class="slide"><img src="assets/eff17a72fc2878f2.jpg" alt="" loading="lazy"><span class="idx">3/3</span></div></div><span class="badge">📑 3장</span></div>
+      <div class="meta"><span>♥ 5,637</span><span>💬 63</span></div>
+      <div class="caption">The World Cup&#x27;s most unexpected MVP? Ranch dressing.⁣
+⁣
+As international soccer fans have flooded into North America for the 2026 FIFA World Cup, many are leaving with a newfound obsession: ranch. Social media has been packed with Europeans</div>
+      <a class="open" href="https://www.instagram.com/p/DZ-Icy_E3vT/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/622b00419d836803.jpg" alt="" loading="lazy"><span class="idx">1/8</span></div><div class="slide"><img src="assets/65066d33f763dc40.jpg" alt="" loading="lazy"><span class="idx">2/8</span></div><div class="slide"><img src="assets/0207cf9974c333c6.jpg" alt="" loading="lazy"><span class="idx">3/8</span></div><div class="slide"><img src="assets/8757d7d72ed83633.jpg" alt="" loading="lazy"><span class="idx">4/8</span></div><div class="slide"><img src="assets/99c02a9ebf5c24ab.jpg" alt="" loading="lazy"><span class="idx">5/8</span></div><div class="slide"><img src="assets/c1dafb852f271b48.jpg" alt="" loading="lazy"><span class="idx">6/8</span></div><div class="slide"><img src="assets/b8f9e47aeed4e2cc.jpg" alt="" loading="lazy"><span class="idx">7/8</span></div><div class="slide"><img src="assets/e204f51d43a24bd1.jpg" alt="" loading="lazy"><span class="idx">8/8</span></div></div><span class="badge">📑 8장</span></div>
+      <div class="meta"><span>♥ 4,430</span><span>💬 273</span></div>
+      <div class="caption">Special de-livery!⁣
+⁣
+President Trump officially unveiled his new Air Force One jet last Friday. The Boeing 747, which was gifted to him by the Qatari government, has a different look than the current presidential jet, replacing the baby bl</div>
+      <a class="open" href="https://www.instagram.com/p/DZ6L-_xjkPL/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/1738718b9cd2be51.jpg" alt="" loading="lazy"><span class="idx">1/10</span></div><div class="slide"><img src="assets/55e6a021c72f6e6d.jpg" alt="" loading="lazy"><span class="idx">2/10</span></div><div class="slide"><img src="assets/d9fcd6f88775e905.jpg" alt="" loading="lazy"><span class="idx">3/10</span></div><div class="slide"><img src="assets/69831a680ba22015.jpg" alt="" loading="lazy"><span class="idx">4/10</span></div><div class="slide"><img src="assets/be38e77d5dc830a4.jpg" alt="" loading="lazy"><span class="idx">5/10</span></div><div class="slide"><img src="assets/7ebcb2159d36c006.jpg" alt="" loading="lazy"><span class="idx">6/10</span></div><div class="slide"><img src="assets/aac3fb9378fbf1f7.jpg" alt="" loading="lazy"><span class="idx">7/10</span></div><div class="slide"><img src="assets/3fc1b777341ca6cc.jpg" alt="" loading="lazy"><span class="idx">8/10</span></div><div class="slide"><img src="assets/3ee4543baefd8498.jpg" alt="" loading="lazy"><span class="idx">9/10</span></div><div class="slide"><img src="assets/664c95dcb1dbaf7b.jpg" alt="" loading="lazy"><span class="idx">10/10</span></div></div><span class="badge">📑 10장</span></div>
+      <div class="meta"><span>♥ 3,797</span><span>💬 228</span></div>
+      <div class="caption">A typical bike has more bells and whistles than this super-cheap EV truck.⁣
+⁣
+Slate Auto, a Jeff Bezos-backed startup, launched pre-orders for its spartan electric truck today with a price tag of $24,950, putting it among just eight new car</div>
+      <a class="open" href="https://www.instagram.com/p/DZ_OuJsk4W2/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/0290d4a4244f3157.jpg" alt=""></div>
+      <div class="meta"><span>♥ 3,407</span><span>💬 129</span></div>
+      <div class="caption">Housing is a real mom-and-pop operation, literally.⁣
+⁣
+About 33% of adults aged 18 to 34 lived with their parents last year, according to a Realtor.com analysis of government data. That’s about in line with 2020, when that number was a reco</div>
+      <a class="open" href="https://www.instagram.com/p/DZxSDjrk_oE/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/6a1fb1f5c7fa5ba0.jpg" alt=""></div>
+      <div class="meta"><span>♥ 3,738</span><span>💬 51</span></div>
+      <div class="caption">It&#x27;s Mike&#x27;s way or the highway. ⁣
+⁣
+After an 11-year run as America&#x27;s top fast food chain, Chick-fil-A has been dethroned by Jersey Mike&#x27;s atop the American Customer Satisfaction Index&#x27;s (ACSI) quick-service restaurant rankings.⁣
+⁣
+Marking </div>
+      <a class="open" href="https://www.instagram.com/p/DZydlLylp2T/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><img class="single" src="assets/9babd6d5f1b5bca6.jpg" alt=""></div>
+      <div class="meta"><span>♥ 3,232</span><span>💬 108</span></div>
+      <div class="caption">Europe&#x27;s summer is turning into a survival test.⁣
+⁣
+France is baking under a record-shattering heat dome that&#x27;s proving deadly. Officials say at least 45 people have died during the heat wave, including 40 drowning victims, as residents flo</div>
+      <a class="open" href="https://www.instagram.com/p/DZ7nIqrldTs/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+
+    <div class="card">
+      <div class="media"><div class="media-track"><div class="slide"><img src="assets/efd7136526d7c42b.jpg" alt="" loading="lazy"><span class="idx">1/5</span></div><div class="slide"><img src="assets/67f53fbab20ababc.jpg" alt="" loading="lazy"><span class="idx">2/5</span></div><div class="slide"><img src="assets/8c4a8957bccacd5b.jpg" alt="" loading="lazy"><span class="idx">3/5</span></div><div class="slide"><img src="assets/e23773138d2361d8.jpg" alt="" loading="lazy"><span class="idx">4/5</span></div><div class="slide"><img src="assets/affdce7b1c907113.jpg" alt="" loading="lazy"><span class="idx">5/5</span></div></div><span class="badge">📑 5장</span></div>
+      <div class="meta"><span>♥ 3,447</span><span>💬 35</span></div>
+      <div class="caption">Call it a square burger squeeze.
+
+Wendy’s loyalists were out in full force today, sending shares of the fast-food chain up more than 25% after retail traders on Reddit’s r/wallstreetbets forum decided the Baconator business needed a helping</div>
+      <a class="open" href="https://www.instagram.com/p/DZ_IfT0EdHu/" target="_blank">Instagram에서 열기</a>
+      
+    </div>
+    
+      </div>
+    </section>
+    
+</main>
+<footer style="text-align:center;padding:32px;color:#999;font-size:12px;">
+  Brand System Designer 작업용 viral 레퍼런스. Reference & Trend Analyst 자동 산출 (Apify + Anthropic).
+</footer>
+
+<script>
+(function() {
+  const date = document.body.dataset.date;
+  const bridgeUrl = document.body.dataset.bridgeUrl || 'http://localhost:8765/submit-picks';
+  const bridgeToken = document.body.dataset.bridgeToken || '';
+  const bar = document.getElementById('submitbar');
+  const countEl = document.getElementById('pick-count');
+  const btn = document.getElementById('submit-btn');
+  if (!bar) return;
+
+  function gather() {
+    const picks = {};
+    document.querySelectorAll('input.pick[type=checkbox]:checked').forEach(cb => {
+      const postId = cb.dataset.postId;
+      const field = cb.dataset.field;
+      const value = cb.dataset.value;
+      picks[postId] = picks[postId] || { post_id: postId, account: cb.dataset.account, picked: {} };
+      picks[postId].picked[field] = value;
+    });
+    return Object.values(picks);
+  }
+
+  function update() {
+    const n = document.querySelectorAll('input.pick[type=checkbox]:checked').length;
+    countEl.textContent = n;
+    btn.disabled = n === 0;
+  }
+
+  let toastEl;
+  function toast(kind, msgHtml, durationMs) {
+    if (!toastEl) {
+      toastEl = document.createElement('div');
+      toastEl.id = 'toast';
+      document.body.appendChild(toastEl);
+    }
+    toastEl.className = kind;
+    toastEl.innerHTML = msgHtml;
+    requestAnimationFrame(() => toastEl.classList.add('show'));
+    if (toastEl._timer) clearTimeout(toastEl._timer);
+    toastEl._timer = setTimeout(() => toastEl.classList.remove('show'), durationMs || 8000);
+  }
+
+  function downloadJson(payload) {
+    const blob = new Blob([JSON.stringify(payload, null, 2)], {type: 'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `picks-${date}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
+  async function submitViaBridge(payload) {
+    const res = await fetch(bridgeUrl, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'X-Bridge-Token': bridgeToken},
+      body: JSON.stringify(payload),
+    });
+    const text = await res.text();
+    let data = {};
+    try { data = JSON.parse(text); } catch (e) { /* ignore */ }
+    if (res.status < 400 && data.ok !== false) return {ok: true, data, status: res.status};
+    return {ok: false, data, status: res.status, text};
+  }
+
+  document.addEventListener('change', e => {
+    if (e.target.matches('input.pick[type=checkbox]')) update();
+  });
+
+  btn.addEventListener('click', async () => {
+    const picks = gather();
+    if (!picks.length) return;
+    const payload = {
+      date: date,
+      submitted_at: new Date().toISOString(),
+      picks_count: picks.length,
+      picks: picks,
+    };
+    btn.disabled = true;
+    btn.textContent = '전송 중…';
+
+    try {
+      const r = await submitViaBridge(payload);
+      if (r.ok) {
+        const d = r.data || {};
+        const bsd = d.bsd_identifier ? `<code>${d.bsd_identifier}</code>` : '<code>—</code>';
+        const ccd = d.ccd_identifier ? `<code>${d.ccd_identifier}</code>` : '<code>—</code>';
+        const idem = d.idempotent ? ' (이미 전송됨 — 동일 picks)' : '';
+        toast('ok', `✓ BSD/CCD에게 전달 완료${idem}<br>BSD: ${bsd} · CCD: ${ccd}<br><small>vault + agent memory 동기됨</small>`, 10000);
+        btn.textContent = '✓ 전달 완료';
+      } else {
+        downloadJson(payload);
+        const err = (r.data && r.data.error) || r.text || `HTTP ${r.status}`;
+        toast('warn', `⚠ 자동 전달 실패 — JSON 다운로드됨<br><small>오류: ${String(err).slice(0,200)}</small><br><small>수동: <code>python3 sync_picks.py ~/Downloads/picks-${date}.json</code></small>`, 12000);
+        btn.textContent = '⚠ 다운로드 fallback';
+      }
+    } catch (e) {
+      downloadJson(payload);
+      toast('warn', `⚠ 브릿지 서버 미응답 — JSON 다운로드됨<br><small>${String(e.message || e).slice(0,150)}</small><br><small>LaunchAgent 점검: <code>launchctl list | grep picks-bridge</code></small>`, 12000);
+      btn.textContent = '⚠ 다운로드 fallback';
+    }
+
+    setTimeout(() => {
+      btn.textContent = 'Submit picks → BSD/CCD';
+      update();
+    }, 6000);
+  });
+
+  update();
+})();
+</script>
+</body>
+</html>
